@@ -1,0 +1,38 @@
+﻿using UnityEngine;
+
+[AddComponentMenu ("Server/Tank Man")]
+[RequireComponent (typeof (NetworkView))]
+
+public class S_TankMan : MonoBehaviour {
+	
+	M_TankController controller;
+	
+	public int horizontalMotion;
+	public int verticalMotion;
+	
+	public void Start () {
+	
+		if (Network.isServer) {
+			controller = GetComponent <M_TankController> ();
+		}
+		
+	}
+	
+	public void Update () {
+	
+		if (Network.isClient || (!Network.isServer && !Network.isClient)) {
+			return;
+		}
+
+		controller.Move (horizontalMotion, verticalMotion);
+		
+	}
+     
+	[RPC]
+	public void UpdateClientMotion (int hor, int vert) {
+	
+		horizontalMotion = hor;
+		verticalMotion = vert;
+	
+	}
+}

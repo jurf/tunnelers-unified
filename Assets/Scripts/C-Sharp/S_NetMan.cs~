@@ -1,0 +1,170 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+[AddComponentMenu("Server/Net Man")]
+
+public class S_NetMan : MonoBehaviour {
+
+	#region Variables
+
+//		public GameObject player; //player object to instantiate
+		public static string levelName = "c_sharp_network_test"; //current level name
+		
+//		public List <C_PlayerMan> playerTracker = new List <C_PlayerMan> ();
+//		public List <NetworkPlayer> scheduledSpawns = new List <NetworkPlayer> ();
+		
+//		public bool processSpawnRequests = false;
+		
+		enum NetworkGroup {
+			DEFAULT = 0,
+			PLAYER = 1,
+			SERVER = 2,	
+		}
+	
+	#endregion
+	
+	public class ScheludedSpawn {
+	
+		public NetworkPlayer player;
+		
+		public int group;
+	
+		public ScheludedSpawn (NetworkPlayer _player, GameObject _prefab, Vector3 _pos, Quaternion _rot, int _group) {
+			
+			player = _player;
+			prefab = _prefab;
+			pos = _pos;
+			rot = _rot;
+			group = _group; 
+		
+		}
+	}
+	
+//	//Called on the server
+//	void OnPlayerConnected (NetworkPlayer player) {
+//	
+//		Debug.Log ("Spawning prefab for new client");
+//		scheduledSpawns.Add (player);
+//		processSpawnRequests = true;
+//		
+//	}
+	
+/*	[RPC]
+	void RequestSpawn.old (NetworkPlayer requester) {
+	
+		//Called from client to the server to request a new entity
+		if (Network.isClient) {
+		
+			Debug.LogError("Client tried to spawn itself! Revise logic!");
+			return; //Get lost! This is server business
+
+		}
+		
+		if (!processSpawnRequests) {
+			return; //silently ignore this
+		}
+		
+		//Process all scheduled players
+		foreach (ScheludedSpawn spawn in scheduledSpawns) {
+		
+			Debug.Log("Checking player " + spawn.player.guid);
+			if (spawn.player == requester) { //That is the one, lets make him an entity!
+				//int num = int.Parse (spawn + "");
+				
+				GameObject handle =  Network.Instantiate (
+					spawn.prefab,
+					spawn.pos, 
+					spawn.rot, 
+					(int)NetworkGroup.PLAYER
+				) as GameObject;
+					
+				C_PlayerMan sc = handle.GetComponent <C_PlayerMan> ();
+				
+				if (!sc) {
+					Debug.LogError("The prefab has no C_PlayerMan attached!");
+				}
+				
+				playerTracker.Add (sc);
+				
+				//Get the network view of the player and add its owner
+				NetworkView netView = handle.GetComponent <NetworkView> ();
+				netView.RPC ("SetOwner", RPCMode.AllBuffered, spawn.player);
+				
+			}
+		}
+		
+		scheduledSpawns.Remove (requester); //Remove the guy from the list now
+		
+		if (scheduledSpawns.Count == 0) {		
+			Debug.Log("Spawns is empty! Stopping spawn request processing");
+			//If we have no more scheduled spawns, stop trying to process spawn requests
+			processSpawnRequests = false;			
+		}
+	}
+	
+*/
+	
+	public bool RequestSpawn (NetworkPlayer requester, GameObject prefab, Vector3 pos, Quaternion rot) {
+	
+		//Called from client to the server to request a new entity
+		if (Network.isClient) {
+		
+			Debug.LogError("Client tried to spawn itself! Spawn terminated.");
+			return; //Get lost! This is server business
+
+		}	
+			
+		GameObject handle = Network.Instantiate (
+			prefab,
+			pos, 
+			rot, 
+			(int)NetworkGroup.PLAYER
+		) as GameObject;
+						
+		C_PlayerMan sc = handle.GetComponent <C_PlayerMan> ();
+				
+		if (!sc) {
+			Debug.LogError("The prefab has no C_PlayerMan attached!");
+		}
+				
+		//Get the network view of the player and add its owner
+		NetworkView netView = handle.GetComponent <NetworkView> ();
+		netView.RPC ("SetOwner", RPCMode.AllBuffered, requester);
+		
+		if (handle)
+			return true;
+			
+		return false;
+		
+	}
+	
+	void OnPlayerDisconnected (NetworkPlayer player) {
+	
+		Debug.Log("Player " + player.guid + " disconnected.");
+		C_PlayerMan found = null;
+		
+		foreach (C_PlayerMan man in playerTracker) {
+		
+			if (man.GetOwner () == player) {
+				Network.RemoveRPCs (man.gameObject.networkView.viewID);
+				Network.Destroy (man.gameObject);
+			}
+			
+		}
+		
+		if (found) {
+			playerTracker.Remove (found);
+		}
+		
+	}
+
+	//Called from S_SpawnMan
+	public void CreateInstance (NetworkPlayer player, GameObject prefab, Vector3 pos, Quaternion rot, int group) {
+	
+		scheludedSpawns.Add (new ScheludedSpawn (player, prefab, pos, rot, group));
+		processSpawnRequests = true;
+		RequestSpawn (player);
+
+	}
+
+}
