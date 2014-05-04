@@ -63,6 +63,7 @@ public class S_SpawnMan : MonoBehaviour {
 			
 				GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
 				playerTracker.Remove (tracker);
+				return;
 			
 			}
 		

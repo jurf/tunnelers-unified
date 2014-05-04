@@ -54,6 +54,8 @@ public class C_TurretMan : MonoBehaviour {
 			networkView.RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
 			controller.Rotate (toRot);
 		}
+		
+		LerpToTarget ();
 	}
 	
 	public float positionErrorThreshold = 0.2f;
@@ -68,7 +70,7 @@ public class C_TurretMan : MonoBehaviour {
 		
 		//only correct if the error margin (the distance) is too extreme
 		if (distance >= positionErrorThreshold) {
-			float lerp = ((1f / distance) * speed) / 100f;
+			float lerp = ((1f / distance) * speed * Time.deltaTime) / 100f;
 			//Debug.Log("Lerp time: " + lerp);
 			transform.rotation = Quaternion.Slerp (transform.rotation, serverRot, lerp);
 		}

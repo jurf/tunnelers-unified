@@ -22,13 +22,13 @@ public class M_TurretPredictor : MonoBehaviour {
 			//Debug.Log("Server is writing");
 			stream.Serialize (ref rot);
 			
-		} else {
+		} else if (stream.isReading) {
 			
 			//This code takes care of the local client!
 			stream.Serialize (ref rot);
 			receiver.serverRot = rot;
 			//Smoothly correct clients position
-			receiver.LerpToTarget ();
+			//receiver.LerpToTarget ();
 			
 			//Take care of data for interpolating remote objects movements
 			// Shift up the buffer
@@ -52,7 +52,7 @@ public class M_TurretPredictor : MonoBehaviour {
 		}
 		
 		//client side has !!only the server connected!!
-		clientPing = (Network.GetAveragePing (Network.connections[0]) / 100) + pingMargin;
+		clientPing = (Network.GetAveragePing (Network.connections[0]) / 100f) + pingMargin;
 		float interpolationTime = (float)Network.time - clientPing;
 		
 		//ensure the buffer has at least one element:

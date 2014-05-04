@@ -5,7 +5,7 @@
 
 public class S_TankMan : MonoBehaviour {
 	
-	M_TankController controller;
+	public M_TankController controller;
 	
 	public int horizontalMotion;
 	public int verticalMotion;
@@ -17,14 +17,6 @@ public class S_TankMan : MonoBehaviour {
 			return;
 		}
 	
-	}
-	
-	public void Start () {
-	
-		if (Network.isServer) {
-			controller = GetComponent <M_TankController> ();
-		}
-		
 	}
 	
 	public void Update () {

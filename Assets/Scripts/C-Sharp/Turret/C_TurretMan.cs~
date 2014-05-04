@@ -17,6 +17,15 @@ public class C_TurretMan : MonoBehaviour {
 	public M_TankController controller;
 	public C_PlayerMan parent;
 	
+	void Awake () {
+	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+		
+	}
+	
 	/// <summary>
 	///Get the M_TankController instance from the current GameObject. 
 	/// </summary>
@@ -33,6 +42,7 @@ public class C_TurretMan : MonoBehaviour {
 	void Update () {
 		
 		if (Network.isServer || (!Network.isServer && !Network.isClient)) {
+			enabled = false;
 			return; //get lost, this is the client side!
 		}
 		
@@ -44,6 +54,8 @@ public class C_TurretMan : MonoBehaviour {
 			networkView.RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
 			controller.Rotate (toRot);
 		}
+		
+		LerpToTarget ();
 	}
 	
 	public float positionErrorThreshold = 0.2f;

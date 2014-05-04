@@ -151,7 +151,7 @@ public class ServerC : MonoBehaviour {
 						string name = "Name: " + element.gameName;
 						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected.";
 						
-						GUILayout.Label ("————————————————————");
+						GUILayout.Label ("—————————————");
 						GUILayout.Label (name);
 						GUILayout.Label (connectedPlayers);
 						//GUILayout.Space (5);
@@ -167,7 +167,7 @@ public class ServerC : MonoBehaviour {
 						GUILayout.Label (hostInfo);								
 						GUILayout.Space (5);						
 						GUILayout.Label ("Description: " + element.comment);
-						GUILayout.Label ("————————————————————");	
+						GUILayout.Label ("—————————————");	
 							
 						if (GUILayout.Button ("Connect to this server")) {
 							
@@ -177,7 +177,7 @@ public class ServerC : MonoBehaviour {
 						}
 					}
 					
-					GUILayout.FlexibleSpace();
+				//	GUILayout.FlexibleSpace();
 					
 					if (GUILayout.Button ("Refresh server list")) {
 						
@@ -206,7 +206,7 @@ public class ServerC : MonoBehaviour {
 		
 		void OnServerInitialized() {
 		
-		    Debug.Log("Server Initializied");
+		    Debug.Log ("Server Initializied");
 		    
 		}
 		

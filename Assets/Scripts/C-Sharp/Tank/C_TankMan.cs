@@ -11,19 +11,17 @@ public class C_TankMan : MonoBehaviour {
     
     public float speed = 10f;
     
-    M_TankController controller;
+    public M_TankController controller;
+           
+    public float positionErrorThreshold = 0.2f;
+	public Vector3 serverPos;
+	public Quaternion serverRot;
     
     void Awake () {
     	if (!Network.isClient || Network.isServer) {
     		enabled = false;
     		return;
     	}
-    }
-    
-    void Start () {
-        if (Network.isClient) {
-            controller = GetComponent <M_TankController> ();
-        }
     }
     
     void Update () {
@@ -47,18 +45,20 @@ public class C_TankMan : MonoBehaviour {
 	        //Simulate how we think the motion should come out	        
 			controller.Move (lastMotionH, lastMotionV);
 	    }
+	    
+	    LerpToTarget ();
 	}
-    
-    public float positionErrorThreshold = 0.2f;
-	public Vector3 serverPos;
-	public Quaternion serverRot;
 	
 	public void LerpToTarget() {
+	
+	//	Debug.Log ("Lerping.");
+	
+	//TODO seperate pos lerp and rot slerp
 	
 	    float distance = Vector3.Distance (transform.position, serverPos);
 
 	    if (distance >= positionErrorThreshold) {
-	        float lerp = ((1f / distance) * speed) / 100f;
+	        float lerp = ((1f / distance) * speed * Time.deltaTime) / 100f;
 	        transform.position = Vector3.Lerp (transform.position, serverPos, lerp);
 	        transform.rotation = Quaternion.Slerp (transform.rotation, serverRot, lerp);
 	    }

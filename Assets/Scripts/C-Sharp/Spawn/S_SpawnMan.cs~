@@ -115,6 +115,11 @@ public class S_SpawnMan : MonoBehaviour {
 		
 		void OnTriggerExit (Collider other) {
 		
+			if (!Network.isServer || Network.isClient) {
+				enabled = false;
+				return;
+			}
+		
 			foreach (PlayerTracker tracker in playerTracker) {
 			
 				if (tracker.instance == other.collider.gameObject.transform.parent.gameObject) {

@@ -13,18 +13,21 @@ public class M_TankPredictor : MonoBehaviour {
 	float clientPing;
 	M_NetState[] serverStateBuffer = new M_NetState[20];
 	
-	public void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
+	public void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) {
 	
 		Vector3 pos = observedTransform.position;
 		Quaternion rot = observedTransform.rotation;
 		
 		if (stream.isWriting) {
 		
-			//Debug.Log("Server is writing");
+		//	Debug.Log ("Server is writing. But wait, is server a server? " + Network.isServer);
+			
 			stream.Serialize (ref pos);
 			stream.Serialize (ref rot);
 		
-		} else {
+		} else if (stream.isReading) {
+		
+		//	Debug.Log ("Client is reading. But wait, is client a client? " + Network.isClient);
 		
 			//This code takes care of the local client!
 			stream.Serialize (ref pos);
@@ -32,7 +35,7 @@ public class M_TankPredictor : MonoBehaviour {
 			receiver.serverPos = pos;
 			receiver.serverRot = rot;
 			//Smoothly correct clients position
-			receiver.LerpToTarget ();
+			//receiver.LerpToTarget ();
 			
 			//Take care of data for interpolating remote objects movements
 			// Shift up the buffer
@@ -47,13 +50,13 @@ public class M_TankPredictor : MonoBehaviour {
 		}
 	}
 	
-	public void Update () {
+	void Update () {
 	
 		if ((Network.player == parent.GetOwner ()) || Network.isServer || (!Network.isServer && !Network.isClient)) {
 			return; //This is only for remote peers, get off
 		}
 		//client side has !!only the server connected!!
-		clientPing = (Network.GetAveragePing (Network.connections[0]) / 100) + pingMargin;
+		clientPing = (Network.GetAveragePing (Network.connections[0]) / 100f) + pingMargin;
 		float interpolationTime = (float)Network.time - clientPing;
 		
 		//ensure the buffer has at least one element:

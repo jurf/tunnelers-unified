@@ -113,7 +113,7 @@ public class ServerC : MonoBehaviour {
 				
 					GUILayout.Label ("Server details:");
 					
-					GUILayou.Space (5);
+					GUILayout.Space (5);
 					
 					gameName = GUILayout.TextField (gameName, 30);
 					roomComment = GUILayout.TextField (roomComment, 200);

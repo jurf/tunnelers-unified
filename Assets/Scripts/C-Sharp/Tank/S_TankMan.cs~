@@ -10,6 +10,15 @@ public class S_TankMan : MonoBehaviour {
 	public int horizontalMotion;
 	public int verticalMotion;
 	
+	void Awake () {
+	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+	
+	}
+	
 	public void Start () {
 	
 		if (Network.isServer) {
@@ -21,6 +30,7 @@ public class S_TankMan : MonoBehaviour {
 	public void Update () {
 	
 		if (Network.isClient || (!Network.isServer && !Network.isClient)) {
+			enabled = false;
 			return;
 		}
 
@@ -30,6 +40,11 @@ public class S_TankMan : MonoBehaviour {
      
 	[RPC]
 	public void UpdateClientMotion (int hor, int vert) {
+	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
 	
 		horizontalMotion = hor;
 		verticalMotion = vert;
