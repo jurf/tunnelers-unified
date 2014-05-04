@@ -20,6 +20,15 @@ public class ServerC : MonoBehaviour {
 		}
 		
 		public string overMaster = "127.0.0.1";
+		public string OverMaster {
+			get {
+				return overMaster;
+			}
+			set {
+				overMaster = value;
+				SetIP ();
+			}
+		}
 
 		public string typeName;
 		public string gameName;
@@ -36,6 +45,10 @@ public class ServerC : MonoBehaviour {
 		public float speed;
 	
 		public Rect windowRect;
+		
+		public string serverNotice = "Pressing 'Launch Server' will make this instance (window) a dedicated server. You will not be able to play. To play, you have to open a new instance (window) of Tunnelers, with it connect to this server. That is the way authoritative networking works. Stop fretting.";
+	
+		public string[] clientServer = new string[] {"Client", "Server"};
 	
 	#endregion Variables
 	
@@ -88,20 +101,33 @@ public class ServerC : MonoBehaviour {
 				
 				if (!Network.isClient && !Network.isServer) {
 				
-					server = GUILayout.Toggle (server, "Server?");
+					//server = GUILayout.Toggle (server, "Server?");
+					server = System.Convert.ToBoolean (GUILayout.Toolbar (System.Convert.ToInt32 (server), clientServer));
 				
 				}
 		
 				if (server == true) {
+				
+					GUILayout.Label ("Server details:");
+					
+					GUILayou.Space (5);
 					
 					gameName = GUILayout.TextField (gameName, 30);
 					roomComment = GUILayout.TextField (roomComment, 200);
-					string[] levels = GetLevelNames ();
+					
+					GUILayout.Label ("Select a level:");
+					
+					string[] levels = GetLevelNames ();		
+					
 					level = GUILayout.SelectionGrid (level, levels, 1);
 					
 					GUILayout.Space (5);
 					
-					if (GUILayout.Button ("Start Server")) {
+					GUILayout.Label (serverNotice);
+					
+					GUILayout.Space (5); 
+					
+					if (GUILayout.Button ("Launch Server")) {
 					
 						startServer = true;
 						Application.LoadLevel (Game.Levels[level + 2]);
@@ -113,14 +139,6 @@ public class ServerC : MonoBehaviour {
 					data = MasterServer.PollHostList();
 						
 					// Go through all the hosts in the host list
-						
-					if (GUILayout.Button ("Refresh server list")) {
-						
-						MasterServer.RequestHostList(typeName);
-						data = MasterServer.PollHostList();
-							
-					}
-						
 					GUILayout.Label ("Current games:");
 						
 					if (data.Length == 0) {
@@ -129,29 +147,43 @@ public class ServerC : MonoBehaviour {
 						
 					foreach (HostData element in data) {
 					
-						string name = element.gameName + " " + element.connectedPlayers + " / " + element.playerLimit;
+						GUILayout.Space (5);
+						string name = "Name: " + element.gameName;
+						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected."
 						
-						GUILayout.Label (name);	
-						GUILayout.Space (5);						
+						GUILayout.Label ("————————————————————");
+						GUILayout.Label (name);
+						GUILayout.Label (connectedPlayers)
+						//GUILayout.Space (5);
+												
 						string hostInfo;						
-						hostInfo = "[";
+						hostInfo = "IP: [";
 							
 						foreach (string host in element.ip) 
 							hostInfo = hostInfo + host + ":" + element.port + " ";
 							
-						hostInfo = hostInfo + "]";							
-						GUILayout.Label(hostInfo);								
+						hostInfo = hostInfo + "]";	
+												
+						GUILayout.Label (hostInfo);								
 						GUILayout.Space (5);						
-						GUILayout.Label(element.comment);							
-						GUILayout.Space (5);							
-						GUILayout.FlexibleSpace();
+						GUILayout.Label ("Description: " + element.comment);
+						GUILayout.Label ("————————————————————");	
 							
-						if (GUILayout.Button ("Connect")) {
+						if (GUILayout.Button ("Connect to this server")) {
 							
 							// Connect to HostData struct, internally the correct method is used (GUID when using NAT).
 							Network.Connect (element);	
 										
 						}
+					}
+					
+					GUILayout.FlexibleSpace();
+					
+					if (GUILayout.Button ("Refresh server list")) {
+						
+						MasterServer.RequestHostList(typeName);
+						data = MasterServer.PollHostList();
+							
 					}
 				}
 				
