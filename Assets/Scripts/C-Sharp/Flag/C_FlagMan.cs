@@ -10,7 +10,7 @@ public class C_FlagMan : MonoBehaviour {
 	
 	void Awake () {
 	
-		if (!Network.okisClient || Network.isServer) {
+		if (!Network.isClient || Network.isServer) {
 			enabled = false;
 			return;
 		}
