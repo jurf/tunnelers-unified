@@ -110,7 +110,7 @@ public class ServerC : MonoBehaviour {
 				
 					GUILayout.Label ("Server details:");
 					
-					GUILayou.Space (5);
+					GUILayout.Space (5);
 					
 					gameName = GUILayout.TextField (gameName, 30);
 					roomComment = GUILayout.TextField (roomComment, 200);
@@ -149,14 +149,14 @@ public class ServerC : MonoBehaviour {
 					
 						GUILayout.Space (5);
 						string name = "Name: " + element.gameName;
-						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected."
+						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected.";
 						
 						GUILayout.Label ("————————————————————");
 						GUILayout.Label (name);
-						GUILayout.Label (connectedPlayers)
+						GUILayout.Label (connectedPlayers);
 						//GUILayout.Space (5);
 												
-						string hostInfo;						
+						string hostInfo;					
 						hostInfo = "IP: [";
 							
 						foreach (string host in element.ip) 
