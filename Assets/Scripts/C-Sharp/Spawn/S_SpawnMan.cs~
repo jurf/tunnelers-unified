@@ -60,8 +60,8 @@ public class S_SpawnMan : MonoBehaviour {
 		foreach (PlayerTracker tracker in playerTracker) {
 		
 			if (tracker.player == player) {
-				Network.RemoveRPCs (tracker.player);
-				Network.Destroy (tracker.instance.networkView.viewID);
+			
+				GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
 				playerTracker.Remove (tracker);
 			
 			}
@@ -117,13 +117,12 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			foreach (PlayerTracker tracker in playerTracker) {
 			
-				if (tracker.instance == other.collider.gameObject.transform.parent) {
+				if (tracker.instance == other.collider.gameObject.transform.parent.gameObject) {
 				
 					Debug.Log ("Destroying the tank which fell out.");
 					
 					GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
-				
-					Network.Destroy (tracker.instance.networkView.viewID);
+					
 					tracker.alive = false;
 					
 					Debug.Log ("Found the fallen instance. Destroyed.");
@@ -134,7 +133,7 @@ public class S_SpawnMan : MonoBehaviour {
 			}
 			
 			Debug.LogError ("Destroying anyway.");
-			Network.Destroy (other.transform.parent.networkView.viewID);
+			GetComponent <S_NetMan> ().NetworkDestroy (other.transform.parent.gameObject);
 			
 		}			
 	

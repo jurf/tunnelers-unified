@@ -10,7 +10,7 @@ public class C_FlagMan : MonoBehaviour {
 	
 	void Awake () {
 	
-		if (!Network.isClient || Network.isServer) {
+		if (!Network.okisClient || Network.isServer) {
 			enabled = false;
 			return;
 		}
@@ -41,6 +41,11 @@ public class C_FlagMan : MonoBehaviour {
 	[RPC]
 	public void Taken (NetworkPlayer player) {
 	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+	
 		Debug.Log ("Flag taken, checking player index");
 	
 		GameObject[] tanks = GameObject.FindGameObjectsWithTag ("Tank");
@@ -49,7 +54,7 @@ public class C_FlagMan : MonoBehaviour {
 		
 		foreach (GameObject go in tanks) {
 		
-			if (go.transform.parent.GetComponent <C_PlayerMan> ().GetOwner () == player) {
+			if (go.transform.parent.gameObject.GetComponent <C_PlayerMan> ().GetOwner () == player) {
 				Debug.Log ("Found the one.");
 				carrier = go;
 				return;
@@ -64,6 +69,11 @@ public class C_FlagMan : MonoBehaviour {
 	[RPC]
 	public void Home () {
 	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+	
 		Debug.Log ("Flag home.");
 	
 		home = true;
@@ -73,6 +83,11 @@ public class C_FlagMan : MonoBehaviour {
 	
 	[RPC]
 	public void Dropped () {
+	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
 	
 		Debug.Log ("Flag dropped.");
 	

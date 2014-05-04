@@ -41,6 +41,11 @@ public class C_FlagMan : MonoBehaviour {
 	[RPC]
 	public void Taken (NetworkPlayer player) {
 	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+	
 		Debug.Log ("Flag taken, checking player index");
 	
 		GameObject[] tanks = GameObject.FindGameObjectsWithTag ("Tank");
@@ -64,6 +69,11 @@ public class C_FlagMan : MonoBehaviour {
 	[RPC]
 	public void Home () {
 	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+	
 		Debug.Log ("Flag home.");
 	
 		home = true;
@@ -73,6 +83,11 @@ public class C_FlagMan : MonoBehaviour {
 	
 	[RPC]
 	public void Dropped () {
+	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
 	
 		Debug.Log ("Flag dropped.");
 	
