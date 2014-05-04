@@ -63,6 +63,7 @@ public class S_SpawnMan : MonoBehaviour {
 			
 				GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
 				playerTracker.Remove (tracker);
+				return;
 			
 			}
 		
@@ -196,7 +197,7 @@ public class S_SpawnMan : MonoBehaviour {
 		} else {
 		
 			pos.x = Random.Range (red1.position.x, red2.position.x);
-			pos.y = Random.Range (red1.position.y, red2.position.y);
+			pos.y = Random.Range (red2.position.y, red1.position.y);
 			
 			prefab = redPrefab;
 		
