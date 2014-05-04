@@ -45,7 +45,7 @@ public class C_FlagMan : MonoBehaviour {
 	
 		GameObject[] tanks = GameObject.FindGameObjectsWithTag ("Tank");
 		
-		Debug.Log ("Found " + tanks.length + " tanks. Checking each and every one of them.");
+		Debug.Log ("Found " + tanks.Length + " tanks. Checking each and every one of them.");
 		
 		foreach (GameObject go in tanks) {
 		

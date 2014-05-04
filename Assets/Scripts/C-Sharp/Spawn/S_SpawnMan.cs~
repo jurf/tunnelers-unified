@@ -117,9 +117,11 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			foreach (PlayerTracker tracker in playerTracker) {
 			
-				if (tracker.instance == other.collider.gameObject) {
+				if (tracker.instance == other.collider.gameObject.transform.parent) {
 				
 					Debug.Log ("Destroying the tank which fell out.");
+					
+					GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
 				
 					Network.Destroy (tracker.instance.networkView.viewID);
 					tracker.alive = false;
@@ -132,7 +134,7 @@ public class S_SpawnMan : MonoBehaviour {
 			}
 			
 			Debug.LogError ("Destroying anyway.");
-			Network.Destroy (other.networkView.viewID);
+			Network.Destroy (other.transform.parent.networkView.viewID);
 			
 		}			
 	
@@ -144,6 +146,8 @@ public class S_SpawnMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+		
+		Debug.Log ("Spawning dead players.");
 	
 		foreach (PlayerTracker tracker in playerTracker) {
 		
@@ -172,6 +176,8 @@ public class S_SpawnMan : MonoBehaviour {
 			enabled = false;
 			return null;
 		}
+		
+		Debug.Log ("Going to spawn player, doing some spawn stuff and then requesting spawn from server NetMan.");
 
 		Vector3 pos = new Vector3 (0,0, spawnHeight);
 		GameObject prefab;
@@ -205,6 +211,8 @@ public class S_SpawnMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+		
+		Debug.Log ("Got request for player spawn, checking queue.");
 	
 		foreach (NetworkPlayer unspawned in connectedUnspawned) {
 		
@@ -212,11 +220,14 @@ public class S_SpawnMan : MonoBehaviour {
 			
 				playerTracker.Add (new PlayerTracker (player, isBlue));
 				connectedUnspawned.Remove (unspawned);
+				Debug.Log ("Found the correct player, added him to the tracker and removed from unspawned.");
 				return;
 			
 			}
 		
 		}
+		
+		Debug.LogError ("Didn't find player in unspawned. Spawn terminated. Try reconnecting.");
 		
 	}
 

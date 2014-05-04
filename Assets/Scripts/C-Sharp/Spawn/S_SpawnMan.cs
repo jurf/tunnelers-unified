@@ -60,8 +60,8 @@ public class S_SpawnMan : MonoBehaviour {
 		foreach (PlayerTracker tracker in playerTracker) {
 		
 			if (tracker.player == player) {
-				Network.RemoveRPCs (tracker.player);
-				Network.Destroy (tracker.instance.networkView.viewID);
+			
+				GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
 				playerTracker.Remove (tracker);
 			
 			}
@@ -117,11 +117,12 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			foreach (PlayerTracker tracker in playerTracker) {
 			
-				if (tracker.instance == other.collider.gameObject.transform.parent) {
+				if (tracker.instance == other.collider.gameObject.transform.parent.gameObject) {
 				
 					Debug.Log ("Destroying the tank which fell out.");
-				
-					Network.Destroy (tracker.instance.networkView.viewID);
+					
+					GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
+					
 					tracker.alive = false;
 					
 					Debug.Log ("Found the fallen instance. Destroyed.");
@@ -132,7 +133,7 @@ public class S_SpawnMan : MonoBehaviour {
 			}
 			
 			Debug.LogError ("Destroying anyway.");
-			Network.Destroy (other.transform.parent.networkView.viewID);
+			GetComponent <S_NetMan> ().NetworkDestroy (other.transform.parent.gameObject);
 			
 		}			
 	
@@ -144,6 +145,8 @@ public class S_SpawnMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+		
+		Debug.Log ("Spawning dead players.");
 	
 		foreach (PlayerTracker tracker in playerTracker) {
 		
@@ -172,6 +175,8 @@ public class S_SpawnMan : MonoBehaviour {
 			enabled = false;
 			return null;
 		}
+		
+		Debug.Log ("Going to spawn player, doing some spawn stuff and then requesting spawn from server NetMan.");
 
 		Vector3 pos = new Vector3 (0,0, spawnHeight);
 		GameObject prefab;
@@ -205,6 +210,8 @@ public class S_SpawnMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+		
+		Debug.Log ("Got request for player spawn, checking queue.");
 	
 		foreach (NetworkPlayer unspawned in connectedUnspawned) {
 		
@@ -212,11 +219,14 @@ public class S_SpawnMan : MonoBehaviour {
 			
 				playerTracker.Add (new PlayerTracker (player, isBlue));
 				connectedUnspawned.Remove (unspawned);
+				Debug.Log ("Found the correct player, added him to the tracker and removed from unspawned.");
 				return;
 			
 			}
 		
 		}
+		
+		Debug.LogError ("Didn't find player in unspawned. Spawn terminated. Try reconnecting.");
 		
 	}
 

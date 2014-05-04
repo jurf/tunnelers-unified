@@ -117,6 +117,8 @@ public class S_NetMan : MonoBehaviour {
 			enabled = false;
 			return null;
 		}
+		
+		Debug.Log ("Actually spawning new player via the server NetMan.");
 			
 		GameObject handle = Network.Instantiate (
 			prefab,
@@ -140,6 +142,15 @@ public class S_NetMan : MonoBehaviour {
 			
 		return null;
 		
+	}
+	
+	public void NetworkDestroy (GameObject gameObject) {
+	
+		Debug.Log ("Network.Destroying a game object.");
+	
+		Network.RemoveRPCs (gameObject.networkView.viewID);
+		Network.Destroy (gameObject);
+	
 	}
 	
 /*	void OnPlayerDisconnected (NetworkPlayer player) {

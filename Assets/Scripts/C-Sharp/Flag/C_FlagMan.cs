@@ -49,7 +49,7 @@ public class C_FlagMan : MonoBehaviour {
 		
 		foreach (GameObject go in tanks) {
 		
-			if (go.transform.parent.GetComponent <C_PlayerMan> ().GetOwner () == player) {
+			if (go.transform.parent.gameObject.GetComponent <C_PlayerMan> ().GetOwner () == player) {
 				Debug.Log ("Found the one.");
 				carrier = go;
 				return;
