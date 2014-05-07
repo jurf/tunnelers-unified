@@ -89,7 +89,7 @@ public class S_FlagMan : MonoBehaviour {
 				carrier = other.gameObject;
 				other.gameObject.SendMessage ("GotFlag", SendMessageOptions.DontRequireReceiver);
 				gameMan.FlagTaken (isBlue);
-				networkView.RPC ("Taken", RPCMode.All, otherType.owner);
+				networkView.RPC ("Taken", RPCMode.All, otherType.id);
 			} else if (!carrier && !home && otherIsMy) {
 				home = true;
 				gameMan.FlagReturned (isBlue);
