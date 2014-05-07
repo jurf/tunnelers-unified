@@ -53,6 +53,8 @@ public class C_TankMan : MonoBehaviour {
 	
 	//	Debug.Log ("Lerping.");
 	
+	//TODO seperate pos lerp and rot slerp
+	
 	    float distance = Vector3.Distance (transform.position, serverPos);
 
 	    if (distance >= positionErrorThreshold) {

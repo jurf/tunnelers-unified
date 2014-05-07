@@ -1,31 +1,38 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-[AddComponentMenu ("Mixed/Turret Predictor")]
+[AddComponentMenu ("Mixed/Tank Predictor")]
+[RequireComponent (typeof (NetworkView))]
 
-public class M_TurretPredictor : MonoBehaviour {
+public class M_TankPredictor : MonoBehaviour {
 
 	public Transform observedTransform;
-	public C_TurretMan receiver; //Guy who is receiving data
-	public PlayerMan parent;
+	public C_TankMan receiver; //Guy who is receiving data
+	public C_PlayerMan parent;
 	public float pingMargin = 0.5f; //ping top-margins
 	
-	private float clientPing;
-	private M_NetState[] serverStateBuffer = new M_NetState[20];
+	float clientPing;
+	M_NetState[] serverStateBuffer = new M_NetState[20];
 	
 	public void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) {
-		
+	
+		Vector3 pos = observedTransform.position;
 		Quaternion rot = observedTransform.rotation;
 		
 		if (stream.isWriting) {
+		
+		//	Debug.Log ("Server is writing. But wait, is server a server? " + Network.isServer);
 			
-			//Debug.Log("Server is writing");
+			stream.Serialize (ref pos);
 			stream.Serialize (ref rot);
-			
+		
 		} else if (stream.isReading) {
-			
+		
+		//	Debug.Log ("Client is reading. But wait, is client a client? " + Network.isClient);
+		
 			//This code takes care of the local client!
+			stream.Serialize (ref pos);
 			stream.Serialize (ref rot);
+			receiver.serverPos = pos;
 			receiver.serverRot = rot;
 			//Smoothly correct clients position
 			//receiver.LerpToTarget ();
@@ -38,35 +45,32 @@ public class M_TurretPredictor : MonoBehaviour {
 			}
 			
 			//Override the first element with the latest server info
-			serverStateBuffer[0] = new M_NetState ((float)info.timestamp, Vector3.zero, rot);
+			serverStateBuffer[0] = new M_NetState ((float)info.timestamp, pos, rot);
 			
 		}
 	}
 	
 	void Update () {
-		
-		if ((Network.player == parent.GetOwner ()) 
-			|| Network.isServer || (!Network.isServer && !Network.isClient)) 
-		{
+	
+		if ((Network.player == parent.GetOwner ()) || Network.isServer || (!Network.isServer && !Network.isClient)) {
 			return; //This is only for remote peers, get off
 		}
-		
 		//client side has !!only the server connected!!
 		clientPing = (Network.GetAveragePing (Network.connections[0]) / 100f) + pingMargin;
 		float interpolationTime = (float)Network.time - clientPing;
 		
 		//ensure the buffer has at least one element:
 		if (serverStateBuffer[0] == null) {
-			serverStateBuffer[0] = new M_NetState (0f, Vector3.zero, transform.rotation);
+			serverStateBuffer[0] = new M_NetState (0f, transform.position, transform.rotation);
 		}
 		
 		//Try interpolation if possible. 
 		//If the latest serverStateBuffer timestamp is smaller than the latency
 		//we're not slow enough to really lag out and just extrapolate.
 		if (serverStateBuffer[0].timestamp > interpolationTime) {
-			
+		
 			for (int i = 0; i < serverStateBuffer.Length; i++) {
-				
+			
 				if (serverStateBuffer[i] == null) {
 					continue;
 				}
@@ -87,6 +91,8 @@ public class M_TurretPredictor : MonoBehaviour {
 						lerpTime = ((interpolationTime - bestStart.timestamp) / timediff);
 					}
 					
+					transform.position = Vector3.Lerp (bestStart.pos, bestTarget.pos, lerpTime);
+					
 					transform.rotation = Quaternion.Slerp (bestStart.rot, bestTarget.rot, lerpTime);
 					//Okay found our way through to lerp the positions, lets return here
 					return;
@@ -96,11 +102,13 @@ public class M_TurretPredictor : MonoBehaviour {
 			}
 			
 		} /*so it appears there is no lag through latency.*/ else {
-			
+		
 			M_NetState latest = serverStateBuffer[0];	
+			transform.position = Vector3.Lerp (transform.position, latest.pos, 0.5f);
 			transform.rotation = Quaternion.Slerp (transform.rotation, latest.rot, 0.5f);
 			
 		}
 		
 	}
+
 }

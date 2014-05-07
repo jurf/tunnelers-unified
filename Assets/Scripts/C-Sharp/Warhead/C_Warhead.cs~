@@ -9,10 +9,20 @@ public class C_Warhead : MonoBehaviour {
 	bool lastMiddle;
 	bool lastRight;
 	
+	void Awake () {
+	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+		
+	}
+	
 	void Update () {
 	
-		if (parent.GetOwner () == null || parent.GetOwner () != Network.player)
+		if (parent.GetOwner () == null || parent.GetOwner () != Network.player) {
 			return;
+		}
 	
 		lastLeft = Input.GetMouseButton (0);
 		lastMiddle =  Input.GetMouseButton (2);

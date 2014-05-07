@@ -15,7 +15,7 @@ public class C_TurretMan : MonoBehaviour {
     Quaternion lastRotation;*/
 	
 	public M_TankController controller;
-	public C_PlayerMan parent;
+	public PlayerMan parent;
 	
 	void Awake () {
 	

@@ -137,6 +137,8 @@ public class S_NetMan : MonoBehaviour {
 		NetworkView netView = handle.GetComponent <NetworkView> ();
 		netView.RPC ("SetOwner", RPCMode.AllBuffered, requester);
 		
+		netView.RPC ("SetID", RPCMode.AllBuffered, GetComponent <S_SpawnMan> ().AddTankToTracker (handle));
+		
 		if (handle)
 			return handle;
 			
@@ -145,6 +147,8 @@ public class S_NetMan : MonoBehaviour {
 	}
 	
 	public void NetworkDestroy (GameObject gameObject) {
+	
+		Debug.Log ("Network.Destroying a game object.");
 	
 		Network.RemoveRPCs (gameObject.networkView.viewID);
 		Network.Destroy (gameObject);

@@ -2,9 +2,11 @@
 
 [AddComponentMenu ("Client/Player Man")]
 
-public class C_PlayerMan : MonoBehaviour {
+public class PlayerMan : MonoBehaviour {
 	//TODO not sure if this should be in client script
 	public NetworkPlayer owner;
+	
+	public int id;
 	
 	public C_TankMan tank;
 	public C_TurretMan turret;
@@ -97,6 +99,13 @@ public class C_PlayerMan : MonoBehaviour {
 				GetComponent <GUILayer> ().enabled = false;
 			}
 		}
+	}
+	
+	[RPC]
+	public void SetID (int identificationNumber) {
+	
+		id = identificationNumber;
+		
 	}
 	
 	[RPC]

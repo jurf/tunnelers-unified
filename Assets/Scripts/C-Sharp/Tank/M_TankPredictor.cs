@@ -7,7 +7,7 @@ public class M_TankPredictor : MonoBehaviour {
 
 	public Transform observedTransform;
 	public C_TankMan receiver; //Guy who is receiving data
-	public C_PlayerMan parent;
+	public PlayerMan parent;
 	public float pingMargin = 0.5f; //ping top-margins
 	
 	float clientPing;

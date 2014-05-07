@@ -20,6 +20,8 @@ public class S_SpawnMan : MonoBehaviour {
 		public List <PlayerTracker> playerTracker;
 		
 		public List <NetworkPlayer> connectedUnspawned = new List <NetworkPlayer> ();
+		
+		public List <GameObject> tankTracker;
 
 	#endregion
 	
@@ -49,6 +51,13 @@ public class S_SpawnMan : MonoBehaviour {
 		playerTracker.Add (new PlayerTracker (player, team));
 	
 	}*/
+	
+	public int AddTankToTracker (GameObject tank) {
+	
+		tankTracker.Add (tank);
+		return tankTracker.Count - 1;
+		
+	}
 	
 	public void DeleteTracker (NetworkPlayer player) {
 	
@@ -140,7 +149,7 @@ public class S_SpawnMan : MonoBehaviour {
 			
 			Debug.LogError ("Destroying anyway.");
 			GetComponent <S_NetMan> ().NetworkDestroy (other.transform.parent.gameObject);
-			
+
 		}			
 	
 	#endregion UnityMethods
@@ -189,12 +198,16 @@ public class S_SpawnMan : MonoBehaviour {
 
 		if (isBlue) {
 		
+			Debug.Log ("Spawning a blue tank.");
+		
 			pos.x = Random.Range (blue1.position.x, blue2.position.x);
 			pos.y = Random.Range (blue1.position.y, blue2.position.y);
 			
 			prefab = bluePrefab;
 		
 		} else {
+		
+			Debug.Log ("Spawning a red tank.");
 		
 			pos.x = Random.Range (red1.position.x, red2.position.x);
 			pos.y = Random.Range (red1.position.y, red2.position.y);

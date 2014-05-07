@@ -38,7 +38,7 @@ public class C_NetManager : MonoBehaviour {
 		
 		foreach (GameObject tank in tanks) {
 			
-			C_PlayerMan playerMan = tank.GetComponent <C_PlayerMan> ();
+			PlayerMan playerMan = tank.GetComponent <PlayerMan> ();
 			
 			if (playerMan.owner == player)
 				return tank;

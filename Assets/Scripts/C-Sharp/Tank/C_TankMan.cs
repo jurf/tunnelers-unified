@@ -4,7 +4,7 @@
 
 public class C_TankMan : MonoBehaviour {
 
-    public C_PlayerMan parent;
+    public PlayerMan parent;
     
     public int lastMotionH;
     public int lastMotionV;

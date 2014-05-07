@@ -38,6 +38,8 @@ public class S_FlagMan : MonoBehaviour {
 		
 	}
 	
+	bool lastCarrierState;
+	
 	void Update () {
 	
 		if (!Network.isServer || Network.isClient) {
@@ -64,7 +66,13 @@ public class S_FlagMan : MonoBehaviour {
 			transform.rotation = carrier.transform.rotation;
 			lastTouch = Time.time;
 		}
-	
+		
+		if (lastCarrierState != carrier && !carrier) {
+			networkView.RPC ("Dropped", RPCMode.All);
+		}
+		
+		lastCarrierState = carrier;
+		
 	}
 	
 	void OnTriggerEnter (Collider other) {
@@ -75,13 +83,13 @@ public class S_FlagMan : MonoBehaviour {
 		}
 	
 		if (other.tag == "Tank") {
-			C_PlayerMan otherType = other.transform.parent.GetComponent <C_PlayerMan> ();
+			PlayerMan otherType = other.transform.parent.GetComponent <PlayerMan> ();
 			bool otherIsMy = otherType.IsMyTeam (isBlue);
 			if (!carrier && !otherIsMy) {
 				carrier = other.gameObject;
 				other.gameObject.SendMessage ("GotFlag", SendMessageOptions.DontRequireReceiver);
 				gameMan.FlagTaken (isBlue);
-				networkView.RPC ("Taken", RPCMode.All, otherType.GetOwner ());
+				networkView.RPC ("Taken", RPCMode.All, otherType.owner);
 			} else if (!carrier && !home && otherIsMy) {
 				home = true;
 				gameMan.FlagReturned (isBlue);

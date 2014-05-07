@@ -65,7 +65,7 @@ GameObject:
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400018}
   m_Layer: 0
-  m_Name: LevathianBlue
+  m_Name: LevathianRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.7733774, y: 6.82867765, z: -18.5027428}
+  m_LocalPosition: {x: 12.5712833, y: 6.61400747, z: -20.9703808}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -222,7 +222,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f6369ee7fb7ad99429dbf4604530e849, type: 2}
+  - {fileID: 2100000, guid: a82104876a2ac5a44bfd09b1b2887505, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -243,7 +243,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f6369ee7fb7ad99429dbf4604530e849, type: 2}
+  - {fileID: 2100000, guid: a82104876a2ac5a44bfd09b1b2887505, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -264,7 +264,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f6369ee7fb7ad99429dbf4604530e849, type: 2}
+  - {fileID: 2100000, guid: a82104876a2ac5a44bfd09b1b2887505, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -408,9 +408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e127da908f7ae440b99a690121cfb8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   tank: {fileID: 11400022}
   turret: {fileID: 11400008}
-  team: 1
+  team: 0
   tankType: 0
 --- !u!114 &11400020
 MonoBehaviour:
@@ -520,7 +521,7 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
-  m_StateSynchronization: 2
+  m_StateSynchronization: 1
   m_Observed: {fileID: 11400026}
   m_ViewID:
     m_ID: 0

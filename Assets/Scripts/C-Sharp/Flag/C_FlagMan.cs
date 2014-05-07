@@ -39,7 +39,7 @@ public class C_FlagMan : MonoBehaviour {
 	}
 	
 	[RPC]
-	public void Taken (NetworkPlayer player) {
+	public void Taken (int playerID) {
 	
 		if (!Network.isClient || Network.isServer) {
 			enabled = false;
@@ -54,7 +54,7 @@ public class C_FlagMan : MonoBehaviour {
 		
 		foreach (GameObject go in tanks) {
 		
-			if (go.transform.parent.gameObject.GetComponent <C_PlayerMan> ().GetOwner () == player) {
+			if (go.transform.parent.gameObject.GetComponent <PlayerMan> ().id == playerID) {
 				Debug.Log ("Found the one.");
 				carrier = go;
 				return;

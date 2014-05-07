@@ -25,7 +25,7 @@ public class LifePoints : MonoBehaviour {
 	
 	void Awake () {
 	
-		if (!playerType) playerType = gameObject.GetComponent <PlayerMan> ();
+		if (!playerType) playerType = gameObject.GetComponent <C_PlayerMan> ();
 		if (!controller) controller = gameObject.GetComponent <M_TankController> ();
 		
 		if (!Network.isServer) {		

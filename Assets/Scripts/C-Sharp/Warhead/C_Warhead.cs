@@ -3,7 +3,7 @@ using System.Collections;
 
 public class C_Warhead : MonoBehaviour {
 
-	public C_PlayerMan parent;
+	public PlayerMan parent;
 
 	bool lastLeft;
 	bool lastMiddle;

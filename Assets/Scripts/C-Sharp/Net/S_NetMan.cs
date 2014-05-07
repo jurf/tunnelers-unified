@@ -61,7 +61,7 @@ public class S_NetMan : MonoBehaviour {
 					(int)NetworkGroup.PLAYER
 				) as GameObject;
 					
-				C_PlayerMan sc = handle.GetComponent <C_PlayerMan> ();
+				PlayerMan sc = handle.GetComponent <PlayerMan> ();
 				
 				if (!sc) {
 					Debug.LogError("The prefab has no C_PlayerMan attached!");
@@ -127,7 +127,7 @@ public class S_NetMan : MonoBehaviour {
 			(int)NetworkGroup.PLAYER
 		) as GameObject;
 						
-		C_PlayerMan sc = handle.GetComponent <C_PlayerMan> ();
+		PlayerMan sc = handle.GetComponent <PlayerMan> ();
 				
 		if (!sc) {
 			Debug.LogError("The prefab has no C_PlayerMan attached.");
@@ -136,6 +136,8 @@ public class S_NetMan : MonoBehaviour {
 		//Get the network view of the player and add its owner
 		NetworkView netView = handle.GetComponent <NetworkView> ();
 		netView.RPC ("SetOwner", RPCMode.AllBuffered, requester);
+		
+		netView.RPC ("SetID", RPCMode.AllBuffered, GetComponent <S_SpawnMan> ().AddTankToTracker (handle));
 		
 		if (handle)
 			return handle;
