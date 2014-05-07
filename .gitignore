@@ -14,7 +14,7 @@
 /.project
 
 # Gedit backups
-**/*~
+*~
 
 # OS Junk
 Thumbs.db
