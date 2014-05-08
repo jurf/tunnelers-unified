@@ -70,8 +70,8 @@ public class S_GameMan : MonoBehaviour {
 		Red,
 		Tie
 	}
-	
-	// Have no idea whether this will make it
+	/*
+	// Have no idea whether this will make it - Answer: Nope.
 	[System.Serializable]
 	public class PlayerScore {
 	
@@ -108,7 +108,7 @@ public class S_GameMan : MonoBehaviour {
 	}
 	
 	public List <PlayerScore> playerScores;
-	
+	*/
 	#region Team Scores
 	
 		public int maxScore;
@@ -283,15 +283,15 @@ public class S_GameMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-	
+	/*
 		int fIndex = GetPlayerIndex (fragger);
 		int dIndex = GetPlayerIndex (dier);
 		
 		playerScores [fIndex].frags++;
 		playerScores [dIndex].deaths++;
-	
+	*/
 	}
-	
+	/*
 	public int GetPlayerIndex (NetworkPlayer playerID) {
 	
 		foreach (PlayerScore player in playerScores) {
@@ -304,7 +304,7 @@ public class S_GameMan : MonoBehaviour {
 		return 0;
 	
 	}
-	
+	*/
 	public void WhoWon () {
 	
 		if (!Network.isServer || Network.isClient) {
@@ -352,15 +352,15 @@ public class S_GameMan : MonoBehaviour {
 		//greenScore = 0;
 		
 		timeToEnd = gameTime;
-		
+		/*
 		foreach (PlayerScore score in playerScores) {
 			score.Reset ();
 		}
-		
+		*/
 		GetComponent <S_NetMan> ().ResetGame ();
 		
 	}
-	
+	/*
 	#region Players
 	
 		void OnPlayerConnected (NetworkPlayer player) {
@@ -377,7 +377,7 @@ public class S_GameMan : MonoBehaviour {
 		}
 	
 	#endregion
-	
+	*/
 	#region Scores
 		
 		public void BlueScored () {
@@ -440,7 +440,7 @@ public class S_GameMan : MonoBehaviour {
 		
 		}
 		
-		public void FlagCaptured (bool isBlue/*, C_PlayerMan.Team otherTeam*/, NetworkPlayer player) {
+		public void FlagCaptured (bool isBlue/*, C_PlayerMan.Team otherTeam, NetworkPlayer player*/) {
 		
 			if (!Network.isServer || Network.isClient) {
 				enabled = false;
@@ -474,7 +474,7 @@ public class S_GameMan : MonoBehaviour {
 					break;
 			}*/
 			
-			playerScores[GetPlayerIndex (player)].captures++;
+			//playerScores[GetPlayerIndex (player)].captures++;
 			networkView.RPC ("C_FlagCaptured", RPCMode.All, isBlue);		
 		
 		}

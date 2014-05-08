@@ -6,10 +6,47 @@ using UnityEngine;
 public class S_FlagMan : MonoBehaviour {
 
 	public bool home;
+	public bool Home {
+		get {
+			return home;
+		}
+		set {
+			bool diff = home != value;
+			home = value;
+			if (value) {
+				transform.position = spawn.position;
+				transform.rotation = spawn.rotation;
+				if (diff)
+					networkView.RPC ("HomeTrue", RPCMode.All);
+				return;
+			}
+			if (diff)
+				networkView.RPC ("HomeFalse", RPCMode.All);
+		}
+	}			
 
 	public Transform spawn;
 	public GameObject carrier;
-	public NetworkPlayer carrierPlayer;
+	public GameObject Carrier {
+		get {
+			return carrier;
+		}
+		set {
+			bool diff = carrier != value;
+			carrier = value;
+			GetComponent <PosAsObjectC> ().theObject = value;
+			isCarrier = carrier;
+			
+			if (value) {
+				if (diff)				
+					networkView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+				return;
+			}
+			if (diff)
+				networkView.RPC ("CarrierFalse", RPCMode.All);
+		}
+	}
+	
 	public bool isCarrier;
 	public float lastTouch;
 	public float timeToReturn;
@@ -38,40 +75,22 @@ public class S_FlagMan : MonoBehaviour {
 		
 	}
 	
-	bool lastCarrierState;
-	
 	void Update () {
 	
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
 			return;
 		}
-	
-		isCarrier = carrier;
-	
-		if (Time.time - lastTouch > timeToReturn && !home && !carrier) {
-			home = true;
+
+		if (Time.time - lastTouch > timeToReturn && !Home && !Carrier) {
+			Home = true;
 			gameMan.FlagReturnedSelf (isBlue);
-			networkView.RPC ("Home", RPCMode.All);
 		}
 		
-		if (home) {
-			transform.position = spawn.position;
-			transform.rotation = spawn.rotation;
-		}
-		
-		if (carrier) {
-			home = false;
-			transform.position = carrier.transform.position + addToHeight;
-			transform.rotation = carrier.transform.rotation;
+		if (Carrier) {
+			Home = false;
 			lastTouch = Time.time;
 		}
-		
-		if (lastCarrierState != carrier && !carrier) {
-			networkView.RPC ("Dropped", RPCMode.All);
-		}
-		
-		lastCarrierState = carrier;
 		
 	}
 	
@@ -83,37 +102,56 @@ public class S_FlagMan : MonoBehaviour {
 		}
 	
 		if (other.tag == "Tank") {
+		
 			PlayerMan otherType = other.transform.parent.GetComponent <PlayerMan> ();
 			bool otherIsMy = otherType.IsMyTeam (isBlue);
-			if (!carrier && !otherIsMy) {
-				carrier = other.gameObject;
+			
+			if (!Carrier && !otherIsMy) { //Flag taken
+			
+				Carrier = other.gameObject;
+				Home = false;
 				other.gameObject.SendMessage ("GotFlag", SendMessageOptions.DontRequireReceiver);
 				gameMan.FlagTaken (isBlue);
-				networkView.RPC ("Taken", RPCMode.All, otherType.id);
-			} else if (!carrier && !home && otherIsMy) {
-				home = true;
+				
+			} else if (!Carrier && !Home && otherIsMy) { //Flag returned
+			
+				Home = true;
 				gameMan.FlagReturned (isBlue);
-				networkView.RPC ("Home", RPCMode.All);
-			} else if (!carrier && home && otherIsMy) {
-				if (otherFlag.carrier == other.gameObject) {
-					otherFlag.home = true;
-					gameMan.FlagCaptured (isBlue/*, otherFlag.isBlue*/, otherFlag.carrier.transform.parent.GetComponent <PlayerMan> ().owner);
-					networkView.RPC ("Home", RPCMode.All);
-					otherFlag.carrier = null;					
+				
+			} else if (!Carrier && Home && otherIsMy) { //Flag captured
+			
+				if (otherFlag.Carrier == other.gameObject) {
+					
+					otherFlag.Carrier = null;
+					otherFlag.Home = true;
+					gameMan.FlagCaptured (isBlue/*, otherFlag.isBlue, otherFlag.Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().owner*/);	
+									
 				}
+				
 			}
 		
 		}
 	
 	}
 	
+	[RPC]
+	public void AnyoneHome (NetworkPlayer requester) {
+		
+		Debug.Log ("Sending flag state to the newly connected player.");
+		
+		if (Carrier)
+			networkView.RPC ("SetState", requester, Home, Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+		else
+			networkView.RPC ("SetState", requester, Home, -1);
+		
+	}
+	
 	/*void OnSerializeNetworkView (BitStream stream) {
 	
 		if (stream.isWriting) {
 		
-			stream.Serialize (ref home);
+			stream.Serialize (ref Home);
 			stream.Serialize (ref isCarrier);
-			stream.Serialize (ref carrierPlayer);
 		
 		}	
 	

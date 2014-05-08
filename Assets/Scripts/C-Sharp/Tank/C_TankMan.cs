@@ -49,19 +49,47 @@ public class C_TankMan : MonoBehaviour {
 	    LerpToTarget ();
 	}
 	
-	public void LerpToTarget() {
+	public void LerpToTarget () {
 	
 	//	Debug.Log ("Lerping.");
 	
-	//TODO seperate pos lerp and rot slerp
-	
-	    float distance = Vector3.Distance (transform.position, serverPos);
-
-	    if (distance >= positionErrorThreshold) {
-	        float lerp = ((1f / distance) * speed * Time.deltaTime) / 100f;
-	        transform.position = Vector3.Lerp (transform.position, serverPos, lerp);
-	        transform.rotation = Quaternion.Slerp (transform.rotation, serverRot, lerp);
-	    }
+		LerpPos ();
+		LerpRot ();
 	
 	}
+	
+	void LerpPos () {
+	
+		/*
+		float distance = Vector3.Distance (transform.position, serverPos);
+	
+		float timing = distance / speed;
+		float rate = 1f / timing;
+		float t = 0f;
+		t += Time.deltaTime * rate;
+	    	
+	//	float lerp = ((1f / distance) * speed * Time.deltaTime) / 100f;
+	    transform.position = Vector3.Lerp (transform.position, serverPos, t);
+	    */
+	    
+	    transform.position = Vector3.Lerp (transform.position, serverPos, Time.deltaTime);
+	}
+	
+	void LerpRot () {
+		
+		/*
+		float distance = Quaternion.Angle (transform.rotation, serverRot);
+	
+		float timing = distance / (speed * 1000f);
+		float rate = 1f / timing;
+		float t = 0f;
+		t += Time.deltaTime * rate;
+		
+		transform.rotation = Quaternion.Slerp (transform.rotation, serverRot, t);
+		*/
+		
+		transform.rotation = Quaternion.Slerp (transform.rotation, serverRot, Time.deltaTime);
+		
+	}
+
 }

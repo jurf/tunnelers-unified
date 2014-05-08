@@ -5,6 +5,8 @@ public class PosAsObjectC : MonoBehaviour {
 	
 	public GameObject theObject;
 	
+	public bool rotate;
+	
 	public bool x;
 	public bool y;
 	public bool z;
@@ -42,6 +44,10 @@ public class PosAsObjectC : MonoBehaviour {
 				temporary.z = addPos.z;
 		
 			transform.position = temporary;
+			
+			if (rotate) {
+				transform.rotation = theObject.transform.rotation;
+			}
 	
 		}
 	}

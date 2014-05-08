@@ -200,8 +200,9 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			Debug.Log ("Spawning a blue tank.");
 		
-			pos.x = Random.Range (blue1.position.x, blue2.position.x);
-			pos.y = Random.Range (blue1.position.y, blue2.position.y);
+			//pos.x = Random.Range (blue1.position.x, blue2.position.x);
+			//pos.y = Random.Range (blue1.position.y, blue2.position.y);
+			pos = blue1.position;
 			
 			prefab = bluePrefab;
 		
@@ -209,8 +210,9 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			Debug.Log ("Spawning a red tank.");
 		
-			pos.x = Random.Range (red1.position.x, red2.position.x);
-			pos.y = Random.Range (red1.position.y, red2.position.y);
+			//pos.x = Random.Range (red1.position.x, red2.position.x);
+			//pos.y = Random.Range (red1.position.y, red2.position.y);
+			pos = red1.position;
 			
 			prefab = redPrefab;
 		
