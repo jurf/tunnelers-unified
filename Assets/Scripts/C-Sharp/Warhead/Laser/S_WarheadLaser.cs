@@ -36,88 +36,50 @@ public class S_WarheadLaser : MonoBehaviour {
 	
 		if (warhead.left && time > coolDown) {
 		
-			StartCoroutine (LaserSequence ());
+			Shoot ();
 			networkView.RPC ("ShootLaser", RPCMode.Others);
 			time = 0f;
 		
 		}
 		
-		time += Time.deltaTime;
-	
+		if (time < coolDown)
+			time += Time.deltaTime;
+		else
+			time = cooldown;
+		
 	}
 	
-	IEnumerator LaserSequence () {
-	
-		if (!Network.isServer || Network.isClient) {
-			enabled = false;
-			return false;
-		}
+
+	public void Shoot () {
 		
-		for (float i = 0.001f; i < range; i += laserSpeed * Time.deltaTime) {		
-					
-			RaycastHit hit;
-			if (Physics.Raycast (transform.position, transform.forward, out hit, i)) {
-				if (hit.collider.tag == "Tank") {
-//					Debug.Log ("Hit tank.");
-					hit.collider.gameObject.GetComponent <LifePoints> ().ApplyDamage (damage);
-				
-				} else {
-				
-					line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, hit.distance));
-//					Debug.Log ("Going to break, distance: " + hit.distance + ", Vector3.z: " + (transform.localPosition + new Vector3 (0,0,hit.distance)));
-					yield return new WaitForSeconds (waitForSec);
-					line.SetPosition (1, transform.localPosition);
-//					Debug.LogWarning ("Just before yield break.");
-					yield break;
-					
-//					break;
-				
-				}
-			
-			
-			} else {
-//				Debug.Log ("If else hit.");
-				line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, i));
-			
-			}
-//			Debug.Log ("Yield returning.");
-			yield return 0;
-			
-		}
-//		Debug.Log ("End of loop.");
+		RayCastHit hit;
+		if (Physics.Raycast (transform.position, transform.forward, out hit, range)) {
 		
-		RaycastHit hit2;
-		if (Physics.Raycast (transform.position, transform.forward, out hit2, range)) {
-			if (hit2.collider.tag == "Tank") {
-//				Debug.Log ("Hit tank.");
+			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
+			
 				hit2.collider.gameObject.GetComponent <LifePoints> ().ApplyDamage (damage);
 				line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, hit2.distance));
-				yield return new WaitForSeconds (waitForSec);
-				line.SetPosition (1, transform.localPosition);
-				yield break;
-			} else {			
-				line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, hit2.distance));
-//				Debug.Log ("Going to break, distance: " + hit.distance + ", Vector3.z: " + (transform.localPosition + new Vector3 (0,0,hit.distance)));
-				yield return new WaitForSeconds (waitForSec);
-				line.SetPosition (1, transform.localPosition);
-//				Debug.LogWarning ("Just before yield break.");
-				yield break;
+				Invoke ("ResetLaser", waitForSec);
 				
-				//					break;
+			} else {
+						
+				line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, hit.distance));
+				Invoke ("ResetLaser", waitForSec);
 				
 			}
+			
 		} else {
 		
-		line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, range));
-		
-		yield return new WaitForSeconds (waitForSec);
-		
-		line.SetPosition (1, transform.localPosition);
-		
-		yield break;
+			line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, range));		
+			Invoke ("ResetLaser", waitForSec);
 		
 		}
-
+	}
+	
+	public void ResetLaser () {
+	
+		line.SetPosition (1, transform.localPosition);
+				
 	}	
 	
 }
