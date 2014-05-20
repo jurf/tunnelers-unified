@@ -3,7 +3,7 @@ using System.Collections;
 
 public class C_WarheadLaser : MonoBehaviour {
 
-	public S_WarheadLaser serverScript;
+	public S_WarheadLaser sscript;
 	
 	void Awake () {
 	
@@ -13,76 +13,43 @@ public class C_WarheadLaser : MonoBehaviour {
 		}
 		
 	}
-
+	
 	[RPC]
-	IEnumerator ShootLaser () {
+	public void Shoot () {
 	
 		if (!Network.isClient || Network.isServer) {
 			enabled = false;
 			return false;
 		}
 		
-		for (float i = 0.001f; i < serverScript.range; i += serverScript.laserSpeed * Time.deltaTime) {		
-			
-			RaycastHit hit;
-			if (Physics.Raycast (serverScript.transform.position, transform.forward, out hit, i)) {
-				
-				if (hit.collider.tag == "Tank") {
-									
-					serverScript.line.SetPosition (1, serverScript.transform.localPosition + new Vector3 (0, 0, hit.distance));					
-				
-				} else {
-					
-					serverScript.line.SetPosition (1, serverScript.transform.localPosition + new Vector3 (0, 0, hit.distance));
-					yield return new WaitForSeconds (serverScript.waitForSec);
-					serverScript.line.SetPosition (1, serverScript.transform.localPosition);
-					yield break;
-					
-				}
-				
-				
-			} else {
-
-				serverScript.line.SetPosition (1, serverScript.transform.localPosition + new Vector3 (0, 0, i));
-				
-			}
-
-			yield return 0;
-			
-		}
-
+		RayCastHit hit;
+		if (Physics.Raycast (transform.position, transform.forward, out hit, sscript.range)) {
 		
-		RaycastHit hit2;
-		if (Physics.Raycast (serverScript.transform.position, transform.forward, out hit2, serverScript.range)) {
+			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
 			
-			if (hit2.collider.tag == "Tank") {
-
-				serverScript.line.SetPosition (1, serverScript.transform.localPosition + new Vector3 (0, 0, hit2.distance));
-				yield return new WaitForSeconds (serverScript.waitForSec);
-				serverScript.line.SetPosition (1, serverScript.transform.localPosition);
-				yield break;
+				sscript.line.SetPosition (1, new Vector3 (0, 0, hit.distance));
+				Invoke ("ResetLaser", sscript.waitForSec);
 				
 			} else {
 						
-				serverScript.line.SetPosition (1, serverScript.transform.localPosition + new Vector3 (0, 0, hit2.distance));		
-				yield return new WaitForSeconds (serverScript.waitForSec);
-				serverScript.line.SetPosition (1, serverScript.transform.localPosition);
-				yield break;
+				sscript.line.SetPosition (1, new Vector3 (0, 0, hit.distance));
+				Invoke ("ResetLaser", sscript.waitForSec);
 				
 			}
 			
 		} else {
-			
-			serverScript.line.SetPosition (1, serverScript.transform.localPosition + new Vector3 (0, 0, serverScript.range));
-			
-			yield return new WaitForSeconds (serverScript.waitForSec);
-			
-			serverScript.line.SetPosition (1, serverScript.transform.localPosition);
-			
-			yield break;
-			
+		
+			sscript.line.SetPosition (1, new Vector3 (0, 0, sscript.range));		
+			Invoke ("ResetLaser", sscript.waitForSec);
+		
 		}
 		
+	}
+	
+	void ResetLaser () {
+	
+		line.SetPosition (1, Vector3.zero);
+				
 	}
 
 }

@@ -10,6 +10,7 @@ public class S_WarheadLaser : MonoBehaviour {
 	
 	public float laserSpeed;
 	public float coolDown;
+	
 	[SerializeField]
 	private float time;
 	public float waitForSec;
@@ -37,7 +38,7 @@ public class S_WarheadLaser : MonoBehaviour {
 		if (warhead.left && time > coolDown) {
 		
 			Shoot ();
-			networkView.RPC ("ShootLaser", RPCMode.Others);
+			networkView.RPC ("Shoot", RPCMode.Others);
 			time = 0f;
 		
 		}
@@ -50,35 +51,35 @@ public class S_WarheadLaser : MonoBehaviour {
 	}
 	
 
-	public void Shoot () {
+	void Shoot () {
 		
 		RayCastHit hit;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, range)) {
 		
 			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
 			
-				hit2.collider.gameObject.GetComponent <LifePoints> ().ApplyDamage (damage);
-				line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, hit2.distance));
+				hit.collider.gameObject.GetComponent <LifePoints> ().ApplyDamage (damage);
+				line.SetPosition (1, new Vector3 (0, 0, hit.distance));
 				Invoke ("ResetLaser", waitForSec);
 				
 			} else {
 						
-				line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, hit.distance));
+				line.SetPosition (1, new Vector3 (0, 0, hit.distance));
 				Invoke ("ResetLaser", waitForSec);
 				
 			}
 			
 		} else {
 		
-			line.SetPosition (1, transform.localPosition + new Vector3 (0, 0, range));		
+			line.SetPosition (1, new Vector3 (0, 0, range));		
 			Invoke ("ResetLaser", waitForSec);
 		
 		}
 	}
 	
-	public void ResetLaser () {
+	void ResetLaser () {
 	
-		line.SetPosition (1, transform.localPosition);
+		line.SetPosition (1, Vector3.zero);
 				
 	}	
 	
