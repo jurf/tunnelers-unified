@@ -19,10 +19,10 @@ public class C_WarheadLaser : MonoBehaviour {
 	
 		if (!Network.isClient || Network.isServer) {
 			enabled = false;
-			return false;
+			return;
 		}
 		
-		RayCastHit hit;
+		RaycastHit hit;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, sscript.range)) {
 		
 			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
@@ -48,7 +48,7 @@ public class C_WarheadLaser : MonoBehaviour {
 	
 	void ResetLaser () {
 	
-		line.SetPosition (1, Vector3.zero);
+		sscript.line.SetPosition (1, Vector3.zero);
 				
 	}
 

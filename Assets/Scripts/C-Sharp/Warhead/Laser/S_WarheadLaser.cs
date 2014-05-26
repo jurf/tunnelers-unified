@@ -46,14 +46,14 @@ public class S_WarheadLaser : MonoBehaviour {
 		if (time < coolDown)
 			time += Time.deltaTime;
 		else
-			time = cooldown;
+			time = coolDown;
 		
 	}
 	
 
 	void Shoot () {
 		
-		RayCastHit hit;
+		RaycastHit hit;
 		if (Physics.Raycast (transform.position, transform.forward, out hit, range)) {
 		
 			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
