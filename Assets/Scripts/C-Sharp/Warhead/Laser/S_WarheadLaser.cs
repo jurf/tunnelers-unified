@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (S_Warhead))]
+[RequireComponent (typeof (NetworkView))]
 
 public class S_WarheadLaser : MonoBehaviour {
 
