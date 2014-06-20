@@ -9,11 +9,12 @@ public class S_WarheadLaser : MonoBehaviour {
 	public LineRenderer line;
 	
 	public float laserSpeed;
-	public float coolDown;
+	public float coolDown = 5f;
+	public bool cooled;
 	
 	[SerializeField]
 	private float time;
-	public float waitForSec;
+	public float waitForSec = 0.5f;
 	
 	public float range = 5f;
 	
@@ -35,18 +36,23 @@ public class S_WarheadLaser : MonoBehaviour {
 			return;
 		}
 	
-		if (warhead.left && time > coolDown) {
+		if (warhead.left && cooled) {
 		
 			Shoot ();
-			networkView.RPC ("Shoot", RPCMode.Others);
+			networkView.RPC ("C_Shoot", RPCMode.Others);
 			time = 0f;
 		
 		}
 		
-		if (time < coolDown)
+		if (time < coolDown) {
+			cooled = false;
 			time += Time.deltaTime;
-		else
+		}
+		
+		if (time > coolDown) {
+			cooled = true;
 			time = coolDown;
+		}
 		
 	}
 	

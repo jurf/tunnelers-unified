@@ -6,8 +6,6 @@ public class C_Warhead : MonoBehaviour {
 	public PlayerMan parent;
 
 	bool lastLeft;
-	bool lastMiddle;
-	bool lastRight;
 	
 	void Awake () {
 	
@@ -18,17 +16,26 @@ public class C_Warhead : MonoBehaviour {
 		
 	}
 	
+	void OnConnectedToServer () {
+	
+		enabled = true;
+		
+	}
+	
 	void Update () {
+	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
 	
 		if (parent.GetOwner () == null || parent.GetOwner () != Network.player) {
 			return;
 		}
 	
 		lastLeft = Input.GetMouseButton (0);
-		lastMiddle =  Input.GetMouseButton (2);
-		lastRight = Input.GetMouseButton (1);
-	
-		networkView.RPC ("UpdateClientMouse", RPCMode.Server, lastLeft, lastMiddle, lastRight);
+
+		networkView.RPC ("UpdateClientMouse", RPCMode.Server, lastLeft);
 	
 	}
 }

@@ -15,7 +15,7 @@ public class C_WarheadLaser : MonoBehaviour {
 	}
 	
 	[RPC]
-	public void Shoot () {
+	public void C_Shoot () {
 	
 		if (!Network.isClient || Network.isServer) {
 			enabled = false;
