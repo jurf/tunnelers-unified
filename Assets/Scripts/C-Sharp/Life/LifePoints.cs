@@ -7,16 +7,16 @@ public class LifePoints : MonoBehaviour {
 	public M_TankController controller;
 	
 	[SerializeField]
-	private float energyPoints = 100f;
-	public float maxRegEnergyPoints = 100f;
-	public float maxEnergyPoints;
+	float energyPoints = 100f;
+	public float maxRegEnergyPoints;
+	public float maxEnergyPoints = 100f;
 	public float moveEnergyConsumption = 2f;
 	public float shootEnergyConsumption = 5f;
 	
 	[SerializeField]
-	private float shieldPoints = 100f;
-	public float maxRegShieldPoints = 100f;
-	public float maxShieldPoints;
+	float shieldPoints = 100f;
+	public float maxRegShieldPoints;
+	public float maxShieldPoints = 100f;
 	
 	public float energyRegenerationRate = 10f;
 	public float shieldRegenerationRate = 5f;
@@ -28,12 +28,13 @@ public class LifePoints : MonoBehaviour {
 		if (!playerType) playerType = gameObject.GetComponent <PlayerMan> ();
 		if (!controller) controller = gameObject.GetComponent <M_TankController> ();
 		
-		if (!Network.isServer) {		
-			enabled = false;	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
 		}
 		
-		maxEnergyPoints = maxRegEnergyPoints * (4f/3f);
-		maxShieldPoints = maxRegShieldPoints * (4f/3f);
+		maxRegEnergyPoints = maxEnergyPoints * (2f/3f);
+		maxRegShieldPoints = maxShieldPoints * (2f/3f);
 		
 	}
 	
@@ -79,6 +80,15 @@ public class LifePoints : MonoBehaviour {
 	
 	}
 	
+	public bool CanIShoot () {
+	
+		if (energyPoints > 0f) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public float GetShield () {
 	
 		return shieldPoints;
@@ -101,21 +111,39 @@ public class LifePoints : MonoBehaviour {
 	
 	void OnTriggerExit (Collider other) {
 	
-		if (playerType.IsMyBase (other.tag)) {
-			inBase = false;
-		} else if (!playerType.IsMyBase (other.tag)) {
-			inBase = false;
+		if (other.tag == "BlueBase" || other.tag == "RedBase" || other.tag == "GreenBase") {
+		
+			if (playerType.IsMyBase (other.tag)) {
+				inBase = false;
+			} else if (!playerType.IsMyBase (other.tag)) {
+				inBase = false;
+			}
+			
 		}
 	
 	}
 	
 	void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) {
-	
+		
+		int energy = 0;
+		int shield = 0;
+		
 		if (stream.isWriting) {
 		
-			stream.Serialize (ref energyPoints);
-			stream.Serialize (ref shieldPoints);
+			energy = (int) energyPoints;
+			shield = (int) shieldPoints;
 		
+			stream.Serialize (ref energy);
+			stream.Serialize (ref shield);
+		
+		} else if (playerType.owner == Network.player) {
+			
+			stream.Serialize (ref energy);
+			stream.Serialize (ref shield);
+			
+			energyPoints = (float) energy;
+			shieldPoints = (float) shield;
+			
 		}
 	
 	}

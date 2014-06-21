@@ -66,8 +66,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 148: {fileID: 14800004}
-  - 114: {fileID: 11400020}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400020}
   m_Layer: 0
   m_Name: LevathianBlue
   m_TagString: Untagged
@@ -197,7 +197,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.89100266, y: 2.88196659, z: -3.2854898}
+  m_LocalPosition: {x: 2.49860334, y: 1.63116932, z: -4.20995235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -417,6 +417,7 @@ MonoBehaviour:
   line: {fileID: 12000000}
   laserSpeed: 0
   coolDown: 3
+  cooled: 0
   time: 0
   waitForSec: .5
   range: 5
@@ -531,9 +532,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595cb7bfdf5805a41ace6179dc574332, type: 3}
+  m_Script: {fileID: 11500000, guid: aa8ef19bb2d503245a68f290a0efabdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerType: {fileID: 11400018}
+  controller: {fileID: 11400028}
+  energyPoints: 100
+  maxRegEnergyPoints: 0
+  maxEnergyPoints: 100
+  moveEnergyConsumption: 2
+  shootEnergyConsumption: 5
+  shieldPoints: 100
+  maxRegShieldPoints: 0
+  maxShieldPoints: 100
+  energyRegenerationRate: 10
+  shieldRegenerationRate: 5
+  inBase: 0
+  otherBaseDivider: 2
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1

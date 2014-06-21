@@ -3,7 +3,7 @@
 [AddComponentMenu ("Client/Player Man")]
 
 public class PlayerMan : MonoBehaviour {
-	//TODO not sure if this should be in client script
+
 	public NetworkPlayer owner;
 	
 	public int id;
