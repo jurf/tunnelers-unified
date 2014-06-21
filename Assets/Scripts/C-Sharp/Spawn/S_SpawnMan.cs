@@ -165,7 +165,9 @@ public class S_SpawnMan : MonoBehaviour {
 	
 		foreach (PlayerTracker tracker in playerTracker) {
 		
-			if (!tracker.alive && !tracker.instance) {
+			if (!tracker.alive && !tracker.instance || tracker.alive && !tracker.instance) {
+			
+				tracker.alive = false;
 			
 				GameObject instance = Spawn (tracker.player, tracker.team);
 				

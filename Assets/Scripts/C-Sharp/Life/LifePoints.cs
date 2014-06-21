@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class LifePoints : MonoBehaviour {
 	
@@ -40,6 +39,11 @@ public class LifePoints : MonoBehaviour {
 	
 	void Update () {
 	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+	
 		energyPoints = Mathf.Clamp (energyPoints, 0f, maxEnergyPoints);
 		shieldPoints = Mathf.Clamp (shieldPoints, 0f, maxShieldPoints);
 
@@ -53,6 +57,11 @@ public class LifePoints : MonoBehaviour {
 	
 	public void ChangeEnergy (float amount) {
 	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+	
 		energyPoints += amount * Time.deltaTime;
 	
 	}
@@ -65,14 +74,29 @@ public class LifePoints : MonoBehaviour {
 	
 	public void ChangeShield (float amount) {
 	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+	
 		shieldPoints += amount * Time.deltaTime;
 	
 	}
 	
 	public bool ApplyDamage (float amount) {
 	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return false;
+		}
+	
+		Debug.Log ("Recieved " + amount + " damage!", gameObject);
+	
 		shieldPoints -= amount;
+		//TODO Report system
 		if (shieldPoints < 0) {
+			Debug.Log ("I'm outta here.", gameObject);
+			GetComponent <S_Assassin> ().Assassinate ();
 			return true;
 		} else {
 			return false;
@@ -97,6 +121,11 @@ public class LifePoints : MonoBehaviour {
 	
 	void OnTriggerStay (Collider other) {
 	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+	
 		if (playerType.IsMyBase (other.tag)) {		
 			inBase = true;
 			if (energyPoints < maxRegEnergyPoints) ChangeEnergy (energyRegenerationRate);
@@ -110,6 +139,11 @@ public class LifePoints : MonoBehaviour {
 	}
 	
 	void OnTriggerExit (Collider other) {
+	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
 	
 		if (other.tag == "BlueBase" || other.tag == "RedBase" || other.tag == "GreenBase") {
 		

@@ -64,7 +64,7 @@ public class S_WarheadLaser : MonoBehaviour {
 		
 			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
 			
-				hit.collider.gameObject.GetComponent <LifePoints> ().ApplyDamage (damage);
+				hit.collider.gameObject.transform.parent.GetComponent <LifePoints> ().ApplyDamage (damage);
 				line.SetPosition (1, new Vector3 (0, 0, hit.distance));
 				Invoke ("ResetLaser", waitForSec);
 				

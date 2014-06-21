@@ -96,7 +96,7 @@ function SpawnExplosion()
 {
 		var ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
-		var hit : RaycastHit;
+var hit : RaycastHit;
 			if (Physics.Raycast (ray, hit, 1000)) 
 			{
 				var offsetSize = currentDetonator.GetComponent("Detonator").size / 3;

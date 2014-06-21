@@ -52,7 +52,7 @@ GameObject:
   - 65: {fileID: 6500002}
   m_Layer: 0
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,6 +68,8 @@ GameObject:
   - 148: {fileID: 14800004}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400020}
+  - 114: {fileID: 11400032}
+  - 114: {fileID: 11400030}
   m_Layer: 0
   m_Name: LevathianBlue
   m_TagString: Untagged
@@ -197,7 +199,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.49860334, y: 1.63116932, z: -4.20995235}
+  m_LocalPosition: {x: 3.0148344, y: 2.34159374, z: -1.39532804}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -421,7 +423,7 @@ MonoBehaviour:
   time: 0
   waitForSec: .5
   range: 5
-  damage: 0
+  damage: 55
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -615,6 +617,32 @@ MonoBehaviour:
   lastSuccRotation: {x: 0, y: 0, z: 0, w: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
   isMoving: 0
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9294ded155f545f449facdb692522f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sscript: {fileID: 11400032}
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fc4ed94aad50545836e3784d762f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 11400018}
+  explosion: {fileID: 100000, guid: 8e02e06584f51ab42986fd44c73d976e, type: 2}
+  wait: 3
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
