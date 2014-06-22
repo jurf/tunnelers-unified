@@ -18,7 +18,7 @@ public class C_GameMan : MonoBehaviour {
 	
 	//	public List <string> gameNotifications;
 	
-		public float cronTime = 5f;
+	//	public float cronTime = 5f;
 		
 		public int serverTimeToEnd;
 		
@@ -255,6 +255,8 @@ public class C_GameMan : MonoBehaviour {
 		}
 	
 		showEndGame = false;
+		
+		CallRequestRefresh ();
 		
 	//	Application.LoadLevel (S_NetMan.levelName);
 		
