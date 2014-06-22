@@ -4,5 +4,5 @@
 NetworkManager:
   m_ObjectHideFlags: 0
   m_DebugLevel: 1
-  m_Sendrate: 5
+  m_Sendrate: 10
   m_AssetToPrefab: {}
