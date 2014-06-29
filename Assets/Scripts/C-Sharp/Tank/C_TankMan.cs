@@ -72,7 +72,7 @@ public class C_TankMan : MonoBehaviour {
 	    transform.position = Vector3.Lerp (transform.position, serverPos, t);
 	    */
 	    
-	    transform.position = Vector3.Lerp (transform.position, serverPos, Time.deltaTime);
+	    transform.position = Vector3.Lerp (transform.position, serverPos, Time.deltaTime * speed);
 	}
 	
 	void LerpRot () {

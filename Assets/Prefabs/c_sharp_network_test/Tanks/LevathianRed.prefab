@@ -565,7 +565,7 @@ MonoBehaviour:
   parent: {fileID: 11400018}
   lastMotionH: 0
   lastMotionV: 0
-  speed: 100
+  speed: 10
   controller: {fileID: 11400028}
   positionErrorThreshold: 0
   serverPos: {x: 0, y: 0, z: 0}
