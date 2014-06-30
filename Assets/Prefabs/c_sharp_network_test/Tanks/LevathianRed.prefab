@@ -464,7 +464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  speed: 5
+  moveSpeed: 5
+  rotSpeed: 2.5
   maxVelocityChange: 10
   maxVelocityChangeStop: 2
   lastSuccRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -565,7 +566,7 @@ MonoBehaviour:
   parent: {fileID: 11400018}
   lastMotionH: 0
   lastMotionV: 0
-  speed: 10
+  speed: 20
   controller: {fileID: 11400028}
   positionErrorThreshold: 0
   serverPos: {x: 0, y: 0, z: 0}
@@ -611,7 +612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  speed: 5
+  moveSpeed: 5
+  rotSpeed: 2.5
   maxVelocityChange: 10
   maxVelocityChangeStop: 2
   lastSuccRotation: {x: 0, y: 0, z: 0, w: 0}
