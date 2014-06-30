@@ -83,7 +83,7 @@ public class M_TankController : MonoBehaviour {
 	/// <param name="lastTo">Last to rotation.</param>
 	static bool GetNewRotationPhase (Transform tankTransform, Quaternion fromRotation, Quaternion toRotation, float speed, ref Quaternion lastSuccTo, ref Quaternion lastTo) {
 		//MAYBEUPGRADE Rotate with force
-		float timing = Quaternion.Angle (fromRotation, toRotation) / (speed * 1000f);
+		float timing = Quaternion.Angle (fromRotation, toRotation) / (speed * 120f);
 		float rate = 1f / timing;
 		float t = 0f;
 		t += Time.deltaTime * rate;
@@ -112,7 +112,7 @@ public class M_TankController : MonoBehaviour {
 	/// <param name="speed">Speed.</param>
 	static bool GetNewRotationPhase (Transform tankTransform, Quaternion fromRotation, Quaternion toRotation, float speed) {
 		
-		float timing = Quaternion.Angle (fromRotation, toRotation) / (speed * 1000f);
+		float timing = Quaternion.Angle (fromRotation, toRotation) / (speed * 2000f);
 		float rate = 1f / timing;
 		float t = 0f;
 		t += Time.deltaTime * rate;
@@ -189,17 +189,17 @@ public class M_TankController : MonoBehaviour {
 	/// <param name="maxVChangeStop">Max stop velocity change.</param>
 	/// <param name="lastSuccRot">Last succ rot.</param>
 	/// <param name="lastRot">Last rot.</param>
-	static public void MoveMain (GameObject tank, int h, int v, float moveSpeed, float maxVChange, float maxVChangeStop, ref Quaternion lastSuccRot, ref Quaternion lastRot, ref bool isItMoving) {		
+	static public void MoveMain (GameObject tank, int h, int v, float mSpeed, float rSpeed, float maxVChange, float maxVChangeStop, ref Quaternion lastSuccRot, ref Quaternion lastRot, ref bool isItMoving) {		
 		Quaternion newRot = GetNewRotation (h, v, lastRot);
 	
-		bool finRot = GetNewRotationPhase (tank.transform, tank.transform.rotation, newRot, 0.3f, ref lastSuccRot, ref lastRot);
+		bool finRot = GetNewRotationPhase (tank.transform, tank.transform.rotation, newRot, rSpeed, ref lastSuccRot, ref lastRot);
 		
 		if (
 			(finRot || (/*finRot && */Quaternion.Angle (lastSuccRot, lastRot) < 45f + rotVar))
 			&& (h != 0 || v != 0)	
 		) {
 			isItMoving = true;
-			tank.rigidbody.AddForce (AddForce (tank.transform.forward, tank.rigidbody.velocity, moveSpeed, maxVChange), ForceMode.VelocityChange);
+			tank.rigidbody.AddForce (AddForce (tank.transform.forward, tank.rigidbody.velocity, mSpeed, maxVChange), ForceMode.VelocityChange);
 		
 		} else {
 			isItMoving = false;
@@ -222,7 +222,9 @@ public class M_TankController : MonoBehaviour {
 	/// <summary>
 	/// The speed.
 	/// </summary>
-	public float speed = 5f;
+	public float moveSpeed = 5f;
+	
+	public float rotSpeed = 2.5f;
 	
 	/// <summary>
 	/// The max velocity change.
@@ -256,7 +258,7 @@ public class M_TankController : MonoBehaviour {
 	/// <param name="v">The vertical axis.</param>
 	public void Move (int h, int v) {
 	
-		M_TankController.MoveMain (gameObject, h, v, speed, maxVelocityChange, maxVelocityChangeStop, ref lastSuccRotation, ref lastRotation, ref isMoving);
+		M_TankController.MoveMain (gameObject, h, v, moveSpeed, rotSpeed, maxVelocityChange, maxVelocityChangeStop, ref lastSuccRotation, ref lastRotation, ref isMoving);
 	
 	}
 	
@@ -297,7 +299,7 @@ public class M_TankController : MonoBehaviour {
 	/// <param name="toRotation">To rotation.</param>
 	public void Rotate (Quaternion toRotation) {
 	
-		M_TankController.GetNewRotationPhase (transform, transform.rotation, toRotation, speed / 50f);
+		M_TankController.GetNewRotationPhase (transform, transform.rotation, toRotation, rotSpeed / 50f);
 	
 	}
 		
