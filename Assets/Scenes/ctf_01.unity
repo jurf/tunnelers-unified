@@ -179,6 +179,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: .500000119
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1317829416bee4c4aa1f6e2237b15d70, type: 2}
+      propertyPath: addPos.y
+      value: 12.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1317829416bee4c4aa1f6e2237b15d70, type: 2}
   m_RootGameObject: {fileID: 365450329}
@@ -540,7 +544,7 @@ MonoBehaviour:
   x: 1
   y: 0
   z: 1
-  addPos: {x: 5, y: 10, z: 0}
+  addPos: {x: 5, y: 12.5, z: 0}
 --- !u!1 &383708567
 GameObject:
   m_ObjectHideFlags: 1
