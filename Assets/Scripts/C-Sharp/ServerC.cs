@@ -31,24 +31,30 @@ public class ServerC : MonoBehaviour {
 		}
 
 		public string typeName;
-		public string gameName;
-		public string roomComment;
+		public string gameName = "A cool game name";
+		public string roomComment = "A cool game description.";
 		public int level;
 	
 		public bool server = false;
 		public bool startServer;
-		
-		public GameObject player;
 	
 		public HostData[] data;
-	
-		public float speed;
+		
+		public int serversMinWidth = 200;
+		public int serversMinHeight = 200;
 	
 		public Rect windowRect;
 		
-		public string serverNotice = "Pressing 'Launch Server' will make this instance (window) a dedicated server. You will not be able to play. To play, you have to open a new instance (window) of Tunnelers, with it connect to this server. That is the way authoritative networking works. Stop fretting.";
+		public string serverNotice = "Pressing 'Launch Server' will make this instance (window) a dedicated server. \n You will not be able to play. To play, you have to open a new instance (window) of Tunnelers, with it connect to this server. That is the way authoritative networking works. Stop fretting.";
+		
+		public Rect noticeRect;
+		public bool showNotice;
+		
+		public Vector2 serverScroll;
 	
 		public string[] clientServer = new string[] {"Client", "Server"};
+		
+		public GUIStyle divider;
 	
 	#endregion Variables
 	
@@ -58,9 +64,9 @@ public class ServerC : MonoBehaviour {
 		
 			SetIP ();
 			
-			if (!server) {
+		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
-			}
+			}	*/
 			
 		}
 		
@@ -73,6 +79,9 @@ public class ServerC : MonoBehaviour {
 					windowRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
 							
 					windowRect = GUILayout.Window (0, windowRect, MainWindow, "Main Menu");
+					
+					if (showNotice)
+						noticeRect = GUILayout.Window (1, noticeRect, NoticeWindow, "Warning");
 	
 				} else if (!Network.isClient && Network.isServer) {
 				
@@ -97,7 +106,8 @@ public class ServerC : MonoBehaviour {
 				
 				OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP?");
 				
-				overMaster = GUILayout.TextField (overMaster, 30);
+				if (OverrideIP)
+					overMaster = GUILayout.TextField (overMaster, 30);
 				
 				if (!Network.isClient && !Network.isServer) {
 				
@@ -113,7 +123,7 @@ public class ServerC : MonoBehaviour {
 					GUILayout.Space (5);
 					
 					gameName = GUILayout.TextField (gameName, 30);
-					roomComment = GUILayout.TextField (roomComment, 200);
+					roomComment = GUILayout.TextArea (roomComment, 200);
 					
 					GUILayout.Label ("Select a level:");
 					
@@ -123,16 +133,19 @@ public class ServerC : MonoBehaviour {
 					
 					GUILayout.Space (5);
 					
-					GUILayout.Label (serverNotice);
-					
-					GUILayout.Space (5); 
+					GUILayout.BeginHorizontal ();
 					
 					if (GUILayout.Button ("Launch Server")) {
 					
 						startServer = true;
 						Application.LoadLevel (Game.Levels[level + 2]);
 						
-					}	
+					}
+					
+					if (GUILayout.Button ("?"))
+						showNotice = true;
+					
+					GUILayout.EndHorizontal ();
 					
 				} else {
 					
@@ -144,14 +157,16 @@ public class ServerC : MonoBehaviour {
 					if (data.Length == 0) {
 						GUILayout.Label ("No games found.");
 					}
-						
+					
+					serverScroll = GUILayout.BeginScrollView (serverScroll, GUILayout.MinWidth (serversMinWidth),  GUILayout.MinHeight (serversMinHeight));
+					
 					foreach (HostData element in data) {
 					
 						GUILayout.Space (5);
 						string name = "Name: " + element.gameName;
 						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected.";
 						
-						GUILayout.Label ("—————————————");
+						GUILayout.Box ("", divider, GUILayout.Height (2));
 						GUILayout.Label (name);
 						GUILayout.Label (connectedPlayers);
 						//GUILayout.Space (5);
@@ -167,7 +182,8 @@ public class ServerC : MonoBehaviour {
 						GUILayout.Label (hostInfo);								
 						GUILayout.Space (5);						
 						GUILayout.Label ("Description: " + element.comment);
-						GUILayout.Label ("—————————————");	
+						
+						GUILayout.Space (5);
 							
 						if (GUILayout.Button ("Connect to this server")) {
 							
@@ -175,7 +191,12 @@ public class ServerC : MonoBehaviour {
 							Network.Connect (element);	
 										
 						}
+						
+						GUILayout.Box ("", divider, GUILayout.Height (2));
+						
 					}
+					
+					GUILayout.EndScrollView ();
 					
 				//	GUILayout.FlexibleSpace();
 					
@@ -189,6 +210,17 @@ public class ServerC : MonoBehaviour {
 				
 				GUILayout.EndVertical ();
 
+			}
+			
+			void NoticeWindow (int windowID) {
+			
+				GUILayout.Label (serverNotice);
+					
+				GUILayout.Space (5);
+				
+				if (GUILayout.Button ("Alright, I understand."))
+					showNotice = false;
+				
 			}
 			
 		#endregion GUI	
@@ -226,16 +258,10 @@ public class ServerC : MonoBehaviour {
 		MasterServer.RegisterHost(typeName, gameName, roomComment);
 		
 	}
-	
-	void SpawnPlayer () {
-	
-		Network.Instantiate (player, new Vector3 (0,2,0), Quaternion.identity, 0);
-		
-	}
 
 	void SetIP() {
 	
-		Debug.Log ("SettingIP");
+		Debug.Log ("Setting the IP of the Master Server and Facilitator.");
 		
 		if (!overrideIP) {
 			MasterServer.ipAddress = MasterServerIP.masterServerIP;

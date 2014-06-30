@@ -106,13 +106,13 @@ MonoBehaviour:
   overrideIP: 0
   overMaster: 127.0.0.1
   typeName: tunnelers
-  gameName: game
-  roomComment: comment
+  gameName: A cool game name
+  roomComment: A cool game description.
   level: 0
   server: 0
   startServer: 0
-  player: {fileID: 0}
-  speed: 0
+  serversMinWidth: 180
+  serversMinHeight: 180
   windowRect:
     serializedVersion: 2
     x: 0
@@ -123,9 +123,76 @@ MonoBehaviour:
     server. You will not be able to play. To play, you have to open a new instance
     (window) of Tunnelers, with it connect to this server. That is the way authoritative
     networking works. Stop fretting.
+  noticeRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  showNotice: 0
+  serverScroll: {x: 0, y: 0}
   clientServer:
   - Client
   - Server
+  divider:
+    m_Name: divider
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: aba36d5d34aca214687c40b3b088c70e, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!4 &548006296
 Transform:
   m_ObjectHideFlags: 0
