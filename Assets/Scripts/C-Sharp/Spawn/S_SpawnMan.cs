@@ -136,7 +136,7 @@ public class S_SpawnMan : MonoBehaviour {
 				
 					Debug.Log ("Destroying the tank which fell out.");
 					
-					GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
+					tracker.instance.GetComponent <S_Assassin> ().Assassinate ();
 					
 					tracker.alive = false;
 					
