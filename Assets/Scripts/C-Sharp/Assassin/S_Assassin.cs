@@ -15,6 +15,15 @@ public class S_Assassin : MonoBehaviour {
 		}
 		
 		Debug.Log ("Assassinating.", gameObject);
+		
+		GameObject [] flags = GameObject.FindGameObjectsWithTag ("Flag");
+		
+		foreach (GameObject flag in flags) {
+		
+			flag.GetComponent <S_FlagMan> ().DidICarryYou (parent.tank.gameObject);
+				
+		}
+		
 		Stun ();
 		CreateDiversion ();
 		Invoke ("Kill", wait);

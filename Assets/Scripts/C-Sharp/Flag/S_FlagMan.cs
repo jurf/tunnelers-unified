@@ -94,7 +94,7 @@ public class S_FlagMan : MonoBehaviour {
 		
 	}
 	
-	void OnTriggerEnter (Collider other) {
+	void OnTriggerStay (Collider other) {
 	
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
@@ -136,6 +136,11 @@ public class S_FlagMan : MonoBehaviour {
 	
 	[RPC]
 	public void AnyoneHome (NetworkPlayer requester) {
+	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
 		
 		Debug.Log ("Sending flag state to the newly connected player.");
 		
@@ -145,6 +150,23 @@ public class S_FlagMan : MonoBehaviour {
 			networkView.RPC ("SetState", requester, Home, -1);
 		
 	}
+	
+	public void DidICarryYou (GameObject me) {
+	
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+	
+		if (me == Carrier) {
+		
+			Carrier = null;
+			
+		}
+		
+	}
+	
+		
 	
 	/*void OnSerializeNetworkView (BitStream stream) {
 	
