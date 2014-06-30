@@ -131,14 +131,16 @@ public class ServerC : MonoBehaviour {
 					
 					level = GUILayout.SelectionGrid (level, levels, 1);
 					
-					GUILayout.Space (5);
+					GUILayout.Box ("", divider, GUILayout.Height (2));
 					
 					GUILayout.BeginHorizontal ();
 					
 					if (GUILayout.Button ("Launch Server")) {
 					
 						startServer = true;
-						Application.LoadLevel (Game.Levels[level + 2]);
+						string levelToLoad = Game.Levels[level + 2];
+						S_NetMan.levelName = levelToLoad;
+						Application.LoadLevel (levelToLoad);
 						
 					}
 					
