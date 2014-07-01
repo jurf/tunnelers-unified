@@ -68,6 +68,7 @@ GameObject:
   - 148: {fileID: 14800004}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400020}
+  - 114: {fileID: 11400034}
   - 114: {fileID: 11400032}
   - 114: {fileID: 11400030}
   m_Layer: 0
@@ -199,7 +200,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.711428165, y: -4.21670818, z: .145696163}
+  m_LocalPosition: {x: -9.63029194, y: 12.906477, z: -26.5046139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -645,6 +646,18 @@ MonoBehaviour:
   parent: {fileID: 11400018}
   explosion: {fileID: 100000, guid: 8e02e06584f51ab42986fd44c73d976e, type: 2}
   wait: 3
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bc8af56a0eb6243ab02d38f67770b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sscript: {fileID: 11400020}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -685,8 +698,8 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_Enabled: 1
-  m_StateSynchronization: 0
-  m_Observed: {fileID: 0}
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 11400004}
   m_ViewID:
     m_ID: 0
     m_Type: 0
@@ -709,8 +722,8 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
-  m_StateSynchronization: 0
-  m_Observed: {fileID: 400006}
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 11400020}
   m_ViewID:
     m_ID: 0
     m_Type: 0

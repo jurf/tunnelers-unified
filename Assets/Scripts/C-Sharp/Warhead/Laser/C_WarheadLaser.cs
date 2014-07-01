@@ -14,6 +14,21 @@ public class C_WarheadLaser : MonoBehaviour {
 		
 	}
 	
+	void OnGUI () {
+	
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+		
+		int time = (int) -sscript.time + (int) sscript.coolDown;
+	
+		if (!sscript.cooled) {
+			GUI.Label (new Rect (Input.mousePosition.x + 20, -Input.mousePosition.y + Screen.height, 20, 20), "<color=#ff0000>" + time.ToString () + "</color>");
+		}
+	
+	}
+	
 	[RPC]
 	public void C_Shoot () {
 	

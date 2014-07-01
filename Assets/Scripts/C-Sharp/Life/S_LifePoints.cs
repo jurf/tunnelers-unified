@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class LifePoints : MonoBehaviour {
+public class S_LifePoints : MonoBehaviour {
 	
 	public PlayerMan playerType;
 	public M_TankController controller;
 	
 	[SerializeField]
 	float energyPoints = 100f;
+	public float EnergyPoints {
+		get { return energyPoints; }
+	}
 	public float maxRegEnergyPoints;
 	public float maxEnergyPoints = 100f;
 	public float moveEnergyConsumption = 2f;
@@ -14,6 +17,9 @@ public class LifePoints : MonoBehaviour {
 	
 	[SerializeField]
 	float shieldPoints = 100f;
+	public float ShieldPoints {
+		get { return shieldPoints; }
+	}
 	public float maxRegShieldPoints;
 	public float maxShieldPoints = 100f;
 	

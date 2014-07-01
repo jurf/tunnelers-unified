@@ -12,8 +12,7 @@ public class S_WarheadLaser : MonoBehaviour {
 	public float coolDown = 5f;
 	public bool cooled;
 	
-	[SerializeField]
-	private float time;
+	public float time;
 	public float waitForSec = 0.5f;
 	
 	public float range = 5f;
@@ -55,7 +54,6 @@ public class S_WarheadLaser : MonoBehaviour {
 		}
 		
 	}
-	
 
 	void Shoot () {
 		
@@ -64,7 +62,7 @@ public class S_WarheadLaser : MonoBehaviour {
 		
 			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
 			
-				hit.collider.gameObject.transform.parent.GetComponent <LifePoints> ().ApplyDamage (damage);
+				hit.collider.gameObject.transform.parent.GetComponent <S_LifePoints> ().ApplyDamage (damage);
 				line.SetPosition (1, new Vector3 (0, 0, hit.distance));
 				Invoke ("ResetLaser", waitForSec);
 				
@@ -87,7 +85,23 @@ public class S_WarheadLaser : MonoBehaviour {
 	
 		line.SetPosition (1, Vector3.zero);
 				
-	}	
+	}
+	
+	public void OnSerializeNetworkView (BitStream stream) {
+	
+		int coolDownTime = 0;
+	
+		if (stream.isWriting) {
+			coolDownTime = (int) time;
+			stream.Serialize (ref cooled);
+			stream.Serialize (ref coolDownTime);
+		} else if (stream.isReading) {
+			stream.Serialize (ref cooled);
+			stream.Serialize (ref coolDownTime);
+			time = (float) coolDownTime;
+		}
+	
+	}
 	
 }
 
