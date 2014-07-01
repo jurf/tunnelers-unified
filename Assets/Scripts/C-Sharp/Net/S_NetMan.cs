@@ -151,6 +151,7 @@ public class S_NetMan : MonoBehaviour {
 		Debug.Log ("Network.Destroying a game object.");
 	
 		Network.RemoveRPCs (gameObject.networkView.viewID);
+		Network.RemoveRPCs (gameObject.GetComponent <PlayerMan> ().owner);
 		Network.Destroy (gameObject);
 	
 	}
