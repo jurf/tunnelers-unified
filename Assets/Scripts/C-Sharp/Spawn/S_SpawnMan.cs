@@ -70,7 +70,7 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			if (tracker.player == player) {
 			
-				GetComponent <S_NetMan> ().NetworkDestroy (tracker.instance);
+				tracker.instance.GetComponent <S_Assassin> ().Assassinate ();
 				playerTracker.Remove (tracker);
 				return;
 			
