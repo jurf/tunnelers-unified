@@ -11,6 +11,9 @@ public class C_LifePoints : MonoBehaviour {
 			return;
 		}
 		
+		if (Network.player != sscript.parent.GetComponent <PlayerMan> ().GetOwner ())
+			return;
+		
 		GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
 		GUILayout.BeginVertical ();
 		

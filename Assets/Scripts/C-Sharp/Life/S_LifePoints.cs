@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class S_LifePoints : MonoBehaviour {
+
+	public GameObject parent;
 	
 	public PlayerMan playerType;
 	public M_TankController controller;
@@ -50,8 +52,8 @@ public class S_LifePoints : MonoBehaviour {
 			return;
 		}
 	
-		energyPoints = Mathf.Clamp (energyPoints, 0f, maxEnergyPoints);
-		shieldPoints = Mathf.Clamp (shieldPoints, 0f, maxShieldPoints);
+		energyPoints = Mathf.Clamp (energyPoints, -1f, maxEnergyPoints);
+		shieldPoints = Mathf.Clamp (shieldPoints, -1f, maxShieldPoints);
 
 		if (controller.isMoving && !inBase && energyPoints > 0) {
 		
@@ -102,7 +104,7 @@ public class S_LifePoints : MonoBehaviour {
 		//TODO Report system
 		if (shieldPoints < 0) {
 			Debug.Log ("I'm outta here.", gameObject);
-			GetComponent <S_Assassin> ().Assassinate ();
+			parent.GetComponent <S_Assassin> ().Assassinate ();
 			return true;
 		} else {
 			return false;
@@ -119,6 +121,15 @@ public class S_LifePoints : MonoBehaviour {
 		return false;
 	}
 	
+	public void IShot (float energyUsed) {
+	
+		if (energyPoints - energyUsed < 0f)
+			Debug.LogError ("Shot without energy!", gameObject);
+			
+		energyPoints -= energyUsed;
+		
+	}
+	
 	public float GetShield () {
 	
 		return shieldPoints;
@@ -131,6 +142,11 @@ public class S_LifePoints : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+		
+	//	Debug.Log ("I am in a trigger and it's name is: " + other.name, gameObject);
+		
+		if (other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase")
+			return;
 	
 		if (playerType.IsMyBase (other.tag)) {		
 			inBase = true;
@@ -150,14 +166,15 @@ public class S_LifePoints : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-	
+		
+	//	Debug.Log ("I just exited a trigger and it's name was: " + other.name, gameObject);
+		
+		if (other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase")
+			return;
+		
 		if (other.tag == "BlueBase" || other.tag == "RedBase" || other.tag == "GreenBase") {
 		
-			if (playerType.IsMyBase (other.tag)) {
-				inBase = false;
-			} else if (!playerType.IsMyBase (other.tag)) {
-				inBase = false;
-			}
+			inBase = false;
 			
 		}
 	

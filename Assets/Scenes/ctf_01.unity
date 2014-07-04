@@ -253,7 +253,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 98fd93d97baa4cd47baa43f086b4041b, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 98fd93d97baa4cd47baa43f086b4041b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1651,7 +1651,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1160003626}
   - 65: {fileID: 1160003624}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: BlueBase
   m_TagString: BlueBase
   m_Icon: {fileID: 0}
@@ -1706,7 +1706,7 @@ GameObject:
   - 114: {fileID: 1219409751}
   m_Layer: 0
   m_Name: RedFlag
-  m_TagString: Untagged
+  m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1907,7 +1907,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1269995272}
   - 65: {fileID: 1269995270}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: RedBase
   m_TagString: RedBase
   m_Icon: {fileID: 0}
@@ -2544,7 +2544,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: a0a049eeec686aa4dab36b2289da1cc6, type: 2}
       propertyPath: m_Layer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0a049eeec686aa4dab36b2289da1cc6, type: 2}
@@ -2737,7 +2737,7 @@ GameObject:
   - 114: {fileID: 2004923203}
   m_Layer: 0
   m_Name: BlueFlag
-  m_TagString: Untagged
+  m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

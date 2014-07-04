@@ -67,8 +67,6 @@ GameObject:
   - 4: {fileID: 400006}
   - 148: {fileID: 14800004}
   - 114: {fileID: 11400018}
-  - 114: {fileID: 11400020}
-  - 114: {fileID: 11400034}
   - 114: {fileID: 11400032}
   - 114: {fileID: 11400030}
   m_Layer: 0
@@ -153,6 +151,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400016}
+  - 114: {fileID: 11400036}
+  - 114: {fileID: 11400034}
+  - 114: {fileID: 11400020}
+  - 65: {fileID: 6500004}
+  - 148: {fileID: 14800010}
+  - 54: {fileID: 5400002}
+  m_Layer: 2
+  m_Name: Life
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -200,11 +219,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.2227631, y: 12.284936, z: -23.4266682}
+  m_LocalPosition: {x: -1.29140997, y: -.504034162, z: -15.3379288}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
   - {fileID: 400010}
+  - {fileID: 400016}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400008
@@ -256,6 +276,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400002}
   m_RootOrder: 0
+--- !u!4 &400016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400006}
+  m_RootOrder: 2
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -352,6 +384,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -376,6 +423,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: .5, z: 1}
   m_Center: {x: 0, y: -.25, z: 0}
+--- !u!65 &6500004
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.20000005, z: 1.5}
+  m_Center: {x: 0, y: .100000001, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -418,6 +477,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warhead: {fileID: 11400012}
   line: {fileID: 12000000}
+  life: {fileID: 11400036}
+  parent: {fileID: 100006}
   laserSpeed: 0
   coolDown: 3
   cooled: 0
@@ -425,6 +486,7 @@ MonoBehaviour:
   waitForSec: .5
   range: 7.5
   damage: 55
+  energyConsumption: 10
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -526,6 +588,7 @@ MonoBehaviour:
   id: 0
   tank: {fileID: 11400022}
   turret: {fileID: 11400008}
+  life: {fileID: 11400036}
   team: 1
   tankType: 0
 --- !u!114 &11400020
@@ -533,26 +596,18 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
+  m_GameObject: {fileID: 100016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8ef19bb2d503245a68f290a0efabdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a813880b3264894e97c749d990abb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: {fileID: 11400018}
-  controller: {fileID: 11400028}
-  energyPoints: 100
-  maxRegEnergyPoints: 0
-  maxEnergyPoints: 100
-  moveEnergyConsumption: 2
-  shootEnergyConsumption: 5
-  shieldPoints: 100
-  maxRegShieldPoints: 0
-  maxShieldPoints: 100
-  energyRegenerationRate: 10
-  shieldRegenerationRate: 5
-  inBase: 0
-  otherBaseDivider: 2
+  theObject: {fileID: 100010}
+  rotate: 1
+  x: 1
+  y: 1
+  z: 1
+  addPos: {x: 0, y: 0, z: 0}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -651,13 +706,39 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
+  m_GameObject: {fileID: 100016}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55bc8af56a0eb6243ab02d38f67770b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sscript: {fileID: 11400020}
+  sscript: {fileID: 11400036}
+--- !u!114 &11400036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8ef19bb2d503245a68f290a0efabdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 100006}
+  playerType: {fileID: 11400018}
+  controller: {fileID: 11400028}
+  energyPoints: 100
+  maxRegEnergyPoints: 0
+  maxEnergyPoints: 100
+  moveEnergyConsumption: 2
+  shootEnergyConsumption: 5
+  shieldPoints: 100
+  maxRegShieldPoints: 0
+  maxShieldPoints: 100
+  energyRegenerationRate: 10
+  shieldRegenerationRate: 5
+  inBase: 0
+  otherBaseDivider: 2
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -722,8 +803,8 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 11400020}
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 0}
   m_ViewID:
     m_ID: 0
     m_Type: 0
@@ -748,6 +829,18 @@ NetworkView:
   m_Enabled: 1
   m_StateSynchronization: 0
   m_Observed: {fileID: 0}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14800010
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 11400036}
   m_ViewID:
     m_ID: 0
     m_Type: 0

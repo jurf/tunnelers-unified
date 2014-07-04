@@ -7,6 +7,8 @@ public class S_WarheadLaser : MonoBehaviour {
 
 	public S_Warhead warhead;
 	public LineRenderer line;
+	public S_LifePoints life;
+	public GameObject parent;
 	
 	public float laserSpeed;
 	public float coolDown = 5f;
@@ -18,6 +20,8 @@ public class S_WarheadLaser : MonoBehaviour {
 	public float range = 5f;
 	
 	public float damage;
+	
+	public float energyConsumption = 10f;
 	
 	void Awake () {
 	
@@ -35,11 +39,12 @@ public class S_WarheadLaser : MonoBehaviour {
 			return;
 		}
 	
-		if (warhead.left && cooled) {
+		if (warhead.left && cooled && life.CanIShoot ()) {
 		
 			Shoot ();
 			networkView.RPC ("C_Shoot", RPCMode.Others);
 			time = 0f;
+			life.IShot (energyConsumption);
 		
 		}
 		
@@ -62,7 +67,7 @@ public class S_WarheadLaser : MonoBehaviour {
 		
 			if (hit.collider.tag == "Tank" || hit.collider.tag == "Turret") {
 			
-				hit.collider.gameObject.transform.parent.GetComponent <S_LifePoints> ().ApplyDamage (damage);
+				hit.collider.gameObject.transform.parent.GetComponent <PlayerMan> ().life.ApplyDamage (damage);
 				line.SetPosition (1, new Vector3 (0, 0, hit.distance));
 				Invoke ("ResetLaser", waitForSec);
 				

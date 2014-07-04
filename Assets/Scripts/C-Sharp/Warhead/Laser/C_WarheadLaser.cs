@@ -21,6 +21,9 @@ public class C_WarheadLaser : MonoBehaviour {
 			return;
 		}
 		
+		if (Network.player != sscript.parent.GetComponent <PlayerMan> ().GetOwner ())
+			return;
+		
 		int time = (int) -sscript.time + (int) sscript.coolDown;
 	
 		if (!sscript.cooled) {

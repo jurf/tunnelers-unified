@@ -10,6 +10,7 @@ public class PlayerMan : MonoBehaviour {
 	
 	public C_TankMan tank;
 	public C_TurretMan turret;
+	public S_LifePoints life;
 	
 //	too complicated for now
 /*
@@ -47,10 +48,18 @@ public class PlayerMan : MonoBehaviour {
 	
 	public bool IsMyBase (string tag) {
 		
-		if (tag == team + "Base") {
+		/*	if (tag == team + "Base") {
 			return true;
 		}
 		
+		return false;	*/
+		
+		if (team && tag == "BlueBase")
+			return true;
+			
+		if (!team && tag == "RedBase")
+			return true;
+			
 		return false;
 		
 	}
