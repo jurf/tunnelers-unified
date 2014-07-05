@@ -17,10 +17,19 @@ public class C_LifePoints : MonoBehaviour {
 		GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
 		GUILayout.BeginVertical ();
 		
-			GUILayout.FlexibleSpace ();
-		
-			GUILayout.Label ("Energy: " + sscript.EnergyPoints.ToString ());
-			GUILayout.Label ("Shield: " + sscript.ShieldPoints.ToString ());
+			GUILayout.FlexibleSpace ();		
+			GUILayout.BeginHorizontal ();
+			
+				GUILayout.Label ("Energy: " + sscript.EnergyPoints.ToString (), "box");
+				GUILayout.FlexibleSpace ();
+				
+			GUILayout.EndHorizontal ();
+			GUILayout.BeginHorizontal ();
+			
+				GUILayout.Label ("Shield: " + sscript.ShieldPoints.ToString (), "box");
+				GUILayout.FlexibleSpace ();
+				
+			GUILayout.EndHorizontal ();
 			
 		GUILayout.EndVertical ();
 		GUILayout.EndArea ();

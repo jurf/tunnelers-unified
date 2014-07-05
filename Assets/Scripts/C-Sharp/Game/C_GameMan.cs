@@ -66,15 +66,38 @@ public class C_GameMan : MonoBehaviour {
 					return;
 				}
 			
-				GUILayout.Space (20);
-			
-				GUILayout.Label ("Blue: " + blueScore.ToString ());
-				GUILayout.Label ("Blue flag home: " + blueFlagHome.ToString());
+				GUILayout.Space (22);
 				
-				GUILayout.Label ("Red: " + redScore.ToString ());
-				GUILayout.Label ("Red flag home: " + redFlagHome.ToString ());
+				GUILayout.BeginHorizontal ();
 				
-				GUILayout.Label ("Time to end: " + serverTimeToEnd.ToString ());
+					GUILayout.Label ("<color=blue>Blue: " + blueScore.ToString () + "</color>", "box");
+					GUILayout.FlexibleSpace ();
+					
+				GUILayout.EndHorizontal ();
+				GUILayout.BeginHorizontal ();
+				
+					GUILayout.Label ("<color=blue>Blue flag home: " + blueFlagHome.ToString() + "</color>", "box");
+					GUILayout.FlexibleSpace ();
+					
+				GUILayout.EndHorizontal ();
+				GUILayout.BeginHorizontal ();
+				
+					GUILayout.Label ("<color=red>Red: " + redScore.ToString () + "</color>", "box");
+					GUILayout.FlexibleSpace ();
+				
+				GUILayout.EndHorizontal ();
+				GUILayout.BeginHorizontal ();
+				
+					GUILayout.Label ("<color=red>Red flag home: " + redFlagHome.ToString () + "</color>", "box");
+					GUILayout.FlexibleSpace ();
+				
+				GUILayout.EndHorizontal ();
+				GUILayout.BeginHorizontal ();
+				
+					GUILayout.Label ("Time to end: " + serverTimeToEnd.ToString (), "box");
+					GUILayout.FlexibleSpace ();
+				
+				GUILayout.EndHorizontal ();
 			
 				if (showEndGame) {
 					
@@ -88,7 +111,7 @@ public class C_GameMan : MonoBehaviour {
 			
 			void EndGameWindow (int WindowID) {
 			
-				GUILayout.Label (endGameState.ToString ());
+				GUILayout.Label ("The game ended.\nState: " + endGameState.ToString ());
 				
 			}
 			
