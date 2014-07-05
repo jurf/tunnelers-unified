@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scenes.Scripts;
+using System.Text.RegularExpressions;
 
 public class ServerC : MonoBehaviour {
 
@@ -29,6 +30,9 @@ public class ServerC : MonoBehaviour {
 				SetIP ();
 			}
 		}
+		
+		public int customServerPort = 25002;
+		string userPort;
 
 		public string typeName;
 		public string gameName = "A cool game name";
@@ -63,6 +67,7 @@ public class ServerC : MonoBehaviour {
 		void Awake () {
 		
 			SetIP ();
+			userPort = customServerPort.ToString ();
 			
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
@@ -130,6 +135,10 @@ public class ServerC : MonoBehaviour {
 					string[] levels = GetLevelNames ();		
 					
 					level = GUILayout.SelectionGrid (level, levels, 1);
+					
+					GUILayout.Label ("Choose a port (don't touch if not sure):");
+					userPort = GUILayout.TextField (userPort, 7);
+					userPort = Regex.Replace (userPort, @"[^0-9 ]", "");
 					
 					GUILayout.Box ("", divider, GUILayout.Height (2));
 					
@@ -255,8 +264,10 @@ public class ServerC : MonoBehaviour {
 	
 	void StartServer () {
 		
+		customServerPort = int.Parse (userPort);
+		
 		// Use NAT punchthrough if no public IP present
-		Network.InitializeServer(32, 25002, !Network.HavePublicAddress());
+		Network.InitializeServer(32, customServerPort, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName, roomComment);
 		
 	}
