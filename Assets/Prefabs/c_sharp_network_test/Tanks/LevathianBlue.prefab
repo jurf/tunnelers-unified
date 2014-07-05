@@ -573,7 +573,7 @@ MonoBehaviour:
   observedTransform: {fileID: 400004}
   receiver: {fileID: 11400008}
   parent: {fileID: 11400018}
-  pingMargin: .5
+  pingMargin: 0
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,7 +655,7 @@ MonoBehaviour:
   observedTransform: {fileID: 400010}
   receiver: {fileID: 11400022}
   parent: {fileID: 11400018}
-  pingMargin: .5
+  pingMargin: 0
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -815,7 +815,7 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
-  m_StateSynchronization: 2
+  m_StateSynchronization: 1
   m_Observed: {fileID: 11400026}
   m_ViewID:
     m_ID: 0
