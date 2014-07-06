@@ -375,6 +375,15 @@ public class S_GameMan : MonoBehaviour {
 		//greenScore = 0;
 		
 		timeToEnd = gameTime;
+		
+		GameObject [] flags = GameObject.FindGameObjectsWithTag ("Flag");
+		
+		foreach (GameObject flag in flags) {
+		
+			flag.GetComponent <S_FlagMan> ().Home = true;
+				
+		}
+		
 		/*
 		foreach (PlayerScore score in playerScores) {
 			score.Reset ();
