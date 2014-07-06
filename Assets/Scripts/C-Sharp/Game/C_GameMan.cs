@@ -111,7 +111,7 @@ public class C_GameMan : MonoBehaviour {
 			
 			void EndGameWindow (int WindowID) {
 			
-				GUILayout.Label ("The game ended.\nState: " + endGameState.ToString ());
+				GUILayout.Label ("The game ended.\nState: " + endGameState.ToString (), GUILayout.MinWidth (100));
 				
 			}
 			
