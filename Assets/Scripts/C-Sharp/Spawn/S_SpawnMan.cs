@@ -114,6 +114,8 @@ public class S_SpawnMan : MonoBehaviour {
 				if (unspawned == player) {
 				
 					connectedUnspawned.Remove (unspawned);
+					Network.RemoveRPCs (player);
+					return;
 				
 				}
 			
