@@ -55,9 +55,6 @@ public class C_SpawnMan : MonoBehaviour {
 	#endregion UnityMethods
 		
 	void TeamSelection (int windowID) {
-	
-        if (GUILayout.Button("Please click me."))
-            print("Got a click");
            
 //		int blueAmount;
         
