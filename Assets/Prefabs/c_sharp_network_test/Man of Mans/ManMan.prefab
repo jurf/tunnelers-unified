@@ -36,6 +36,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -64,13 +65,12 @@ MonoBehaviour:
   maxPlayers: 24
   gameTime: 300
   respawnTime: 5
-  playerScores: []
   maxScore: 5
   red: 1
   blue: 1
   timeToEnd: 0
-  blueFlagHome: 0
-  redFlagHome: 0
+  blueFlagHome: 1
+  redFlagHome: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,9 +85,8 @@ MonoBehaviour:
   langMan: {fileID: 0}
   blueScore: 0
   redScore: 0
-  blueFlagHome: 0
-  redFlagHome: 0
-  cronTime: 5
+  blueFlagHome: 1
+  redFlagHome: 1
   serverTimeToEnd: 0
   endGameState: 0
   showEndGame: 0

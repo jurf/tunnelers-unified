@@ -164,8 +164,8 @@ public class S_GameMan : MonoBehaviour {
 	
 		public float timeToEnd;
 		
-		public bool blueFlagHome;
-		public bool redFlagHome;
+		public bool blueFlagHome = true;
+		public bool redFlagHome = true;
 		
 		// Only sound for now
 		/*

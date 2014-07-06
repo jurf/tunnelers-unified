@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7f44a7b967c8f4b8c21c29f219793f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  home: 0
+  home: 1
   spawn: {fileID: 0}
   carrier: {fileID: 0}
   isCarrier: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   server: {fileID: 11400000}
   carrier: {fileID: 0}
-  home: 0
+  home: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

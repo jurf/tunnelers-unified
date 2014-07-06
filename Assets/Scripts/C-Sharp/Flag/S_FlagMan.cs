@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class S_FlagMan : MonoBehaviour {
 
-	public bool home;
+	public bool home = true;
 	public bool Home {
 		get {
 			return home;
