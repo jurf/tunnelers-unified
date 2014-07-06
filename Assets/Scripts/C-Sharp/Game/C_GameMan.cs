@@ -241,12 +241,13 @@ public class C_GameMan : MonoBehaviour {
 			if (isBlue) {
 				Debug.Log ("Blue scored.");
 				blueScore++;
-				blueFlagHome = true;
 			} else {
 				Debug.Log ("Red scored.");
 				redScore++;
-				redFlagHome = true;
 			}
+			
+			blueFlagHome = true;
+			redFlagHome = true;
 			
 		//	PlaySound
 			

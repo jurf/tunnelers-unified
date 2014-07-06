@@ -381,6 +381,7 @@ public class S_GameMan : MonoBehaviour {
 		foreach (GameObject flag in flags) {
 		
 			flag.GetComponent <S_FlagMan> ().Home = true;
+			flag.GetComponent <S_FlagMan> ().Carrier = null;
 				
 		}
 		
@@ -482,14 +483,15 @@ public class S_GameMan : MonoBehaviour {
 			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Captured"), otherTeam.ToString ().ToLower ()));
 			
 			if (isBlue) {
-				Debug.Log ("Blue scored.");
-				blueFlagHome = true;
+				Debug.Log ("Blue scored.");				
 				BlueScore++;
 			} else {
-				Debug.Log ("Red scored.");
-				redFlagHome = true;
+				Debug.Log ("Red scored.");				
 				RedScore++;
-			}	
+			}
+			
+			blueFlagHome = true;
+			redFlagHome = true;
 			
 			/*switch (myTeam) {
 				case C_PlayerMan.Team.Red:
