@@ -66,7 +66,7 @@ public class C_GameMan : MonoBehaviour {
 					return;
 				}
 			
-				GUILayout.Space (22);
+				GUILayout.Space (25);
 				
 				GUILayout.BeginHorizontal ();
 				

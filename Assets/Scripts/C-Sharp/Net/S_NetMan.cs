@@ -7,8 +7,7 @@ public class S_NetMan : MonoBehaviour {
 
 	#region Variables
 
-//		public GameObject player; //player object to instantiate
-		static public string levelName = "ctf_01"; //current level name			
+//		public GameObject player; //player object to instantiate		
 		
 //		public List <C_PlayerMan> playerTracker = new List <C_PlayerMan> ();
 //		public List <NetworkPlayer> scheduledSpawns = new List <NetworkPlayer> ();

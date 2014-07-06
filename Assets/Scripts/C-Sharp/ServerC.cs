@@ -148,7 +148,7 @@ public class ServerC : MonoBehaviour {
 					
 						startServer = true;
 						string levelToLoad = Game.Levels[level + 2];
-						S_NetMan.levelName = levelToLoad;
+						S_LevelName.levelName = levelToLoad;
 						Application.LoadLevel (levelToLoad);
 						
 					}
@@ -256,6 +256,7 @@ public class ServerC : MonoBehaviour {
 		void OnDisconnectedFromServer (NetworkDisconnection info) {
 	
 		Debug.Log ("Disconnected from server: " + info);
+		S_LevelName.levelName = "";
 		Application.LoadLevel ("main");
 	
 	}

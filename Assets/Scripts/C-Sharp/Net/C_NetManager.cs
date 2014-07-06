@@ -5,10 +5,20 @@ public class C_NetManager : MonoBehaviour {
 
 	void OnConnectedToServer () {
 	
-		Debug.Log ("Disabling message queue!");
-		Network.isMessageQueueRunning = false;
-		Application.LoadLevel (S_NetMan.levelName);
+		StartCoroutine ("WaitForName");
 	
+	}
+
+	IEnumerator WaitForName () {
+	
+		while (S_LevelName.levelName == "") {
+			yield return 0;
+		}
+		
+		Debug.Log ("Loading a level with the name: " + S_LevelName.levelName, gameObject);
+		
+		Application.LoadLevel (S_LevelName.levelName);
+		
 	}
 	
 	void OnLevelWasLoaded (int level) {
