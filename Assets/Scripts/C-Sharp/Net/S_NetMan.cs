@@ -13,6 +13,8 @@ public class S_NetMan : MonoBehaviour {
 //		public List <NetworkPlayer> scheduledSpawns = new List <NetworkPlayer> ();
 		
 //		public bool processSpawnRequests = false;
+
+		public static string levelName;
 		
 		enum NetworkGroup {
 			DEFAULT = 0,

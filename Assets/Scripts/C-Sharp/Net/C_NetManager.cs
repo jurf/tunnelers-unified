@@ -5,20 +5,11 @@ public class C_NetManager : MonoBehaviour {
 
 	void OnConnectedToServer () {
 	
-		StartCoroutine ("WaitForName");
+		Debug.Log ("Disabling message queue!");
+		Network.isMessageQueueRunning = false;
 	
-	}
-
-	IEnumerator WaitForName () {
+		Application.LoadLevel (S_NetMan.levelName);
 	
-		while (S_LevelName.levelName == "") {
-			yield return 0;
-		}
-		
-		Debug.Log ("Loading a level with the name: " + S_LevelName.levelName, gameObject);
-		
-		Application.LoadLevel (S_LevelName.levelName);
-		
 	}
 	
 	void OnLevelWasLoaded (int level) {
@@ -38,6 +29,10 @@ public class C_NetManager : MonoBehaviour {
 			
 			GetComponent <C_SpawnMan> ().Green = true;
 		
+		} else {
+		
+			S_NetMan.levelName = "";
+			
 		}
 	
 	}

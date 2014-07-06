@@ -36,7 +36,7 @@ public class ServerC : MonoBehaviour {
 
 		public string typeName;
 		public string gameName = "A cool game name";
-		public string roomComment = "A cool game description.";
+	//	public string roomComment = "";
 		public int level;
 	
 		public bool server = false;
@@ -123,12 +123,12 @@ public class ServerC : MonoBehaviour {
 		
 				if (server == true) {
 				
-					GUILayout.Label ("Server details:");
+					GUILayout.Label ("Server name:");
 					
 					GUILayout.Space (5);
 					
 					gameName = GUILayout.TextField (gameName, 30);
-					roomComment = GUILayout.TextArea (roomComment, 200);
+					//roomComment = GUILayout.TextArea (roomComment, 200);
 					
 					GUILayout.Label ("Select a level:");
 					
@@ -148,7 +148,7 @@ public class ServerC : MonoBehaviour {
 					
 						startServer = true;
 						string levelToLoad = Game.Levels[level + 2];
-						S_LevelName.levelName = levelToLoad;
+						S_NetMan.levelName = levelToLoad;
 						Application.LoadLevel (levelToLoad);
 						
 					}
@@ -192,13 +192,14 @@ public class ServerC : MonoBehaviour {
 												
 						GUILayout.Label (hostInfo);								
 						GUILayout.Space (5);						
-						GUILayout.Label ("Description: " + element.comment);
+						GUILayout.Label ("Map: " + element.comment);
 						
 						GUILayout.Space (5);
 							
 						if (GUILayout.Button ("Connect to this server")) {
 							
 							// Connect to HostData struct, internally the correct method is used (GUID when using NAT).
+							S_NetMan.levelName = element.comment;
 							Network.Connect (element);	
 										
 						}
@@ -265,7 +266,7 @@ public class ServerC : MonoBehaviour {
 		void OnDisconnectedFromServer (NetworkDisconnection info) {
 	
 		Debug.Log ("Disconnected from server: " + info);
-		S_LevelName.levelName = "";
+		S_NetMan.levelName = "";
 		Application.LoadLevel ("main");
 	
 	}
@@ -277,8 +278,8 @@ public class ServerC : MonoBehaviour {
 		customServerPort = int.Parse (userPort);
 		
 		// Use NAT punchthrough if no public IP present
-		Network.InitializeServer(32, customServerPort, !Network.HavePublicAddress());
-		MasterServer.RegisterHost(typeName, gameName, roomComment);
+		Network.InitializeServer (32, customServerPort, !Network.HavePublicAddress());
+		MasterServer.RegisterHost (typeName, gameName, S_NetMan.levelName);
 		
 	}
 
