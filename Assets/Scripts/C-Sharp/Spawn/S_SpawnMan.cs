@@ -109,12 +109,13 @@ public class S_SpawnMan : MonoBehaviour {
 		
 		void OnPlayerDisconnected (NetworkPlayer player) {
 		
+			Network.RemoveRPCs (player);
+		
 			foreach (NetworkPlayer unspawned in connectedUnspawned) {
 				
 				if (unspawned == player) {
 				
 					connectedUnspawned.Remove (unspawned);
-					Network.RemoveRPCs (player);
 					return;
 				
 				}
