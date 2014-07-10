@@ -102,7 +102,7 @@ public class S_NetMan : MonoBehaviour {
 		
 	}
 	
-	public GameObject RequestSpawn (NetworkPlayer requester, GameObject prefab, Vector3 pos, Quaternion rot) {
+	public GameObject RequestSpawn (NetworkPlayer requester, GameObject prefab, Vector3 pos, Quaternion rot, string name) {
 		
 		/*
 		//Called from client to the server to request a new entity
@@ -139,6 +139,8 @@ public class S_NetMan : MonoBehaviour {
 		netView.RPC ("SetOwner", RPCMode.AllBuffered, requester);
 		
 		netView.RPC ("SetID", RPCMode.AllBuffered, GetComponent <S_SpawnMan> ().AddTankToTracker (handle));
+		
+		netView.RPC ("SetName", RPCMode.AllBuffered, name);
 		
 		if (handle)
 			return handle;

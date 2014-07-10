@@ -12,6 +12,8 @@ public class PlayerMan : MonoBehaviour {
 	public C_TurretMan turret;
 	public S_LifePoints life;
 	
+	public TextMesh name;
+	
 //	too complicated for now
 /*
 	public enum Team {
@@ -114,6 +116,13 @@ public class PlayerMan : MonoBehaviour {
 	public void SetID (int identificationNumber) {
 	
 		id = identificationNumber;
+		
+	}
+	
+	[RPC]
+	public void SetName (string myNameBro) {
+	
+		name.text = myNameBro;
 		
 	}
 	

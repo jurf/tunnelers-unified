@@ -54,6 +54,10 @@ public class ServerC : MonoBehaviour {
 		public Rect noticeRect;
 		public bool showNotice;
 		
+		public static string name = "TestDude";
+		public bool showNameDialog = true;
+		public Rect nameRect;
+		
 		public Vector2 serverScroll;
 	
 		public string[] clientServer = new string[] {"Client", "Server"};
@@ -68,6 +72,8 @@ public class ServerC : MonoBehaviour {
 		
 			SetIP ();
 			userPort = customServerPort.ToString ();
+			
+			ServerC.name = ServerC.name + Random.Range (0,100);
 			
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
@@ -87,6 +93,9 @@ public class ServerC : MonoBehaviour {
 					
 					if (showNotice)
 						noticeRect = GUILayout.Window (1, noticeRect, NoticeWindow, "Warning");
+						
+					if (showNameDialog)
+						nameRect = GUILayout.Window (2, nameRect, NameWindow, "Who are you sir? What is your name?");
 	
 				} else if (!Network.isClient && Network.isServer) {
 				
@@ -241,6 +250,21 @@ public class ServerC : MonoBehaviour {
 				
 				if (GUILayout.Button ("Alright, I understand."))
 					showNotice = false;
+				
+			}
+			
+			void NameWindow (int windowID) {
+			
+				GUILayout.BeginHorizontal ();
+			
+					GUILayout.Label ("My name is ");
+					
+					ServerC.name = GUILayout.TextField (ServerC.name, 25, GUILayout.MinWidth (200));
+					
+				GUILayout.EndHorizontal ();
+				
+				if (GUILayout.Button ("Cool, ain't it?"))
+					showNameDialog = false;
 				
 			}
 			

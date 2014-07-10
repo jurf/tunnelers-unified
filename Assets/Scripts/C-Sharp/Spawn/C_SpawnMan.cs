@@ -59,12 +59,12 @@ public class C_SpawnMan : MonoBehaviour {
 //		int blueAmount;
         
 		if (GUILayout.Button ("Blue")) {
-			networkView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, true);
+			networkView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, true, ServerC.name);
 			enabled = false;
 		}
         
 		if (GUILayout.Button ("Red")) {
-			networkView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, false);
+			networkView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, false, ServerC.name);
 			enabled = false;
 		}
 

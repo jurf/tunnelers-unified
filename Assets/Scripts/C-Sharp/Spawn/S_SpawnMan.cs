@@ -35,11 +35,14 @@ public class S_SpawnMan : MonoBehaviour {
 		public GameObject instance;
 
 		public bool team;
+		
+		public string name;
 
-		public PlayerTracker (NetworkPlayer id, bool isBlue) {
+		public PlayerTracker (NetworkPlayer id, bool isBlue, string playerName) {
 		
 			player = id;
 			team = isBlue;
+			name = playerName;
 		
 		}
 		
@@ -172,7 +175,7 @@ public class S_SpawnMan : MonoBehaviour {
 			
 				tracker.alive = false;
 			
-				GameObject instance = Spawn (tracker.player, tracker.team);
+				GameObject instance = Spawn (tracker.player, tracker.team, tracker.name);
 				
 				if (instance) {
 					tracker.alive = true;
@@ -189,7 +192,7 @@ public class S_SpawnMan : MonoBehaviour {
 		
 	}
 
-	GameObject Spawn (NetworkPlayer player, bool isBlue) {
+	GameObject Spawn (NetworkPlayer player, bool isBlue, string name) {
 	
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
@@ -223,14 +226,14 @@ public class S_SpawnMan : MonoBehaviour {
 		
 		}
 		
-		return GetComponent <S_NetMan> ().RequestSpawn (player, prefab, pos, Quaternion.identity);
+		return GetComponent <S_NetMan> ().RequestSpawn (player, prefab, pos, Quaternion.identity, name);
 		
 		//Network.Instantiate (prefab, pos, Quaternion.identity, 0);
 		
 	}
 
 	[RPC]
-	public void RequestGameEntry (NetworkPlayer player, bool isBlue) {
+	public void RequestGameEntry (NetworkPlayer player, bool isBlue, string name) {
 	
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
@@ -243,7 +246,7 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			if (unspawned == player) {
 			
-				playerTracker.Add (new PlayerTracker (player, isBlue));
+				playerTracker.Add (new PlayerTracker (player, isBlue, name));
 				connectedUnspawned.Remove (unspawned);
 				Debug.Log ("Found the correct player, added him to the tracker and removed from unspawned.");
 				return;
