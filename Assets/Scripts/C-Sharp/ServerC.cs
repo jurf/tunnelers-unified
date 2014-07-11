@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.Scenes.Scripts;
 using System.Text.RegularExpressions;
 
 public class ServerC : MonoBehaviour {
@@ -171,7 +170,7 @@ public class ServerC : MonoBehaviour {
 					if (GUILayout.Button ("Launch Server")) {
 					
 						startServer = true;
-						string levelToLoad = Game.Levels[level + 2];
+						string levelToLoad = GetComponent <ReadSceneNames> ().scenes[level + 2];
 						S_NetMan.levelName = levelToLoad;
 						Application.LoadLevel (levelToLoad);
 						
@@ -351,12 +350,13 @@ public class ServerC : MonoBehaviour {
 	
 	string[] GetLevelNames () {
 		
+		ReadSceneNames maps = GetComponent <ReadSceneNames> ();
 		
-		string[] levels = new string[Game.Levels.Length - 2];
+		string[] levels = new string[maps.scenes.Length - 2];
 		
-		for (int i = 2; i < Game.Levels.Length; i++) {
+		for (int i = 2; i < maps.scenes.Length; i++) {
 			
-			levels[i - 2] = Game.Levels[i];
+			levels[i - 2] = maps.scenes[i];
 			
 		}
 		

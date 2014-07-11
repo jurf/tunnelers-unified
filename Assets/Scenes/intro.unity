@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 548006296}
   - 114: {fileID: 548006295}
+  - 114: {fileID: 548006297}
   m_Layer: 0
   m_Name: ConnectionManager
   m_TagString: Untagged
@@ -212,6 +213,23 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &548006297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548006294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e8b1fe29bf61b42abe43000bb0c5b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenes:
+  - intro
+  - main
+  - ctf_01_big
+  - ctf_02_small
 --- !u!1 &557024707
 GameObject:
   m_ObjectHideFlags: 0
