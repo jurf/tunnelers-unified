@@ -101,28 +101,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9355b42e49c568047ad559f388c5d8ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  version: 'Tunnelers: Unified Beta 0.0'
   masterServerIP: 185.35.76.112
   facilitatorIP: 185.35.76.112
   overrideIP: 0
   overMaster: 127.0.0.1
   customServerPort: 25002
-  typeName: tunnelers
+  typeName: tunnelers_unified_0_0
   gameName: A cool game name
   level: 0
   server: 0
   startServer: 0
-  serversMinWidth: 180
-  serversMinHeight: 180
+  serversMinWidth: 200
+  serversMinHeight: 200
   windowRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 0
     height: 0
-  serverNotice: Pressing 'Launch Server' will make this instance (window) a dedicated
-    server. You will not be able to play. To play, you have to open a new instance
+  serverNotice: "Pressing 'Launch Server' will make this instance (window) a dedicated
+    server. \n You will not be able to play. To play, you have to open a new instance
     (window) of Tunnelers, with it connect to this server. That is the way authoritative
-    networking works. Stop fretting.
+    networking works. Stop fretting."
   noticeRect:
     serializedVersion: 2
     x: 0
@@ -130,12 +131,19 @@ MonoBehaviour:
     width: 0
     height: 0
   showNotice: 0
+  showNameDialog: 1
+  nameRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   serverScroll: {x: 0, y: 0}
   clientServer:
   - Client
   - Server
   divider:
-    m_Name: divider
+    m_Name: 
     m_Normal:
       m_Background: {fileID: 2800000, guid: aba36d5d34aca214687c40b3b088c70e, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
@@ -253,7 +261,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -293,6 +301,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1209416887}
   - 114: {fileID: 1209416886}
+  - 114: {fileID: 1209416888}
   m_Layer: 0
   m_Name: Intro
   m_TagString: Untagged
@@ -312,6 +321,129 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionMan: {fileID: 548006294}
+  fader: {fileID: 1209416888}
+  drawLogo: 1
+  logo: {fileID: 2800000, guid: 863cb57dd5067ca4bb653c4edf59204f, type: 3}
+  logogo:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: 863cb57dd5067ca4bb653c4edf59204f, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  drawCredits: 0
+  credits: {fileID: 2800000, guid: 1c36230e596a27542b7145185e0ed4e8, type: 3}
+  creditits:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: 1c36230e596a27542b7145185e0ed4e8, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!4 &1209416887
 Transform:
   m_ObjectHideFlags: 0
@@ -323,3 +455,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
+--- !u!114 &1209416888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1209416885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a1616b4623f6841a616155f9630e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

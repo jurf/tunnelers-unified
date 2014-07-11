@@ -6,6 +6,11 @@ using System.Text.RegularExpressions;
 public class ServerC : MonoBehaviour {
 
 	#region Variables
+	
+		public string version = "Tunnelers Beta";
+
+		public string masterServerIP;
+		public string facilitatorIP;
 		
 		public bool overrideIP;
 		public bool OverrideIP {
@@ -34,7 +39,7 @@ public class ServerC : MonoBehaviour {
 		public int customServerPort = 25002;
 		string userPort;
 
-		public string typeName;
+		public string typeName = "tunnelers_unified";
 		public string gameName = "A cool game name";
 	//	public string roomComment = "";
 		public int level;
@@ -84,6 +89,16 @@ public class ServerC : MonoBehaviour {
 		#region GUI
 	
 			void OnGUI () {
+			
+				GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
+					GUILayout.BeginVertical ();
+						GUILayout.FlexibleSpace ();		
+						GUILayout.BeginHorizontal ();
+							GUILayout.FlexibleSpace ();
+							GUILayout.Label (version, "box");
+						GUILayout.EndHorizontal ();
+					GUILayout.EndVertical ();
+				GUILayout.EndArea ();
 			
 				if (!Network.isClient && !Network.isServer) {
 				
@@ -255,16 +270,20 @@ public class ServerC : MonoBehaviour {
 			
 			void NameWindow (int windowID) {
 			
+				GUI.BringWindowToFront (2);
+			
 				GUILayout.BeginHorizontal ();
 			
-					GUILayout.Label ("My name is ");
+					GUILayout.Label ("My name is ", GUILayout.MinWidth (75));
 					
-					ServerC.name = GUILayout.TextField (ServerC.name, 25, GUILayout.MinWidth (200));
+					ServerC.name = GUILayout.TextField (ServerC.name, 25, GUILayout.MinWidth (150));
 					
 				GUILayout.EndHorizontal ();
 				
-				if (GUILayout.Button ("Cool, ain't it?"))
+				if (GUILayout.Button ("Do you like it?")) {
+					Debug.Log ("No, but it doesn't matter. I'll still identify you by numbers.");
 					showNameDialog = false;
+				}
 				
 			}
 			
