@@ -29,7 +29,7 @@ public class Intro : MonoBehaviour {
 	
 	void Update () {
 	
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Space) && !onMain) {
 			drawLogo = false;
 			drawCredits = false;
 			onMain = true;
