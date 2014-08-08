@@ -1,6 +1,24 @@
-using System.Collections.Generic;
+//
+//  S_GameMan.cs is part of Tunnelers: Unified
+//  <https://github.com/VacuumGames/Tunnelers-Unified/>.
+//
+//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//
+//  Tunnelers: Unified is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Tunnelers: Unified is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
+//
+
 using UnityEngine;
-using L = Locale;
 
 public class S_GameMan : MonoBehaviour {
 
@@ -227,7 +245,7 @@ public class S_GameMan : MonoBehaviour {
 			
 		}
 		
-		void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) {
+		void OnSerializeNetworkView (BitStream stream) {
 		
 			stream.Serialize (ref timeToEnd);
 			stream.Serialize (ref bluePlayers);
@@ -248,31 +266,31 @@ public class S_GameMan : MonoBehaviour {
 				
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=blue>Blue: " + blueScore.ToString () + "</color>", "box");
+					GUILayout.Label ("<color=blue>Blue: " + blueScore + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 					
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=blue>Blue flag home: " + blueFlagHome.ToString() + "</color>", "box");
+					GUILayout.Label ("<color=blue>Blue flag home: " + blueFlagHome + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 					
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=red>Red: " + redScore.ToString () + "</color>", "box");
+					GUILayout.Label ("<color=red>Red: " + redScore + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 				
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=red>Red flag home: " + redFlagHome.ToString () + "</color>", "box");
+					GUILayout.Label ("<color=red>Red flag home: " + redFlagHome + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 				
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("Time to end: " + timeToEnd.ToString (), "box");
+					GUILayout.Label ("Time to end: " + timeToEnd, "box");
 					GUILayout.FlexibleSpace ();
 				
 				GUILayout.EndHorizontal ();
@@ -299,35 +317,35 @@ public class S_GameMan : MonoBehaviour {
 		}
 	
 	}
+
+//	public void ReportFrag (NetworkPlayer fragger, NetworkPlayer dier) {
+//	
+//		if (!Network.isServer || Network.isClient) {
+//			enabled = false;
+//			return;
+//		}
+//
+//		int fIndex = GetPlayerIndex (fragger);
+//		int dIndex = GetPlayerIndex (dier);
+//		
+//		playerScores [fIndex].frags++;
+//		playerScores [dIndex].deaths++;
+//
+//	}
 	
-	public void ReportFrag (NetworkPlayer fragger, NetworkPlayer dier) {
-	
-		if (!Network.isServer || Network.isClient) {
-			enabled = false;
-			return;
-		}
-	/*
-		int fIndex = GetPlayerIndex (fragger);
-		int dIndex = GetPlayerIndex (dier);
-		
-		playerScores [fIndex].frags++;
-		playerScores [dIndex].deaths++;
-	*/
-	}
-	/*
-	public int GetPlayerIndex (NetworkPlayer playerID) {
-	
-		foreach (PlayerScore player in playerScores) {
-			if (player.player == playerID) {
-				return playerScores.IndexOf (player);
-			}
-			
-		}
-		
-		return 0;
-	
-	}
-	*/
+//	public int GetPlayerIndex (NetworkPlayer playerID) {
+//	
+//		foreach (PlayerScore player in playerScores) {
+//			if (player.player == playerID) {
+//				return playerScores.IndexOf (player);
+//			}
+//			
+//		}
+//		
+//		return 0;
+//	
+//	}
+
 	public void WhoWon () {
 	
 		if (!Network.isServer || Network.isClient) {
@@ -353,7 +371,7 @@ public class S_GameMan : MonoBehaviour {
 	
 		Debug.Log ("End of match.");
 		
-		networkView.RPC ("TheEnd", RPCMode.All, (int)gameState);
+		networkView.RPC ("TheEnd", RPCMode.All, gameState);
 		
 		Debug.Log ("Match status: " + gameState);
 		

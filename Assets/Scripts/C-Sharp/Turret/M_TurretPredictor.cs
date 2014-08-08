@@ -1,5 +1,24 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//
+//  M_TurretPredictor.cs is part of Tunnelers: Unified
+//  <https://github.com/VacuumGames/Tunnelers-Unified/>.
+//
+//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//
+//  Tunnelers: Unified is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Tunnelers: Unified is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+using UnityEngine;
 
 [AddComponentMenu ("Mixed/Turret Predictor")]
 
@@ -10,8 +29,8 @@ public class M_TurretPredictor : MonoBehaviour {
 	public PlayerMan parent;
 	public float pingMargin = 0.5f; //ping top-margins
 	
-	private float clientPing;
-	private M_NetState[] serverStateBuffer = new M_NetState[20];
+	float clientPing;
+	M_NetState[] serverStateBuffer = new M_NetState[20];
 	
 	public void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) {
 		
@@ -93,9 +112,9 @@ public class M_TurretPredictor : MonoBehaviour {
 					
 				}
 				
-			}
-			
-		} /*so it appears there is no lag through latency.*/ else {
+			}			
+//		so it appears there is no lag through latency.
+		} else {
 			
 			M_NetState latest = serverStateBuffer[0];	
 			transform.rotation = Quaternion.Slerp (transform.rotation, latest.rot, 0.5f);

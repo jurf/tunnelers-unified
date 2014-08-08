@@ -1,6 +1,24 @@
-using System.Collections.Generic;
+//
+//  C_GameMan.cs is part of Tunnelers: Unified
+//  <https://github.com/VacuumGames/Tunnelers-Unified/>.
+//
+//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//
+//  Tunnelers: Unified is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Tunnelers: Unified is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
+//
+
 using UnityEngine;
-using L = Locale;
 
 public class C_GameMan : MonoBehaviour {
 
@@ -70,31 +88,31 @@ public class C_GameMan : MonoBehaviour {
 				
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=blue>Blue: " + blueScore.ToString () + "</color>", "box");
+					GUILayout.Label ("<color=blue>Blue: " + blueScore + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 					
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=blue>Blue flag home: " + blueFlagHome.ToString() + "</color>", "box");
+					GUILayout.Label ("<color=blue>Blue flag home: " + blueFlagHome + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 					
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=red>Red: " + redScore.ToString () + "</color>", "box");
+					GUILayout.Label ("<color=red>Red: " + redScore + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 				
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("<color=red>Red flag home: " + redFlagHome.ToString () + "</color>", "box");
+					GUILayout.Label ("<color=red>Red flag home: " + redFlagHome + "</color>", "box");
 					GUILayout.FlexibleSpace ();
 				
 				GUILayout.EndHorizontal ();
 				GUILayout.BeginHorizontal ();
 				
-					GUILayout.Label ("Time to end: " + serverTimeToEnd.ToString (), "box");
+					GUILayout.Label ("Time to end: " + serverTimeToEnd, "box");
 					GUILayout.FlexibleSpace ();
 				
 				GUILayout.EndHorizontal ();
@@ -109,9 +127,9 @@ public class C_GameMan : MonoBehaviour {
 				
 			}
 			
-			void EndGameWindow (int WindowID) {
+			void EndGameWindow (int windowId) {
 			
-				GUILayout.Label ("The game ended.\nState: " + endGameState.ToString (), GUILayout.MinWidth (100));
+				GUILayout.Label ("The game ended.\nState: " + endGameState, GUILayout.MinWidth (100));
 				
 			}
 			

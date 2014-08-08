@@ -268,12 +268,12 @@ public class DiggerC : MonoBehaviour {
 		transform.rotation = Quaternion.RotateTowards (_from,_to,speed   * Time.smoothDeltaTime);
 	}
 	
-	public Quaternion CalculateMiddle (Quaternion rot1, Quaternion rot2) {
-		return Quaternion.Slerp (rot1,rot2,0.5f);
+	public static Quaternion CalculateMiddle (Quaternion rot1, Quaternion rot2) {
+		return Quaternion.Slerp (rot1, rot2, 0.5f);
 	}
 	
 	
-	public float Inverse (float num) {
+	public static float Inverse (float num) {
 		return num * -1;
 	}
 

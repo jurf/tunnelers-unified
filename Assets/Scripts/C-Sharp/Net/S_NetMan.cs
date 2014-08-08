@@ -1,3 +1,23 @@
+//
+//  S_NetMan.cs is part of Tunnelers: Unified
+//  <https://github.com/VacuumGames/Tunnelers-Unified/>.
+//
+//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//
+//  Tunnelers: Unified is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Tunnelers: Unified is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
+//
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -102,7 +122,9 @@ public class S_NetMan : MonoBehaviour {
 		
 	}
 	
-	public GameObject RequestSpawn (NetworkPlayer requester, GameObject prefab, Vector3 pos, Quaternion rot, string name) {
+	public GameObject RequestSpawn (
+		NetworkPlayer requester, GameObject prefab, Vector3 pos, Quaternion rot, string playerName
+	) {
 		
 		/*
 		//Called from client to the server to request a new entity
@@ -140,7 +162,7 @@ public class S_NetMan : MonoBehaviour {
 		
 		netView.RPC ("SetID", RPCMode.AllBuffered, GetComponent <S_SpawnMan> ().AddTankToTracker (handle));
 		
-		netView.RPC ("SetName", RPCMode.AllBuffered, name);
+		netView.RPC ("SetName", RPCMode.AllBuffered, playerName);
 		
 		if (handle)
 			return handle;
@@ -149,13 +171,13 @@ public class S_NetMan : MonoBehaviour {
 		
 	}
 	
-	public void NetworkDestroy (GameObject gameObject) {
+	public void NetworkDestroy (GameObject theGameObject) {
 	
 		Debug.Log ("Network.Destroying a game object.");
 	
-		Network.RemoveRPCs (gameObject.networkView.viewID);
+		Network.RemoveRPCs (theGameObject.networkView.viewID);
 	//	Network.RemoveRPCs (gameObject.GetComponent <PlayerMan> ().owner);
-		Network.Destroy (gameObject);
+		Network.Destroy (theGameObject);
 	
 	}
 	

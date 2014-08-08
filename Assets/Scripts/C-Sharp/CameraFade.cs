@@ -1,15 +1,23 @@
 // simple fading script
-// A texture is stretched over the entire screen. The color of the pixel is set each frame until it reaches its target color.
+// A texture is stretched over the entire screen. The color of the pixel
+// is set each frame until it reaches its target color.
+
 using UnityEngine;
 
 public class CameraFade : MonoBehaviour {
-   
-	GUIStyle m_BackgroundStyle = new GUIStyle ();	// Style for background tiling
-	Texture2D m_FadeTexture;	// 1x1 pixel texture used for fading
-	Color m_CurrentScreenOverlayColor = new Color (0,0,0,0);	// default starting color: black and fully transparrent
-	Color m_TargetScreenOverlayColor = new Color (0,0,0,0);	// default target color: black and fully transparrent
-	Color m_DeltaColor = new Color (0,0,0,0);	// the delta-color is basically the "speed / second" at which the current color should change
-	int m_FadeGUIDepth = -1000;	// make sure this texture is drawn on top of everything
+
+	// Style for background tiling
+	GUIStyle m_BackgroundStyle = new GUIStyle ();
+	// 1x1 pixel texture used for fading
+	Texture2D m_FadeTexture;
+	// default starting color: black and fully transparrent
+	Color m_CurrentScreenOverlayColor = new Color (0,0,0,0);
+	// default target color: black and fully transparrent
+	Color m_TargetScreenOverlayColor = new Color (0,0,0,0);
+	// the delta-color is basically the "speed / second" at which the current color should change
+	Color m_DeltaColor = new Color (0,0,0,0);
+	// make sure this texture is drawn on top of everything
+	int m_FadeGUIDepth = -1000;
 
 	// initialize the texture, background-style and initial color:
 	void Awake () {
@@ -19,7 +27,8 @@ public class CameraFade : MonoBehaviour {
 		SetScreenOverlayColor (m_CurrentScreenOverlayColor);
 
 		// TEMP:
-		// usage: use "SetScreenOverlayColor" to set the initial color, then use "StartFade" to set the desired color & fade duration and start the fade
+		// usage: use "SetScreenOverlayColor" to set the initial color, then use "StartFade" to set
+		// the desired color & fade duration and start the fade
 		//SetScreenOverlayColor(new Color(0,0,0,1));
 		//StartFade(new Color(1,0,0,1), 5);
 		
@@ -32,8 +41,12 @@ public class CameraFade : MonoBehaviour {
 		// if the current color of the screen is not equal to the desired color: keep fading!
 		if (m_CurrentScreenOverlayColor != m_TargetScreenOverlayColor) {
 		
-			// if the difference between the current alpha and the desired alpha is smaller than delta-alpha * deltaTime, then we're pretty much done fading:
-			if (Mathf.Abs (m_CurrentScreenOverlayColor.a - m_TargetScreenOverlayColor.a) < Mathf.Abs (m_DeltaColor.a) * Time.deltaTime) {
+			// if the difference between the current alpha and the desired alpha is smaller than
+			// delta-alpha * deltaTime, then we're pretty much done fading:
+			if (
+				Mathf.Abs (m_CurrentScreenOverlayColor.a - m_TargetScreenOverlayColor.a) < Mathf.Abs (m_DeltaColor.a)
+			    * Time.deltaTime
+			) {
 			
 				m_CurrentScreenOverlayColor = m_TargetScreenOverlayColor;
 				SetScreenOverlayColor (m_CurrentScreenOverlayColor);
@@ -66,14 +79,17 @@ public class CameraFade : MonoBehaviour {
 	}
 
 
-	// initiate a fade from the current screen color (set using "SetScreenOverlayColor") towards "newScreenOverlayColor" taking "fadeDuration" seconds
+	// initiate a fade from the current screen color (set using "SetScreenOverlayColor") towards
+	// "newScreenOverlayColor" taking "fadeDuration" seconds
 	public void StartFade (Color newScreenOverlayColor, float fadeDuration) {
-	
-		if (fadeDuration <= 0.0f) {		// can't have a fade last -2455.05 seconds!
+
+		// can't have a fade last -2455.05 seconds!
+		if (fadeDuration <= 0.0f) {
 		
 			SetScreenOverlayColor (newScreenOverlayColor);
-			
-		} else {	// initiate the fade: set the target-color and the delta-color
+		
+		// initiate the fade: set the target-color and the delta-color
+		} else {	
 		
 			m_TargetScreenOverlayColor = newScreenOverlayColor;
 			m_DeltaColor = (m_TargetScreenOverlayColor - m_CurrentScreenOverlayColor) / fadeDuration;

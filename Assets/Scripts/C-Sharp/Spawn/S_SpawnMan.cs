@@ -1,4 +1,24 @@
-﻿using UnityEngine;
+﻿//
+//  S_SpawnMan.cs is part of Tunnelers: Unified
+//  <https://github.com/VacuumGames/Tunnelers-Unified/>.
+//
+//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//
+//  Tunnelers: Unified is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Tunnelers: Unified is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+using UnityEngine;
 using System.Collections.Generic;
 
 public class S_SpawnMan : MonoBehaviour {
@@ -192,7 +212,7 @@ public class S_SpawnMan : MonoBehaviour {
 		
 	}
 
-	GameObject Spawn (NetworkPlayer player, bool isBlue, string name) {
+	GameObject Spawn (NetworkPlayer player, bool isBlue, string playerName) {
 	
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
@@ -201,7 +221,7 @@ public class S_SpawnMan : MonoBehaviour {
 		
 		Debug.Log ("Going to spawn player, doing some spawn stuff and then requesting spawn from server NetMan.");
 
-		Vector3 pos = new Vector3 (0,0, spawnHeight);
+		Vector3 pos;
 		GameObject prefab;
 
 		if (isBlue) {
@@ -226,14 +246,14 @@ public class S_SpawnMan : MonoBehaviour {
 		
 		}
 		
-		return GetComponent <S_NetMan> ().RequestSpawn (player, prefab, pos, Quaternion.identity, name);
+		return GetComponent <S_NetMan> ().RequestSpawn (player, prefab, pos, Quaternion.identity, playerName);
 		
 		//Network.Instantiate (prefab, pos, Quaternion.identity, 0);
 		
 	}
 
 	[RPC]
-	public void RequestGameEntry (NetworkPlayer player, bool isBlue, string name) {
+	public void RequestGameEntry (NetworkPlayer player, bool isBlue, string playerName) {
 	
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
@@ -246,7 +266,7 @@ public class S_SpawnMan : MonoBehaviour {
 		
 			if (unspawned == player) {
 			
-				playerTracker.Add (new PlayerTracker (player, isBlue, name));
+				playerTracker.Add (new PlayerTracker (player, isBlue, playerName));
 				connectedUnspawned.Remove (unspawned);
 				Debug.Log ("Found the correct player, added him to the tracker and removed from unspawned.");
 				return;

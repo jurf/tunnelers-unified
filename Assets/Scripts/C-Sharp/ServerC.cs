@@ -1,5 +1,24 @@
-﻿using UnityEngine;
-using System.Collections;
+//
+//  ServerC.cs is part of Tunnelers: Unified
+//  <https://github.com/VacuumGames/Tunnelers-Unified/>.
+//
+//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//
+//  Tunnelers: Unified is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  Tunnelers: Unified is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+using UnityEngine;
 using System.Text.RegularExpressions;
 
 public class ServerC : MonoBehaviour {
@@ -43,7 +62,7 @@ public class ServerC : MonoBehaviour {
 	//	public string roomComment = "";
 		public int level;
 	
-		public bool server = false;
+		public bool server;
 		public bool startServer;
 	
 		public HostData[] data;
@@ -144,7 +163,7 @@ public class ServerC : MonoBehaviour {
 				
 				}
 		
-				if (server == true) {
+				if (server) {
 				
 					GUILayout.Label ("Server name:");
 					
@@ -197,11 +216,11 @@ public class ServerC : MonoBehaviour {
 					foreach (HostData element in data) {
 					
 						GUILayout.Space (5);
-						string name = "Name: " + element.gameName;
+						string serverName = "Name: " + element.gameName;
 						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected.";
 						
 						GUILayout.Box ("", divider, GUILayout.Height (2));
-						GUILayout.Label (name);
+						GUILayout.Label (serverName);
 						GUILayout.Label (connectedPlayers);
 						//GUILayout.Space (5);
 												
@@ -288,9 +307,9 @@ public class ServerC : MonoBehaviour {
 			
 		#endregion GUI	
 	
-		void OnLevelWasLoaded (int level) {
+		void OnLevelWasLoaded (int levelNum) {
 		
-			if (startServer && level != 0) {
+			if (startServer && levelNum != 0) {
 			
 				StartServer ();
 					startServer = false;
@@ -311,7 +330,7 @@ public class ServerC : MonoBehaviour {
 		S_NetMan.levelName = "";
 		Application.LoadLevel ("main");
 	
-	}
+		}
 			
 	#endregion UnityMethods
 	
