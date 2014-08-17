@@ -20,6 +20,12 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (C_GameMan))]
+[RequireComponent (typeof (M_GameMan))]
+
+[AddComponentMenu ("Network/Game Man")]
+
 public class S_GameMan : MonoBehaviour {
 
 	public LanguageManager langMan;

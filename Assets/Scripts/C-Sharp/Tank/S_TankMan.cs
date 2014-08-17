@@ -20,8 +20,12 @@
 
 using UnityEngine;
 
-[AddComponentMenu ("Server/Tank Man")]
 [RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (C_TankMan))]
+[RequireComponent (typeof (M_TankPredictor))]
+[RequireComponent (typeof (M_TankController))]
+
+[AddComponentMenu ("Network/Tank Man")]
 
 public class S_TankMan : MonoBehaviour {
 	

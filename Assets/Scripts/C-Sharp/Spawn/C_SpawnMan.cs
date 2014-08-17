@@ -20,6 +20,11 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_SpawnMan))]
+
+[AddComponentMenu ("Network/Spawn Man")]
+
 public class C_SpawnMan : MonoBehaviour {
 
 	bool green; //is all loaded properly? set by client netman

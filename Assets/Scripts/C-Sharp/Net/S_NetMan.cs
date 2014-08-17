@@ -21,7 +21,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Server/Net Man")]
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (C_NetManager))]
+
+[AddComponentMenu ("Network/Life")]
 
 public class S_NetMan : MonoBehaviour {
 

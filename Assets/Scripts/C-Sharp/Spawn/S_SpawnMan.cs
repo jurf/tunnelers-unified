@@ -21,6 +21,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (C_SpawnMan))]
+
+[AddComponentMenu ("Network/Spawn Man")]
+
 public class S_SpawnMan : MonoBehaviour {
 	
 	#region variables

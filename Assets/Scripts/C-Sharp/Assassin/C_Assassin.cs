@@ -23,6 +23,8 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (S_Assassin))]
 
+[AddComponentMenu ("Network/Assassin")]
+
 public class C_Assassin : MonoBehaviour {
 
 	public S_Assassin sscript;

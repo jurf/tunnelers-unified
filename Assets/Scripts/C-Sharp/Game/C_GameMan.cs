@@ -20,6 +20,12 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_GameMan))]
+[RequireComponent (typeof (M_GameMan))]
+
+[AddComponentMenu ("Network/Game Man")]
+
 public class C_GameMan : MonoBehaviour {
 
 	#region Variables

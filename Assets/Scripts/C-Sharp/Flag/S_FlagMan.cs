@@ -23,6 +23,8 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (C_FlagMan))]
 
+[AddComponentMenu ("Network/Flag Man")]
+
 public class S_FlagMan : MonoBehaviour {
 
 	public bool home = true;

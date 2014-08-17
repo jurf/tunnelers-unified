@@ -20,7 +20,12 @@
 
 using UnityEngine;
 
-[AddComponentMenu ("Client/Turret Man")]
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_TurretMan))]
+[RequireComponent (typeof (M_TurretPredictor))]
+[RequireComponent (typeof (M_TankController))]
+
+[AddComponentMenu ("Network/Turret Man")]
 
 public class C_TurretMan : MonoBehaviour {
 	

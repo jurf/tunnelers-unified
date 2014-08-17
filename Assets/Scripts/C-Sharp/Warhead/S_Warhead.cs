@@ -21,6 +21,9 @@
 using UnityEngine;
 
 [RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (C_Warhead))]
+
+[AddComponentMenu ("Network/Warhead")]
 
 public class S_Warhead : MonoBehaviour {
 

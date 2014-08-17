@@ -41,17 +41,6 @@ public class PlayerType : MonoBehaviour {
 	public Team team;
 	public Tank tank;
 	
-	
-	// Use this for initialization
-		void Start () {
-	
-	}
-	
-		// Update is called once per frame
-	void Update () {
-	
-	}
-	
 	public bool IsMyTeam (Team otherTeam) {
 	
 		if (otherTeam == team) {

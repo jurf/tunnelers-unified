@@ -20,8 +20,12 @@
 
 using UnityEngine;
 
-[AddComponentMenu ("Mixed/Tank Predictor")]
 [RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_TankMan))]
+[RequireComponent (typeof (C_TankMan))]
+[RequireComponent (typeof (M_TankController))]
+
+[AddComponentMenu ("Network/Tank Man")]
 
 public class M_TankPredictor : MonoBehaviour {
 

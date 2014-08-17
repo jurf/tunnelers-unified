@@ -20,6 +20,11 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_Warhead))]
+
+[AddComponentMenu ("Network/Warhead")]
+
 public class C_Warhead : MonoBehaviour {
 
 	public PlayerMan parent;

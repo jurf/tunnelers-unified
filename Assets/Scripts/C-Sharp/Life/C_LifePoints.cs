@@ -20,6 +20,11 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_LifePoints))]
+
+[AddComponentMenu ("Network/Life")]
+
 public class C_LifePoints : MonoBehaviour {
 	
 	public S_LifePoints sscript;

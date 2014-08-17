@@ -20,6 +20,11 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_NetMan))]
+
+[AddComponentMenu ("Network/Net Man")]
+
 public class C_NetManager : MonoBehaviour {
 
 	void OnConnectedToServer () {

@@ -21,6 +21,10 @@
 using UnityEngine;
 using System.Text.RegularExpressions;
 
+[RequireComponent (typeof (NetworkView))]
+
+[AddComponentMenu ("Network/Menu")]
+
 public class ServerC : MonoBehaviour {
 
 	#region Variables

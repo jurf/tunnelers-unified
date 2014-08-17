@@ -23,6 +23,8 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (S_FlagMan))]
 
+[AddComponentMenu ("Network/Flag Man")]
+
 public class C_FlagMan : MonoBehaviour {
 	
 	public S_FlagMan server;

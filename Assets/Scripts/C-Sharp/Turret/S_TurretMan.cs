@@ -20,6 +20,13 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (C_TurretMan))]
+[RequireComponent (typeof (M_TurretPredictor))]
+[RequireComponent (typeof (M_TankController))]
+
+[AddComponentMenu ("Network/Turret Man")]
+
 public class S_TurretMan : MonoBehaviour {
 
 	M_TankController controller;

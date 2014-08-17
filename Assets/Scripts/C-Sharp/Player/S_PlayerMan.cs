@@ -18,7 +18,11 @@
 //  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+// TODO maybe delete this
+
 using UnityEngine;
+
+[AddComponentMenu ("Network/Player Man")]
 
 public class S_PlayerMan : MonoBehaviour {
 

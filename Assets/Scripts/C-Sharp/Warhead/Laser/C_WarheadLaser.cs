@@ -20,6 +20,11 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_WarheadLaser))]
+
+[AddComponentMenu ("Network/Warhead/Laser")]
+
 public class C_WarheadLaser : MonoBehaviour {
 
 	public S_WarheadLaser sscript;

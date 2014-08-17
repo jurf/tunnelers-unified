@@ -20,6 +20,12 @@
 
 using UnityEngine;
 
+[RequireComponent (typeof (NetworkView))]
+[RequireComponent (typeof (S_GameMan))]
+[RequireComponent (typeof (C_GameMan))]
+
+[AddComponentMenu ("Network/Game Man")]
+
 public class M_GameMan : MonoBehaviour {
 
 	public S_GameMan observedGameMan;

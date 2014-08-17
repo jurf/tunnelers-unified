@@ -20,7 +20,9 @@
 
 using UnityEngine;
 
-[AddComponentMenu ("Client/Player Man")]
+[RequireComponent (typeof (NetworkView))]
+
+[AddComponentMenu ("Network/Player Man")]
 
 public class PlayerMan : MonoBehaviour {
 
