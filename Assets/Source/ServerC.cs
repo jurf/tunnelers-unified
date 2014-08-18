@@ -194,7 +194,7 @@ public class ServerC : MonoBehaviour {
 					
 						startServer = true;
 						string levelToLoad = GetComponent <ReadSceneNames> ().scenes[level + 2];
-						S_NetMan.levelName = levelToLoad;
+						SNetMan.levelName = levelToLoad;
 						Application.LoadLevel (levelToLoad);
 						
 					}
@@ -245,7 +245,7 @@ public class ServerC : MonoBehaviour {
 						if (GUILayout.Button ("Connect to this server")) {
 							
 							// Connect to HostData struct, internally the correct method is used (GUID when using NAT).
-							S_NetMan.levelName = element.comment;
+							SNetMan.levelName = element.comment;
 							Network.Connect (element);	
 										
 						}
@@ -331,7 +331,7 @@ public class ServerC : MonoBehaviour {
 		void OnDisconnectedFromServer (NetworkDisconnection info) {
 	
 		Debug.Log ("Disconnected from server: " + info);
-		S_NetMan.levelName = "";
+		SNetMan.levelName = "";
 		Application.LoadLevel ("main");
 	
 		}
@@ -344,7 +344,7 @@ public class ServerC : MonoBehaviour {
 		
 		// Use NAT punchthrough if no public IP present
 		Network.InitializeServer (32, customServerPort, !Network.HavePublicAddress());
-		MasterServer.RegisterHost (typeName, gameName, S_NetMan.levelName);
+		MasterServer.RegisterHost (typeName, gameName, SNetMan.levelName);
 		
 	}
 

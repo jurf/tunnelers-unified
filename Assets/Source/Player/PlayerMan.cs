@@ -30,9 +30,9 @@ public class PlayerMan : MonoBehaviour {
 	
 	public int id;
 	
-	public C_TankMan tank;
-	public C_TurretMan turret;
-	public S_LifePoints life;
+	public CTankMan tank;
+	public CTurretMan turret;
+	public SLifePoints life;
 	
 	public TextMesh name;
 	
@@ -115,8 +115,8 @@ public class PlayerMan : MonoBehaviour {
 			//So it just so happens that WE are the player in question,
 			//which means we can enable this control again
 			enabled = true;
-			tank.GetComponent <C_TankMan> ().enabled = true;
-			turret.GetComponent <C_TurretMan> ().enabled = true;
+			tank.GetComponent <CTankMan> ().enabled = true;
+			turret.GetComponent <CTurretMan> ().enabled = true;
 			GameObject.Find ("CameraFollow").GetComponent <PosAsObjectC> ().theObject = tank.gameObject;
 		} else {
 			//Disable a bunch of other things here that are not interesting:
