@@ -43,10 +43,12 @@ public class CTankMan : MonoBehaviour {
 	public Quaternion serverRot;
     
     void Awake () {
+
     	if (!Network.isClient || Network.isServer) {
     		enabled = false;
     		return;
     	}
+
     }
     
     void Update () {
