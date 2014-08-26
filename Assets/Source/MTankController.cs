@@ -1,5 +1,5 @@
 //
-//  M_TankController.cs is part of Tunnelers: Unified
+//  MTankController.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
 //  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
