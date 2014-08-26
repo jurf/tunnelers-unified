@@ -31,16 +31,19 @@ public class CTankMan : MonoBehaviour {
 
     public PlayerMan parent;
     
-    public int lastMotionH;
-    public int lastMotionV;
+    int lastMotionH;
+    int lastMotionV;
     
-    public float speed = 10f;
-    
-    public MTankController controller;
-           
-    public float positionErrorThreshold = 0.2f;
-	public Vector3 serverPos;
-	public Quaternion serverRot;
+	public MTankController controller;
+
+	public float speed = 10f;       
+    public float positionErrorThreshold = 0.5f;
+	public byte maxErrors = 3;
+
+	byte positionErrors;
+
+	Vector3 serverPos;
+	Quaternion serverRot;
     
     void Awake () {
 
@@ -99,6 +102,16 @@ public class CTankMan : MonoBehaviour {
 	    transform.position = Vector3.Lerp (transform.position, serverPos, t);
 	    */
 	    
+		if (Vector3.Distance (transform.position, serverPos) < positionErrorThreshold) {
+			positionErrors ++;
+		}
+
+		if (positionErrors < maxErrors) {
+			transform.position = serverPos;
+			positionErrors = 0;
+			return;
+		}
+
 	    transform.position = Vector3.Lerp (transform.position, serverPos, Time.deltaTime * speed);
 	}
 	
