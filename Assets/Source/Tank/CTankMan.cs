@@ -42,8 +42,8 @@ public class CTankMan : MonoBehaviour {
 
 	byte positionErrors;
 
-	Vector3 serverPos;
-	Quaternion serverRot;
+	public Vector3 serverPos;
+	public Quaternion serverRot;
     
     void Awake () {
 
