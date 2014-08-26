@@ -30,9 +30,9 @@ using UnityEngine;
 public class MTankPredictor : MonoBehaviour {
 
 	public Transform observedTransform;
-	public CTankMan receiver; //Guy who is receiving data
+	public CTankMan receiver;
 	public PlayerMan parent;
-	public float pingMargin = 0.5f; //ping top-margins
+	public float pingMargin = 0.5f;
 	
 	float clientPing;
 	MNetState[] serverStateBuffer = new MNetState[20];
@@ -43,32 +43,22 @@ public class MTankPredictor : MonoBehaviour {
 		Quaternion rot = observedTransform.rotation;
 		
 		if (stream.isWriting) {
-		
-		//	Debug.Log ("Server is writing. But wait, is server a server? " + Network.isServer);
 			
 			stream.Serialize (ref pos);
 			stream.Serialize (ref rot);
 		
 		} else if (stream.isReading) {
-		
-		//	Debug.Log ("Client is reading. But wait, is client a client? " + Network.isClient);
-		
-			//This code takes care of the local client!
+
 			stream.Serialize (ref pos);
 			stream.Serialize (ref rot);
 			receiver.serverPos = pos;
 			receiver.serverRot = rot;
-			//Smoothly correct clients position
-			//receiver.LerpToTarget ();
-			
-			//Take care of data for interpolating remote objects movements
-			// Shift up the buffer
-			//The loop is a bit complicated, but it's not my fault
+
 			for (int i = serverStateBuffer.Length - 1; i >= 1; i--) {
 				serverStateBuffer[i] = serverStateBuffer[i - 1];
 			}
 			
-			//Override the first element with the latest server info
+			// Override the first element with the latest server info
 			serverStateBuffer[0] = new MNetState ((float)info.timestamp, pos, rot);
 			
 		}
