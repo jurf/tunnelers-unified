@@ -33,6 +33,8 @@ public class MTankPredictor : MonoBehaviour {
 	public CTankMan receiver;
 	public PlayerMan parent;
 	public float pingMargin = 0.5f;
+	public float maxDeltaPos = 0.05f;
+	public float maxDeltaRot = 0.5f;
 	
 	float clientPing;
 	MNetState[] serverStateBuffer = new MNetState[20];
@@ -44,13 +46,13 @@ public class MTankPredictor : MonoBehaviour {
 		
 		if (stream.isWriting) {
 			
-			stream.Serialize (ref pos);
-			stream.Serialize (ref rot);
+			stream.Serialize (ref pos, maxDeltaPos);
+			stream.Serialize (ref rot, maxDeltaRot);
 		
 		} else if (stream.isReading) {
 
-			stream.Serialize (ref pos);
-			stream.Serialize (ref rot);
+			stream.Serialize (ref pos, maxDeltaPos);
+			stream.Serialize (ref rot, maxDeltaRot);
 			receiver.serverPos = pos;
 			receiver.serverRot = rot;
 
