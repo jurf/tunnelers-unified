@@ -35,6 +35,7 @@ public class CTankMan : MonoBehaviour {
     int lastMotionV;
     
 	public MTankController controller;
+	public MTankPredictor predictor;
 
 	public float speed = 10f;       
     public float positionErrorThreshold = 0.5f;
@@ -101,8 +102,13 @@ public class CTankMan : MonoBehaviour {
 	//	float lerp = ((1f / distance) * speed * Time.deltaTime) / 100f;
 	    transform.position = Vector3.Lerp (transform.position, serverPos, t);
 	    */
+
+		float distance = Vector3.Distance (transform.position, serverPos);
+
+		if (distance < predictor.maxDeltaPos)
+			return;
 	    
-		if (Vector3.Distance (transform.position, serverPos) < positionErrorThreshold) {
+		if (distance < positionErrorThreshold) {
 			positionErrors ++;
 		}
 

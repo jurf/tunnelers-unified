@@ -24,6 +24,8 @@ public class DetonatorSound : DetonatorComponent {
 
 	void Update()
 	{
+		if (_soundComponent == null) return;
+
 		_soundComponent.pitch = Time.timeScale;
 		
 		if (_delayedExplosionStarted)

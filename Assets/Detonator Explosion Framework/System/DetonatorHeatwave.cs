@@ -10,7 +10,7 @@ public class DetonatorHeatwave : DetonatorComponent {
 	private float s;
 	private float _startSize;
 	private float _maxSize;
-	private float _baseDuration = .35f;
+	private float _baseDuration = .25f;
 	private bool _delayedExplosionStarted = false;
 	private float _explodeDelay;
 	

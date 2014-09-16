@@ -215,6 +215,7 @@ public class Detonator : MonoBehaviour {
 	}
 	
 	private bool _firstComponentUpdate = true;
+
 	void UpdateComponents()
 	{
 		if (_firstComponentUpdate)
@@ -226,19 +227,25 @@ public class Detonator : MonoBehaviour {
 			}
 			_firstComponentUpdate = false;
 		}
-			
+		
 		if (!_firstComponentUpdate)
 		{
+			float s = size / _baseSize;
+			
+			Vector3 sdir = new Vector3(direction.x * s, direction.y * s, direction.z * s);
+			
+			float d = duration / _baseDuration;
+			
 			foreach (DetonatorComponent component in components)
 			{
 				if (component.detonatorControlled)
 				{
-					component.size = component.startSize * (size / _baseSize);
-					component.timeScale = (duration / _baseDuration);
+					component.size = component.startSize * s;
+					component.timeScale = d;
 					component.detail = component.startDetail * detail;
-					component.force = (component.startForce *  (size /_baseSize)) + (direction * (size /_baseSize));
-					component.velocity = (component.startVelocity *  (size /_baseSize)) + (direction * (size /_baseSize));
-				
+					component.force = new Vector3(component.startForce.x * s + sdir.x, component.startForce.y * s + sdir.y, component.startForce.z * s + sdir.z );
+					component.velocity = new Vector3(component.startVelocity.x * s + sdir.x, component.startVelocity.y * s + sdir.y, component.startVelocity.z * s + sdir.z );
+					
 					//take the alpha of detonator color and consider it a weight - 1=use all detonator, 0=use all components
 					component.color = Color.Lerp(component.startColor, color, color.a);
 				}

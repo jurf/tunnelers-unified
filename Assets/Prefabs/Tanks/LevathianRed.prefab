@@ -693,11 +693,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 11400018}
-  lastMotionH: 0
-  lastMotionV: 0
-  speed: 12.5
   controller: {fileID: 11400028}
+  predictor: {fileID: 11400026}
+  speed: 12.5
   positionErrorThreshold: 0
+  maxErrors: 3
   serverPos: {x: 0, y: 0, z: 0}
   serverRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400024
@@ -729,6 +729,8 @@ MonoBehaviour:
   receiver: {fileID: 11400022}
   parent: {fileID: 11400018}
   pingMargin: 0
+  maxDeltaPos: .0500000007
+  maxDeltaRot: .5
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
