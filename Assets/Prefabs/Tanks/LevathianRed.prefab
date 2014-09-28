@@ -729,7 +729,7 @@ MonoBehaviour:
   receiver: {fileID: 11400022}
   parent: {fileID: 11400018}
   pingMargin: 0
-  maxDeltaPos: .0500000007
+  maxDeltaPos: .0250000004
   maxDeltaRot: .5
 --- !u!114 &11400028
 MonoBehaviour:
