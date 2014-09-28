@@ -439,13 +439,13 @@ public class SGameMan : MonoBehaviour {
 		
 		public void BlueScored () {
 		
-			networkView.RPC ("C_BlueScored", RPCMode.All);
+			networkView.RPC ("CBlueScored", RPCMode.All);
 			
 		}
 		
 		public void RedScored () {
 		
-			networkView.RPC ("C_RedScored", RPCMode.All);
+			networkView.RPC ("CRedScored", RPCMode.All);
 		
 		}
 		
@@ -465,7 +465,7 @@ public class SGameMan : MonoBehaviour {
 			if (isBlue) blueFlagHome = false; else redFlagHome = false;
 
 			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Taken"), team.ToString ().ToLower ()));
-			networkView.RPC ("C_FlagTaken", RPCMode.All, isBlue);
+			networkView.RPC ("CFlagTaken", RPCMode.All, isBlue);
 		
 		}
 		
@@ -479,7 +479,7 @@ public class SGameMan : MonoBehaviour {
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
 		
 			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Returned"), team.ToString ().ToLower ()));
-			networkView.RPC ("C_FlagReturned", RPCMode.All, isBlue);
+			networkView.RPC ("CFlagReturned", RPCMode.All, isBlue);
 
 		}
 		
@@ -493,7 +493,7 @@ public class SGameMan : MonoBehaviour {
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
 		
 			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.ReturnedSelf"), team.ToString ().ToLower ()));
-			networkView.RPC ("C_FlagReturnedSelf", RPCMode.All, isBlue);
+			networkView.RPC ("CFlagReturnedSelf", RPCMode.All, isBlue);
 		
 		}
 		
@@ -533,7 +533,7 @@ public class SGameMan : MonoBehaviour {
 			}*/
 			
 			//playerScores[GetPlayerIndex (player)].captures++;
-			networkView.RPC ("C_FlagCaptured", RPCMode.All, isBlue);		
+			networkView.RPC ("CFlagCaptured", RPCMode.All, isBlue);		
 		
 		}
 

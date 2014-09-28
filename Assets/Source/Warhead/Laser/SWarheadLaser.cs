@@ -64,7 +64,7 @@ public class SWarheadLaser : MonoBehaviour {
 		if (warhead.left && cooled && life.CanIShoot ()) {
 		
 			Shoot ();
-			networkView.RPC ("C_Shoot", RPCMode.Others);
+			networkView.RPC ("CShoot", RPCMode.Others);
 			time = 0f;
 			life.IShot (energyConsumption);
 		
