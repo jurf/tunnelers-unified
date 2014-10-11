@@ -377,7 +377,7 @@ public class SGameMan : MonoBehaviour {
 	
 		Debug.Log ("End of match.");
 		
-		networkView.RPC ("TheEnd", RPCMode.All, gameState);
+		networkView.RPC ("TheEnd", RPCMode.All, (int)gameState);
 		
 		Debug.Log ("Match status: " + gameState);
 		

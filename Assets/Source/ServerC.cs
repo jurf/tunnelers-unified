@@ -221,7 +221,7 @@ public class ServerC : MonoBehaviour {
 					
 						GUILayout.Space (5);
 						string serverName = "Name: " + element.gameName;
-						string connectedPlayers = element.connectedPlayers + " out of " + element.playerLimit + " players connected.";
+						string connectedPlayers = (element.connectedPlayers - 1) + " out of " + element.playerLimit + " players connected.";
 						
 						GUILayout.Box ("", divider, GUILayout.Height (2));
 						GUILayout.Label (serverName);
