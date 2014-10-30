@@ -132,7 +132,7 @@ public class ServerC : MonoBehaviour {
 						noticeRect = GUILayout.Window (1, noticeRect, NoticeWindow, "Warning");
 						
 					if (showNameDialog)
-						nameRect = GUILayout.Window (2, nameRect, NameWindow, "Who are you sir? What is your name?");
+						nameRect = GUILayout.Window (2, nameRect, NameWindow, "Enter name:");
 	
 				} else if (!Network.isClient && Network.isServer) {
 				
@@ -299,14 +299,14 @@ public class ServerC : MonoBehaviour {
 			
 				GUILayout.BeginHorizontal ();
 			
-					GUILayout.Label ("My name is ", GUILayout.MinWidth (75));
+					GUILayout.Label ("Name: ", GUILayout.MinWidth (75));
 					
 					ServerC.name = GUILayout.TextField (ServerC.name, 25, GUILayout.MinWidth (150));
 					
 				GUILayout.EndHorizontal ();
 				
-				if (GUILayout.Button ("Do you like it?")) {
-					Debug.Log ("No, but it doesn't matter. I'll still identify you by numbers.");
+				if (GUILayout.Button ("OK")) {
+					Debug.Log ("Name entered.");
 					showNameDialog = false;
 				}
 				
