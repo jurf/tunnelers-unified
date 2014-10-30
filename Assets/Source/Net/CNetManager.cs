@@ -51,7 +51,7 @@ public class CNetManager : MonoBehaviour {
 			//Request a player instance form the server (done by spawn man)
 			//networkView.RPC ("RequestSpawn", RPCMode.Server, Network.player);
 			
-			GetComponent <CSpawnMan> ().Green = true;
+			GetComponent <CSpawnMan> ().ReadyToGo = true;
 		
 		} else {
 		

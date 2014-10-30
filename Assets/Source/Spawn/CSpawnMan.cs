@@ -27,16 +27,16 @@ using UnityEngine;
 
 public class CSpawnMan : MonoBehaviour {
 
-	bool green; //is all loaded properly? set by client netman
-	public bool Green {
+	bool readyToGo; //is all loaded properly? set by client netman
+	public bool ReadyToGo {
 	
 		get {
-			return green;
+			return readyToGo;
 		}
 		
 		set {
-			if (!green)
-				green = value;
+			if (!readyToGo)
+				readyToGo = value;
 		}
 	
 	}
@@ -67,7 +67,7 @@ public class CSpawnMan : MonoBehaviour {
 				return;
 			}
 			
-			if (green) {
+			if (readyToGo) {
 			
 				teamSelectionRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
 					
