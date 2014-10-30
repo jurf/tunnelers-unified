@@ -265,14 +265,17 @@ public class ServerC : MonoBehaviour {
 							
 					}
 					
-					bool isWebPlayer = (Application.platform == RuntimePlatform.OSXWebPlayer ||
-						Application.platform == RuntimePlatform.WindowsWebPlayer);
 					
-					if (!isWebPlayer) {
-						if (GUILayout.Button ("Exit"))
-							Application.Quit ();
-					}
 					
+					
+				}
+				
+				bool isWebPlayer = (Application.platform == RuntimePlatform.OSXWebPlayer ||
+		        	Application.platform == RuntimePlatform.WindowsWebPlayer);
+				
+				if (!isWebPlayer) {
+					if (GUILayout.Button ("Exit"))
+						Application.Quit ();
 				}
 				
 				GUILayout.EndVertical ();
