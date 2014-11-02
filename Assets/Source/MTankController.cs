@@ -32,8 +32,7 @@ public class MTankController : MonoBehaviour {
 	public static Quaternion[] rotationsQ = new Quaternion[4];
 
 	static MTankController () {
-		
-		Debug.Log ("Run Constructor.");
+
 		for (int r = 0; r < rotations.Length; r++) {
 			rotationsQ[r] = Quaternion.Euler (rotations[r]);
 		}
