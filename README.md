@@ -11,7 +11,7 @@ Contributing
 ============
 Feel free to fork this repo and create a pull request. Also, feel free to join the team, if you want.
 
-You can also purchase this game on [itch.io](doctorjellyface.itch.io/tunnelers-unified). If you want to see this game developed, please do!
+You can also purchase this game on [itch.io](http://doctorjellyface.itch.io/tunnelers-unified). If you want to see this game developed, please do!
 
 License
 =======
