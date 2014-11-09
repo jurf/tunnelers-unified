@@ -66,14 +66,9 @@ public class CTankMan : MonoBehaviour {
 	    }
 
 	    if (parent.GetOwner () != null && Network.player == parent.GetOwner ()) {
-		//	Debug.Log ("I am the owner.");
-			bool a = Input.GetKey (KeyCode.A);
-			bool d = Input.GetKey (KeyCode.D);
-			bool s = Input.GetKey (KeyCode.S);
-			bool w = Input.GetKey (KeyCode.W);
-			
-			lastMotionH = MTankController.GetHorizontalAxis (a,d);
-			lastMotionV = MTankController.GetVerticalAxis (s, w);
+
+			lastMotionH = (int) Input.GetAxisRaw ("Horizontal");
+			lastMotionV = (int)Input.GetAxisRaw ("Vertical");
 	        
 	        networkView.RPC ("UpdateClientMotion", RPCMode.Server, lastMotionH, lastMotionV);
 	        //Simulate how we think the motion should come out	        
