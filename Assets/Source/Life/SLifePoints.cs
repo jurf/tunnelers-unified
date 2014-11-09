@@ -28,9 +28,10 @@ using UnityEngine;
 public class SLifePoints : MonoBehaviour {
 
 	public GameObject parent;
+	public GameObject tank;
 	
 	public PlayerMan playerType;
-	public MTankController controller;
+	public IMovable <int> controller;
 	
 	[SerializeField]
 	float energyPoints = 100f;
@@ -57,8 +58,8 @@ public class SLifePoints : MonoBehaviour {
 	
 	void Awake () {
 	
-		if (!playerType) playerType = gameObject.GetComponent <PlayerMan> ();
-		if (!controller) controller = gameObject.GetComponent <MTankController> ();
+		if (!playerType) playerType = parent.GetComponent <PlayerMan> ();
+		if (controller == null) controller = (IMovable <int>) tank.GetComponent (typeof (IMovable <int>));
 		
 		if (!Network.isServer || Network.isClient) {
 			enabled = false;
@@ -80,7 +81,7 @@ public class SLifePoints : MonoBehaviour {
 		energyPoints = Mathf.Clamp (energyPoints, -1f, maxEnergyPoints);
 		shieldPoints = Mathf.Clamp (shieldPoints, -1f, maxShieldPoints);
 
-		if (controller.isMoving && !inBase && energyPoints > 0) {
+		if (controller.IsMoving && !inBase && energyPoints > 0) {
 		
 			ChangeEnergy (-moveEnergyConsumption);
 		

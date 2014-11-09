@@ -23,7 +23,7 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (STurretMan))]
 [RequireComponent (typeof (CTurretMan))]
-[RequireComponent (typeof (MTankController))]
+[RequireComponent (typeof (IRotatable))]
 
 [AddComponentMenu ("Network/Turret Man")]
 

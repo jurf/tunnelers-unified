@@ -23,7 +23,7 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (STankMan))]
 [RequireComponent (typeof (MTankPredictor))]
-[RequireComponent (typeof (MTankController))]
+[RequireComponent (typeof (IMovable <int>))]
 
 [AddComponentMenu ("Network/Tank Man")]
 
@@ -34,7 +34,7 @@ public class CTankMan : MonoBehaviour {
     int lastMotionH;
     int lastMotionV;
     
-	public MTankController controller;
+	public IMovable <int> controller;
 	public MTankPredictor predictor;
 
 	public float speed = 10f;       
@@ -52,6 +52,9 @@ public class CTankMan : MonoBehaviour {
     		enabled = false;
     		return;
     	}
+
+		if (controller == null)
+			controller = (IMovable <int>) GetComponent (typeof (IMovable <int>));
 
     }
     

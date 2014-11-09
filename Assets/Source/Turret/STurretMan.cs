@@ -23,13 +23,13 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (CTurretMan))]
 [RequireComponent (typeof (MTurretPredictor))]
-[RequireComponent (typeof (MTankController))]
+[RequireComponent (typeof (IRotatable))]
 
 [AddComponentMenu ("Network/Turret Man")]
 
 public class STurretMan : MonoBehaviour {
 
-	MTankController controller;
+	IRotatable controller;
 	
 	Quaternion toRotation;
 	
@@ -39,14 +39,9 @@ public class STurretMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-		
-	}
-	
-	void Start () {
-		
-		if (Network.isServer) {
-			controller = GetComponent <MTankController> ();
-		}
+
+		if (controller == null)
+			controller = (IRotatable) GetComponent (typeof (IRotatable));
 		
 	}
 	
@@ -75,7 +70,7 @@ public class STurretMan : MonoBehaviour {
 			return;
 		}
 		
-		toRotation = Quaternion.Euler (new Vector3 (0,toRotY,0));
+		toRotation = Quaternion.Euler (new Vector3 (0, toRotY, 0));
 		
 	}
 }

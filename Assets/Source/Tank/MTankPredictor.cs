@@ -23,7 +23,7 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (STankMan))]
 [RequireComponent (typeof (CTankMan))]
-[RequireComponent (typeof (MTankController))]
+[RequireComponent (typeof (IMovable <int>))]
 
 [AddComponentMenu ("Network/Tank Man")]
 

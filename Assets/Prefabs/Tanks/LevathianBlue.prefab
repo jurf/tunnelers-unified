@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
-  - 114: {fileID: 11400010}
+  - 114: {fileID: 11400042}
   - 114: {fileID: 11400016}
   - 148: {fileID: 14800002}
   - 114: {fileID: 11400014}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400028}
+  - 114: {fileID: 11400040}
   - 148: {fileID: 14800006}
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400024}
@@ -583,29 +583,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  controller: {fileID: 11400010}
   parent: {fileID: 11400018}
   positionErrorThreshold: .200000003
   serverRot: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &11400010
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3ab192dfcecbe94d8599dea3afe8047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
-  moveSpeed: 5
-  rotSpeed: 2.5
-  maxVelocityChange: 10
-  maxVelocityChangeStop: 2
-  lastSuccRotation: {x: 0, y: 0, z: 0, w: 0}
-  lastRotation: {x: 0, y: 0, z: 0, w: 0}
-  isMoving: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,7 +673,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 11400018}
-  controller: {fileID: 11400028}
   predictor: {fileID: 11400026}
   speed: 12.5
   positionErrorThreshold: 0
@@ -711,7 +690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378cece6602f84a468e34b840936e47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 11400028}
   horizontalMotion: 0
   verticalMotion: 0
 --- !u!114 &11400026
@@ -731,25 +709,6 @@ MonoBehaviour:
   pingMargin: 0
   maxDeltaPos: .0250000004
   maxDeltaRot: .5
---- !u!114 &11400028
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3ab192dfcecbe94d8599dea3afe8047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  moveSpeed: 5
-  rotSpeed: 2.5
-  maxVelocityChange: 10
-  maxVelocityChangeStop: 2
-  lastSuccRotation: {x: 0, y: 0, z: 0, w: 0}
-  lastRotation: {x: 0, y: 0, z: 0, w: 0}
-  isMoving: 0
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -800,8 +759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 100006}
+  tank: {fileID: 100010}
   playerType: {fileID: 11400018}
-  controller: {fileID: 11400028}
   energyPoints: 100
   maxRegEnergyPoints: 0
   maxEnergyPoints: 100
@@ -831,6 +790,33 @@ MonoBehaviour:
   y: 1
   z: 1
   addPos: {x: -1.27999997, y: 1.32704198, z: -1.24000001}
+--- !u!114 &11400040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8072da661efcec48b7624ea23604ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 2.5
+  maxVelocityChange: 10
+  maxStopVelocityChange: 2
+--- !u!114 &11400042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560db3723f3f0804bacfde86d5a0b092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

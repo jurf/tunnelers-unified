@@ -23,7 +23,7 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (STurretMan))]
 [RequireComponent (typeof (MTurretPredictor))]
-[RequireComponent (typeof (MTankController))]
+[RequireComponent (typeof (IRotatable))]
 
 [AddComponentMenu ("Network/Turret Man")]
 
@@ -39,7 +39,7 @@ public class CTurretMan : MonoBehaviour {
     Quaternion lastSuccRotation;
     Quaternion lastRotation;*/
 	
-	public MTankController controller;
+	public IRotatable controller;
 	public PlayerMan parent;
 	
 	void Awake () {
@@ -48,17 +48,10 @@ public class CTurretMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+
+		if (controller == null)
+			controller = (IRotatable) GetComponent (typeof (IRotatable));
 		
-	}
-	
-	/// <summary>
-	///Get the M_TankController instance from the current GameObject. 
-	/// </summary>
-	void Start () {
-		if (Network.isClient) {
-			controller = GetComponent<MTankController>();
-//			parent = transform.parent.gameObject.GetComponent <C_PlayerMan> ();
-		}
 	}
 	
 	/// <summary>
@@ -74,7 +67,7 @@ public class CTurretMan : MonoBehaviour {
 		//Check if this update applies for the current client
 		if (parent.GetOwner () != null && Network.player == parent.GetOwner ()) {
 			
-			Quaternion toRot = MTankController.RotateToMouse (gameObject);
+			Quaternion toRot = controller.RotateToMouse (Input.mousePosition);
 			
 			networkView.RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
 			controller.Rotate (toRot);

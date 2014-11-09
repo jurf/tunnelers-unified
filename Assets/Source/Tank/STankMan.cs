@@ -23,13 +23,13 @@ using UnityEngine;
 [RequireComponent (typeof (NetworkView))]
 [RequireComponent (typeof (CTankMan))]
 [RequireComponent (typeof (MTankPredictor))]
-[RequireComponent (typeof (MTankController))]
+[RequireComponent (typeof (IMovable <int>))]
 
 [AddComponentMenu ("Network/Tank Man")]
 
 public class STankMan : MonoBehaviour {
 	
-	public MTankController controller;
+	public IMovable <int> controller;
 	
 	public int horizontalMotion;
 	public int verticalMotion;
@@ -40,6 +40,9 @@ public class STankMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+
+		if (controller == null)
+			controller = (IMovable <int>) GetComponent (typeof (IMovable <int>));
 	
 	}
 	
