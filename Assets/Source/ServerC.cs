@@ -81,7 +81,7 @@ public class ServerC : MonoBehaviour {
 		public Rect noticeRect;
 		public bool showNotice;
 		
-		public static string name = "TestDude";
+		public static string playerNickname = "TestDude";
 		public bool showNameDialog = true;
 		public Rect nameRect;
 		
@@ -100,7 +100,7 @@ public class ServerC : MonoBehaviour {
 			SetIP ();
 			userPort = customServerPort.ToString ();
 			
-			ServerC.name = ServerC.name + Random.Range (0,100);
+			ServerC.playerNickname = ServerC.playerNickname + Random.Range (0,100);
 			
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
@@ -306,7 +306,7 @@ public class ServerC : MonoBehaviour {
 			
 					GUILayout.Label ("Name: ", GUILayout.MinWidth (75));
 					
-					ServerC.name = GUILayout.TextField (ServerC.name, 25, GUILayout.MinWidth (150));
+					ServerC.playerNickname = GUILayout.TextField (ServerC.playerNickname, 25, GUILayout.MinWidth (150));
 					
 				GUILayout.EndHorizontal ();
 				
