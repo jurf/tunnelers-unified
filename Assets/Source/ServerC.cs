@@ -378,7 +378,7 @@ public class ServerC : MonoBehaviour {
 		
 		ReadSceneNames maps = GetComponent <ReadSceneNames> ();
 		
-		string[] levels = new string[maps.scenes.Length - 2];
+		var levels = new string[maps.scenes.Length - 2];
 		
 		for (int i = 2; i < maps.scenes.Length; i++) {
 			
