@@ -65,7 +65,7 @@ public class CTankMan : MonoBehaviour {
 	        return;
 	    }
 
-	    if (parent.GetOwner () != null && Network.player == parent.GetOwner ()) {
+	    if (Network.player == parent.GetOwner ()) {
 
 			lastMotionH = (int) Input.GetAxisRaw ("Horizontal");
 			lastMotionV = (int)Input.GetAxisRaw ("Vertical");

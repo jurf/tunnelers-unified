@@ -65,7 +65,7 @@ public class CTurretMan : MonoBehaviour {
 		}
 		
 		//Check if this update applies for the current client
-		if (parent.GetOwner () != null && Network.player == parent.GetOwner ()) {
+		if (Network.player == parent.GetOwner ()) {
 			
 			Quaternion toRot = controller.RotateToMouse (Input.mousePosition);
 			

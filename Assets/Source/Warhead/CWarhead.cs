@@ -53,7 +53,7 @@ public class CWarhead : MonoBehaviour {
 			return;
 		}
 	
-		if (parent.GetOwner () == null || parent.GetOwner () != Network.player) {
+		if (parent.GetOwner () != Network.player) {
 			return;
 		}
 	
