@@ -100,7 +100,7 @@ public class ServerC : MonoBehaviour {
 			SetIP ();
 			userPort = customServerPort.ToString ();
 			
-			ServerC.playerNickname = ServerC.playerNickname + Random.Range (0,100);
+			playerNickname = playerNickname + Random.Range (0,100);
 			
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
@@ -306,7 +306,7 @@ public class ServerC : MonoBehaviour {
 			
 					GUILayout.Label ("Name: ", GUILayout.MinWidth (75));
 					
-					ServerC.playerNickname = GUILayout.TextField (ServerC.playerNickname, 25, GUILayout.MinWidth (150));
+					playerNickname = GUILayout.TextField (playerNickname, 25, GUILayout.MinWidth (150));
 					
 				GUILayout.EndHorizontal ();
 				
