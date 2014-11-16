@@ -107,6 +107,12 @@ public class ServerC : MonoBehaviour {
 			}	*/
 			
 		}
+
+	void Start () {
+
+		RefreshGameList ();
+
+	}
 		
 		#region GUI
 	
@@ -260,8 +266,7 @@ public class ServerC : MonoBehaviour {
 					
 					if (GUILayout.Button ("Refresh server list")) {
 						
-						MasterServer.RequestHostList(typeName);
-						data = MasterServer.PollHostList();
+						RefreshGameList ();
 							
 					}
 					
@@ -366,6 +371,11 @@ public class ServerC : MonoBehaviour {
 			Network.natFacilitatorIP = overMaster;
 			Network.natFacilitatorPort = 50005;
 		}
+	}
+
+	void RefreshGameList () {
+		MasterServer.RequestHostList (typeName);
+		data = MasterServer.PollHostList ();
 	}
 	
 	public void DontDestroy () {
