@@ -82,6 +82,7 @@ public class ServerC : MonoBehaviour {
 		public bool showNotice;
 		
 		public static string playerNickname = "TestDude";
+		public bool rememberNick;
 		public bool showNameDialog = true;
 		public Rect nameRect;
 		
@@ -101,6 +102,12 @@ public class ServerC : MonoBehaviour {
 			userPort = customServerPort.ToString ();
 			
 			playerNickname = playerNickname + Random.Range (0,100);
+			
+			rememberNick = System.Convert.ToBoolean (PlayerPrefs.GetInt ("RememberNickname", 0));
+
+			if (rememberNick) {
+				playerNickname = PlayerPrefs.GetString ("PlayerNickname", playerNickname);
+			}
 			
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
@@ -309,9 +316,20 @@ public class ServerC : MonoBehaviour {
 					playerNickname = GUILayout.TextField (playerNickname, 25, GUILayout.MinWidth (150));
 					
 				GUILayout.EndHorizontal ();
+
+				rememberNick = GUILayout.Toggle (rememberNick, "Remember name?");
 				
 				if (GUILayout.Button ("OK")) {
 					Debug.Log ("Name entered.");
+					
+					PlayerPrefs.SetInt ("RememberNickname", System.Convert.ToInt32 (rememberNick));
+
+					if (rememberNick) {
+						PlayerPrefs.SetString ("PlayerNickname", playerNickname);
+					} else {
+						PlayerPrefs.DeleteKey ("PlayerNickname");
+					}
+					
 					showNameDialog = false;
 				}
 				
