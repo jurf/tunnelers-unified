@@ -34,7 +34,7 @@ public class PlayerMan : MonoBehaviour {
 	public CTurretMan turret;
 	public SLifePoints life;
 	
-	public TextMesh name;
+	public TextMesh nameMesh;
 	
 //	too complicated for now
 /*
@@ -144,7 +144,7 @@ public class PlayerMan : MonoBehaviour {
 	[RPC]
 	public void SetName (string myNameBro) {
 	
-		name.text = myNameBro;
+		nameMesh.text = myNameBro;
 		
 	}
 	
