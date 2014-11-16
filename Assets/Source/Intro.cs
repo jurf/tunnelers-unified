@@ -50,6 +50,8 @@ public class Intro : MonoBehaviour {
 	void Update () {
 	
 		if (Input.GetKeyDown (KeyCode.Space) && !onMain) {
+			StopCoroutine ("Sequence");
+			fader.SetScreenOverlayColor (Color.black);
 			drawLogo = false;
 			drawCredits = false;
 			onMain = true;
