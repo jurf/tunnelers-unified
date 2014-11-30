@@ -641,7 +641,7 @@ MonoBehaviour:
   tank: {fileID: 11400022}
   turret: {fileID: 11400008}
   life: {fileID: 11400036}
-  name: {fileID: 10200000}
+  nameMesh: {fileID: 10200000}
   team: 0
   tankType: 0
 --- !u!114 &11400020
