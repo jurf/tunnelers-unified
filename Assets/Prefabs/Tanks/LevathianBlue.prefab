@@ -707,8 +707,8 @@ MonoBehaviour:
   receiver: {fileID: 11400022}
   parent: {fileID: 11400018}
   pingMargin: 0
-  maxDeltaPos: .0250000004
-  maxDeltaRot: .5
+  maxDeltaPos: 0
+  maxDeltaRot: 0
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
