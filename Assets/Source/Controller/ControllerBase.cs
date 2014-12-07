@@ -66,7 +66,7 @@ public class ControllerBase: MonoBehaviour	{
 		return Quaternion.Slerp (rot1, rot2, 0.5f);
 	}
 
-	static public Vector3 AddForce (Vector3 direction, Vector3 velocity, float speed, float maximumVelocityChange) {
+	public static Vector3 AddForce (Vector3 direction, Vector3 velocity, float speed, float maximumVelocityChange) {
 
 		Vector3 targetVelocity = direction;
 		targetVelocity *= speed;
@@ -80,7 +80,7 @@ public class ControllerBase: MonoBehaviour	{
 
 	}
 
-	static public Quaternion AddTorque (Quaternion fromRotation, Quaternion toRotation, float speed) {
+	public static Quaternion AddTorque (Quaternion fromRotation, Quaternion toRotation, float speed) {
 
 		//TODO Rotate with force
 		float timing = Quaternion.Angle (fromRotation, toRotation) / (speed * 120f);
