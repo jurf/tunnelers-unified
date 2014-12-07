@@ -71,7 +71,7 @@ public class SAssassin : MonoBehaviour {
 	
 	void Kill () {
 	
-		GameObject.Find ("ManMan").GetComponent <SNetMan> ().NetworkDestroy (gameObject);
+		SNetMan.NetworkDestroy (gameObject);
 	
 	}
 

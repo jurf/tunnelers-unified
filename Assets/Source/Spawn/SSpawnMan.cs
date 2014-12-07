@@ -179,7 +179,7 @@ public class SSpawnMan : MonoBehaviour {
 			}
 			
 			Debug.LogError ("Destroying anyway.");
-			GetComponent <SNetMan> ().NetworkDestroy (other.transform.parent.gameObject);
+			SNetMan.NetworkDestroy (other.transform.parent.gameObject);
 
 		}			
 	
