@@ -136,16 +136,21 @@ public class ServerC : MonoBehaviour {
 				GUILayout.EndArea ();
 			
 				if (!Network.isClient && !Network.isServer) {
-				
+					
 					windowRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
-							
+					
+					if (showNameDialog) {
+						nameRect.center = new Vector2 (Screen.width / 2, Screen.height / 2);
+						nameRect = GUILayout.Window (2, nameRect, NameWindow, "Enter name:");
+						return;
+					}
+					
 					windowRect = GUILayout.Window (0, windowRect, MainWindow, "Main Menu");
 					
 					if (showNotice)
 						noticeRect = GUILayout.Window (1, noticeRect, NoticeWindow, "Warning");
 						
-					if (showNameDialog)
-						nameRect = GUILayout.Window (2, nameRect, NameWindow, "Enter name:");
+					
 	
 				} else if (!Network.isClient && Network.isServer) {
 				
