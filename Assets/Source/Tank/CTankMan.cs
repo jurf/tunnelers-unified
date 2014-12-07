@@ -102,9 +102,6 @@ public class CTankMan : MonoBehaviour {
 	    */
 
 		float distance = Vector3.Distance (transform.position, serverPos);
-
-		if (distance < predictor.maxDeltaPos)
-			return;
 	    
 		if (distance < positionErrorThreshold) {
 			positionErrors ++;
