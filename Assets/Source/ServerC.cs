@@ -94,6 +94,16 @@ public class ServerC : MonoBehaviour {
 		public bool rememberNick;
 		public bool showNameDialog = true;
 		public Rect nameRect;
+
+		public bool MuteSound {
+			get {
+				return AudioListener.pause;
+			}
+			set {
+				AudioListener.pause = value;
+				PlayerPrefs.SetInt ("MuteSound", System.Convert.ToInt32 (value));
+			}
+		}
 		
 		public Vector2 serverScroll;
 	
@@ -124,6 +134,8 @@ public class ServerC : MonoBehaviour {
 			isWebPlayer = (Application.platform == RuntimePlatform.OSXWebPlayer ||
 		                    Application.platform == RuntimePlatform.WindowsWebPlayer);
 			
+			AudioListener.pause = System.Convert.ToBoolean (PlayerPrefs.GetInt ("MuteSound", 0));
+
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
 			}	*/
@@ -298,8 +310,9 @@ public class ServerC : MonoBehaviour {
 				} else if (currentTab == Tabs.Options) {
 
 					OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP?");
-
 					overMaster = GUILayout.TextField (overMaster, 30);
+					
+					MuteSound = GUILayout.Toggle (MuteSound, "Mute sound?");
 
 				} else {
 				
