@@ -68,7 +68,16 @@ public class ServerC : MonoBehaviour {
 	
 		public bool server;
 		public bool startServer;
-	
+
+		public enum Tabs {
+			Client,
+			Server,
+			Options,
+			Exit
+		}
+		
+		public Tabs currentTab;
+		
 		public HostData[] data;
 		
 		public int serversMinWidth = 200;
@@ -88,9 +97,12 @@ public class ServerC : MonoBehaviour {
 		
 		public Vector2 serverScroll;
 	
-		public string[] clientServer = new string[] {"Client", "Server"};
+		public string[] clientServer = new string[] {"Client", "Server", "Options", "Exit"};
+		public string[] clientServerWithoutExit = new string[] {"Client", "Server", "Options"};
 		
 		public GUIStyle divider;
+
+		public bool isWebPlayer;
 	
 	#endregion Variables
 	
@@ -108,6 +120,9 @@ public class ServerC : MonoBehaviour {
 			if (rememberNick) {
 				playerNickname = PlayerPrefs.GetString ("PlayerNickname", playerNickname);
 			}
+			
+			isWebPlayer = (Application.platform == RuntimePlatform.OSXWebPlayer ||
+		                    Application.platform == RuntimePlatform.WindowsWebPlayer);
 			
 		/*	if (!server) {
 				MasterServer.RequestHostList (typeName);
@@ -173,19 +188,17 @@ public class ServerC : MonoBehaviour {
 	
 				GUILayout.BeginVertical ();
 				
-				OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP?");
-				
-				if (OverrideIP)
-					overMaster = GUILayout.TextField (overMaster, 30);
-				
 				if (!Network.isClient && !Network.isServer) {
 				
 					//server = GUILayout.Toggle (server, "Server?");
-					server = System.Convert.ToBoolean (GUILayout.Toolbar (System.Convert.ToInt32 (server), clientServer));
-				
+//					server = System.Convert.ToBoolean (GUILayout.Toolbar (System.Convert.ToInt32 (server), clientServer));
+					if (!isWebPlayer)
+						currentTab = (Tabs) GUILayout.Toolbar ((int)currentTab, clientServer);
+					else
+						currentTab = (Tabs) GUILayout.Toolbar ((int)currentTab, clientServerWithoutExit);
 				}
 		
-				if (server) {
+				if (currentTab == Tabs.Server) {
 				
 					GUILayout.Label ("Server name:");
 					
@@ -222,7 +235,7 @@ public class ServerC : MonoBehaviour {
 					
 					GUILayout.EndHorizontal ();
 					
-				} else {
+				} else if (currentTab == Tabs.Client) {
 					
 					data = MasterServer.PollHostList();
 						
@@ -281,19 +294,25 @@ public class ServerC : MonoBehaviour {
 						RefreshGameList ();
 							
 					}
+
+				} else if (currentTab == Tabs.Options) {
+
+					OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP?");
+
+					overMaster = GUILayout.TextField (overMaster, 30);
+
+				} else {
+				
+					GUILayout.Label ("Really exit?");
 					
-					
-					
-					
+					if (!isWebPlayer) {
+						if (GUILayout.Button ("Yes"))
+							Application.Quit ();
+					}
+
 				}
 				
-				bool isWebPlayer = (Application.platform == RuntimePlatform.OSXWebPlayer ||
-		        	Application.platform == RuntimePlatform.WindowsWebPlayer);
 				
-				if (!isWebPlayer) {
-					if (GUILayout.Button ("Exit"))
-						Application.Quit ();
-				}
 				
 				GUILayout.EndVertical ();
 
