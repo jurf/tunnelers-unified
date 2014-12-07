@@ -110,7 +110,7 @@ public class CTankMan : MonoBehaviour {
 			positionErrors ++;
 		}
 
-		if (positionErrors < maxErrors) {
+		if (positionErrors > maxErrors) {
 			transform.position = serverPos;
 			positionErrors = 0;
 			return;
