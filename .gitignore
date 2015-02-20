@@ -15,8 +15,10 @@
 
 # Gedit backups
 *~
-# Shortcut to C:
+# MonoDevelop on Linux
 /C:
+/Z:
+sln_name_of_last_monodevelop_call
 
 # OS Junk
 Thumbs.db
