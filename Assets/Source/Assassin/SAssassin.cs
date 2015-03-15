@@ -57,7 +57,7 @@ public class SAssassin : MonoBehaviour {
 	
 	void Stun () {
 	
-		networkView.RPC ("Freeze", RPCMode.All);
+		GetComponent<NetworkView>().RPC ("Freeze", RPCMode.All);
 		parent.tank.gameObject.SetActive (false);
 		parent.turret.gameObject.SetActive (false);
 		

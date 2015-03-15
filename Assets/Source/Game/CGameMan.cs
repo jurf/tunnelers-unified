@@ -150,7 +150,7 @@ public class CGameMan : MonoBehaviour {
 			return;
 		}
 	
-		networkView.RPC ("RequestRefresh", RPCMode.Server, Network.player);
+		GetComponent<NetworkView>().RPC ("RequestRefresh", RPCMode.Server, Network.player);
 		
 	}
 

@@ -24,6 +24,6 @@ public class LocalizedGUIText : MonoBehaviour
 	void OnChangeLanguage(LanguageManager thisLanguageManager)
 	{
 		//Initialize all your language specific variables here
-		this.guiText.text = LanguageManager.Instance.GetTextValue(localizedKey);
+		this.GetComponent<GUIText>().text = LanguageManager.Instance.GetTextValue(localizedKey);
 	}
 }

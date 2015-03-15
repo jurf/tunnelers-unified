@@ -59,7 +59,7 @@ public class CWarhead : MonoBehaviour {
 	
 		lastLeft = Input.GetMouseButton (0);
 
-		networkView.RPC ("UpdateClientMouse", RPCMode.Server, lastLeft);
+		GetComponent<NetworkView>().RPC ("UpdateClientMouse", RPCMode.Server, lastLeft);
 	
 	}
 }

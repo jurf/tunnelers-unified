@@ -61,7 +61,7 @@ public class CFlagMan : MonoBehaviour {
 			return;
 		}
 		
-		networkView.RPC ("AnyoneHome", RPCMode.Server,Network.player);
+		GetComponent<NetworkView>().RPC ("AnyoneHome", RPCMode.Server,Network.player);
 	
 	}
 	

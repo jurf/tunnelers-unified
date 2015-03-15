@@ -24,6 +24,6 @@ public class LocalizedGUITexture : MonoBehaviour
 	void OnChangeLanguage(LanguageManager thisLanguageManager)
 	{
 		//Initialize all your language specific variables here
-		this.guiTexture.texture = LanguageManager.Instance.GetTexture(localizedKey);
+		this.GetComponent<GUITexture>().texture = LanguageManager.Instance.GetTexture(localizedKey);
 	}
 }

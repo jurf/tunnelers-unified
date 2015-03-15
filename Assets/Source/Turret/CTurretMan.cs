@@ -69,7 +69,7 @@ public class CTurretMan : MonoBehaviour {
 			
 			Quaternion toRot = controller.RotateToMouse (Input.mousePosition);
 			
-			networkView.RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
+			GetComponent<NetworkView>().RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
 			controller.Rotate (toRot);
 		}
 		

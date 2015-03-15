@@ -70,7 +70,7 @@ public class CTankMan : MonoBehaviour {
 			lastMotionH = (int) Input.GetAxisRaw ("Horizontal");
 			lastMotionV = (int)Input.GetAxisRaw ("Vertical");
 	        
-	        networkView.RPC ("UpdateClientMotion", RPCMode.Server, lastMotionH, lastMotionV);
+	        GetComponent<NetworkView>().RPC ("UpdateClientMotion", RPCMode.Server, lastMotionH, lastMotionV);
 	        //Simulate how we think the motion should come out	        
 			controller.Move (lastMotionH, lastMotionV);
 	    }

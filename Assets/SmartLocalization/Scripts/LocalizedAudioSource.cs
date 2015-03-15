@@ -20,7 +20,7 @@ public class LocalizedAudioSource : MonoBehaviour
 		thisLanguageManager.OnChangeLanguage += OnChangeLanguage;
 		
 		//Get the audio source
-		thisAudioSource = this.audio;
+		thisAudioSource = this.GetComponent<AudioSource>();
 		
 		//Run the method one first time
 		OnChangeLanguage(thisLanguageManager);

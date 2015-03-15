@@ -187,16 +187,16 @@ public class DiggerC : MonoBehaviour {
 		targetVelocity *= speed;
  
 		// Apply a force that attempts to reach our target velocity
-		Vector3 velocity = rigidbody.velocity;
+		Vector3 velocity = GetComponent<Rigidbody>().velocity;
 		Vector3 velocityChange = (targetVelocity - velocity);
 		velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
 		velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
 		velocityChange.y = 0;
-		rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
+		GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
 
 		//}
 	
-		Debug.Log (rigidbody.velocity);
+		Debug.Log (GetComponent<Rigidbody>().velocity);
 			
 	}
 	

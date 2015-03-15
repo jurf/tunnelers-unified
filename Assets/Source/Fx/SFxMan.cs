@@ -33,7 +33,7 @@ public class SFxMan: MonoBehaviour, IFxMan {
 
 		Instantiate (tankExplosion, pos, rot);
 
-		networkView.RPC ("CCreateExplosion", RPCMode.All, pos, rot);
+		GetComponent<NetworkView>().RPC ("CCreateExplosion", RPCMode.All, pos, rot);
 	
 	}
 	

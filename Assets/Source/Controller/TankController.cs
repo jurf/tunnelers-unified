@@ -56,12 +56,12 @@ public class TankController: ControllerBase, IMovable <int> {
 
 		if ((h != 0 || v != 0) && canMove) {
 			isMoving = true;
-			Vector3 newForce = AddForce (transform.forward, rigidbody.velocity, moveSpeed, maxVelocityChange);
-			rigidbody.AddForce (newForce, ForceMode.VelocityChange);
+			Vector3 newForce = AddForce (transform.forward, GetComponent<Rigidbody>().velocity, moveSpeed, maxVelocityChange);
+			GetComponent<Rigidbody>().AddForce (newForce, ForceMode.VelocityChange);
 		} else {
 			isMoving = false;
-			Vector3 stopForce = AddForce (transform.forward, rigidbody.velocity, 0f, maxStopVelocityChange);
-			rigidbody.AddForce (stopForce, ForceMode.VelocityChange);
+			Vector3 stopForce = AddForce (transform.forward, GetComponent<Rigidbody>().velocity, 0f, maxStopVelocityChange);
+			GetComponent<Rigidbody>().AddForce (stopForce, ForceMode.VelocityChange);
 		}
 
 	}

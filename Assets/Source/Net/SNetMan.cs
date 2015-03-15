@@ -176,7 +176,7 @@ public class SNetMan : MonoBehaviour {
 	
 	public static void NetworkDestroy (GameObject theGameObject) {
 		Debug.Log ("Network.Destroying a game object.");
-		Network.RemoveRPCs (theGameObject.networkView.viewID);
+		Network.RemoveRPCs (theGameObject.GetComponent<NetworkView>().viewID);
 		//	Network.RemoveRPCs (gameObject.GetComponent <PlayerMan> ().owner);
 		Network.Destroy (theGameObject);
 	}
@@ -223,7 +223,7 @@ public class SNetMan : MonoBehaviour {
 		
 		foreach (SSpawnMan.PlayerTracker tracker in playerTracker) {
 		
-			Network.Destroy (tracker.instance.networkView.viewID);
+			Network.Destroy (tracker.instance.GetComponent<NetworkView>().viewID);
 			
 			tracker.alive = false;	
 		

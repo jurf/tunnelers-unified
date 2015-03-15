@@ -39,11 +39,11 @@ public class SFlagMan : MonoBehaviour {
 				transform.position = spawn.position;
 				transform.rotation = spawn.rotation;
 				if (diff)
-					networkView.RPC ("HomeTrue", RPCMode.All);
+					GetComponent<NetworkView>().RPC ("HomeTrue", RPCMode.All);
 				return;
 			}
 			if (diff)
-				networkView.RPC ("HomeFalse", RPCMode.All);
+				GetComponent<NetworkView>().RPC ("HomeFalse", RPCMode.All);
 		}
 	}			
 
@@ -61,11 +61,11 @@ public class SFlagMan : MonoBehaviour {
 			
 			if (value) {
 				if (diff)				
-					networkView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+					GetComponent<NetworkView>().RPC ("CarrierTrue", RPCMode.All, value.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
 				return;
 			}
 			if (diff)
-				networkView.RPC ("CarrierFalse", RPCMode.All);
+				GetComponent<NetworkView>().RPC ("CarrierFalse", RPCMode.All);
 		}
 	}
 	
@@ -167,9 +167,9 @@ public class SFlagMan : MonoBehaviour {
 		Debug.Log ("Sending flag state to the newly connected player.");
 		
 		if (Carrier)
-			networkView.RPC ("SetState", requester, Home, Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+			GetComponent<NetworkView>().RPC ("SetState", requester, Home, Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
 		else
-			networkView.RPC ("SetState", requester, Home, -1);
+			GetComponent<NetworkView>().RPC ("SetState", requester, Home, -1);
 		
 	}
 	

@@ -33,7 +33,7 @@ public class PlayerTest : MonoBehaviour {
  
     void Update () {
 
-        if (networkView.isMine) {
+        if (GetComponent<NetworkView>().isMine) {
 			InputMovement();
 		}
 

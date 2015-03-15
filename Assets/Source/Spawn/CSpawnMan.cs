@@ -84,12 +84,12 @@ public class CSpawnMan : MonoBehaviour {
 //		int blueAmount;
         
 		if (GUILayout.Button ("Blue", GUILayout.MinWidth (100))) {
-			networkView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, true, ServerC.playerNickname);
+			GetComponent<NetworkView>().RPC ("RequestGameEntry", RPCMode.Server, Network.player, true, ServerC.playerNickname);
 			enabled = false;
 		}
         
 		if (GUILayout.Button ("Red", GUILayout.MinWidth (100))) {
-			networkView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, false, ServerC.playerNickname);
+			GetComponent<NetworkView>().RPC ("RequestGameEntry", RPCMode.Server, Network.player, false, ServerC.playerNickname);
 			enabled = false;
 		}
 

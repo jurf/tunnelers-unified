@@ -163,7 +163,7 @@ public class SSpawnMan : MonoBehaviour {
 		
 			foreach (PlayerTracker tracker in playerTracker) {
 			
-				if (tracker.instance == other.collider.gameObject.transform.parent.gameObject) {
+				if (tracker.instance == other.GetComponent<Collider>().gameObject.transform.parent.gameObject) {
 				
 					Debug.Log ("Destroying the tank which fell out.");
 					
