@@ -27,8 +27,6 @@ using UnityEngine;
 [AddComponentMenu ("Network/Game Man")]
 
 public class SGameMan : MonoBehaviour {
-
-	public LanguageManager langMan;
 	
 	// Only CTF for now
 	/*public enum GameType {
@@ -218,8 +216,6 @@ public class SGameMan : MonoBehaviour {
 			enabled = true;
 			
 			timeToEnd = gameTime;
-			
-			langMan = LanguageManager.Instance;
 			
 		}
 	
@@ -464,7 +460,6 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = false; else redFlagHome = false;
 
-			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Taken"), team.ToString ().ToLower ()));
 			GetComponent<NetworkView>().RPC ("CFlagTaken", RPCMode.All, isBlue);
 		
 		}
@@ -477,8 +472,7 @@ public class SGameMan : MonoBehaviour {
 			}
 			
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
-		
-			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Returned"), team.ToString ().ToLower ()));
+
 			GetComponent<NetworkView>().RPC ("CFlagReturned", RPCMode.All, isBlue);
 
 		}
@@ -491,8 +485,7 @@ public class SGameMan : MonoBehaviour {
 			}
 			
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
-		
-			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.ReturnedSelf"), team.ToString ().ToLower ()));
+
 			GetComponent<NetworkView>().RPC ("CFlagReturnedSelf", RPCMode.All, isBlue);
 		
 		}
@@ -503,8 +496,6 @@ public class SGameMan : MonoBehaviour {
 				enabled = false;
 				return;
 			}
-		
-			//gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Captured"), otherTeam.ToString ().ToLower ()));
 			
 			if (isBlue) {
 				Debug.Log ("Blue scored.");				

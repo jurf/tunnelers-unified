@@ -30,8 +30,6 @@ public class CGameMan : MonoBehaviour {
 
 	#region Variables
 
-		public LanguageManager langMan;
-
 		public int blueScore;
 	//	public int greenScore;
 		public int redScore;
@@ -70,8 +68,6 @@ public class CGameMan : MonoBehaviour {
 			enabled = true;
 			
 		//	InvokeRepeating ("CallRequestRefresh", 0f, cronTime);
-			
-			langMan = LanguageManager.Instance;
 			
 		}
 
@@ -183,8 +179,6 @@ public class CGameMan : MonoBehaviour {
 				return;
 			}
 			
-		//	gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Taken"), C_PlayerMan.GetTeam (team).ToString ().ToLower ()));
-			
 			if (isBlue)
 				blueFlagHome = false;
 			else
@@ -201,8 +195,7 @@ public class CGameMan : MonoBehaviour {
 				enabled = false;
 				return;
 			}
-			
-		//	gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Returned"), C_PlayerMan.GetTeam (team).ToString ().ToLower ()));
+
 		//	Debug.Log (string.Format (L.localeEN.flagReturned, team.ToString ().ToLower ()));
 			
 		//	PlaySound
@@ -221,8 +214,6 @@ public class CGameMan : MonoBehaviour {
 				enabled = false;
 				return;
 			}
-			
-		//	gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.ReturnedSelf"), C_PlayerMan.GetTeam (team).ToString ().ToLower ()));
 			
 		//	PlaySound
 			
@@ -257,8 +248,6 @@ public class CGameMan : MonoBehaviour {
 				default:
 					break;
 			}
-			
-			gameNotifications.Add (string.Format (langMan.GetTextValue ("Flag.Captured"), C_PlayerMan.GetTeam (otherTeam).ToString ().ToLower ()));
 			
 			*/
 			
