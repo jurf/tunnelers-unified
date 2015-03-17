@@ -24,7 +24,7 @@ using UnityEngine;
 
 [AddComponentMenu ("Network/Player Man")]
 
-public class PlayerMan : MonoBehaviour {
+public class PlayerMan : MonoBehaviour, IKillable <float> {
 
 	public NetworkPlayer owner;
 	
@@ -152,4 +152,20 @@ public class PlayerMan : MonoBehaviour {
 	public NetworkPlayer GetOwner () {
 		return owner;
 	}
+
+	public void Kill (float timeLeft) {
+
+		// TODO Add timeout
+
+		// Find instance implementing IFxMan
+		IFxMan fxMan = (IFxMan) GameObject.Find ("ManMan").GetComponent (typeof (IFxMan));
+
+		// Ask it for a explosion
+		fxMan.CreateExplosion (transform.position, transform.rotation);
+
+		// Gracefully dissapear
+		SNetMan.NetworkDestroy (gameObject);
+
+	}
+
 }
