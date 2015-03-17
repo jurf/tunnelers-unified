@@ -66,7 +66,7 @@ public class PlayerMan : MonoBehaviour {
 	
 	public bool IsMyTeam (bool otherTeam) {
 		
-		return otherTeam == team ? true : false;
+		return otherTeam == team;
 		
 	}
 	
