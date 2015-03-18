@@ -153,9 +153,7 @@ public class PlayerMan : MonoBehaviour, IKillable <float> {
 		return owner;
 	}
 
-	public void Kill (float timeLeft) {
-
-		// TODO Add timeout
+	public void Kill () {
 
 		// Find instance implementing IFxMan
 		IFxMan fxMan = (IFxMan) GameObject.Find ("ManMan").GetComponent (typeof (IFxMan));
@@ -165,6 +163,12 @@ public class PlayerMan : MonoBehaviour, IKillable <float> {
 
 		// Gracefully dissapear
 		SNetMan.NetworkDestroy (gameObject);
+
+	}
+
+	public void Kill (float timeLeft) {
+
+		Invoke ("Kill", timeLeft);
 
 	}
 

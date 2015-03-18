@@ -20,6 +20,10 @@
 
 public interface IKillable <T> {
 
+	// Instant kill
+	void Kill ();
+
+	// Kill after time
 	void Kill (T timeLeft);
 
 }
