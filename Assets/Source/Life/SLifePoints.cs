@@ -128,10 +128,17 @@ public class SLifePoints : MonoBehaviour {
 	
 		shieldPoints -= amount;
 		//TODO Report system
+
 		if (shieldPoints < 0) {
+
 			Debug.Log ("I'm outta here.", gameObject);
-			parent.GetComponent <SAssassin> ().Assassinate ();
+
+			// Get IKillable instance and commit suicide
+			var killer = (IKillable <float>) parent.GetComponent (typeof (IKillable <float>));
+			killer.Kill ();
+
 			return true;
+
 		}
 
 		return false;
