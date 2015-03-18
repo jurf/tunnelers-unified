@@ -153,7 +153,23 @@ public class PlayerMan : MonoBehaviour, IKillable <float> {
 		return owner;
 	}
 
+	public void DropFlags () {
+
+		// Get a list of all flags on scene
+		GameObject [] flags = GameObject.FindGameObjectsWithTag ("Flag");
+
+		// Go thorugh the list
+		foreach (GameObject flag in flags) {
+			// Ask if we are the carrier
+			flag.GetComponent <SFlagMan> ().DidICarryYou (tank.gameObject);
+		}
+
+	}
+
 	public void Kill () {
+
+		// We need to drop flags before dissapearing to prevent confusion
+		DropFlags ();
 
 		// Find instance implementing IFxMan
 		IFxMan fxMan = (IFxMan) GameObject.Find ("ManMan").GetComponent (typeof (IFxMan));
