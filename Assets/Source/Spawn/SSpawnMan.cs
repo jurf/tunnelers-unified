@@ -97,11 +97,13 @@ public class SSpawnMan : MonoBehaviour {
 		foreach (PlayerTracker tracker in playerTracker) {
 		
 			if (tracker.player == player) {
-			
-				tracker.instance.GetComponent <SAssassin> ().Assassinate ();
+				// Get IKillable instance
+				var killer = (IKillable <float>) tracker.instance.GetComponent (typeof (IKillable <float>));
+				// Kill it
+				killer.Kill ();
+				// Remove it from the tracker since it doesn't exist anymore
 				playerTracker.Remove (tracker);
 				return;
-			
 			}
 		
 		}
@@ -166,11 +168,13 @@ public class SSpawnMan : MonoBehaviour {
 				if (tracker.instance == other.GetComponent<Collider>().gameObject.transform.parent.gameObject) {
 				
 					Debug.Log ("Destroying the tank which fell out.");
-					
-					tracker.instance.GetComponent <SAssassin> ().Assassinate ();
-					
+					// Get IKillable instance
+					var killer = (IKillable <float>) tracker.instance.GetComponent (typeof (IKillable <float>));
+					// Kill it
+					killer.Kill ();
+					// Update the tracker accordingly
 					tracker.alive = false;
-					
+					// Celebrate
 					Debug.Log ("Found the fallen instance. Destroyed.");
 					return;
 					
