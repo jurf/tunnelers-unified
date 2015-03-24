@@ -29,7 +29,7 @@ public class CFlagMan : MonoBehaviour {
 	
 	public SFlagMan server;
 	
-	public GameObject carrier;
+	GameObject carrier;
 	public GameObject Carrier {
 		get {
 			return carrier;
@@ -40,7 +40,7 @@ public class CFlagMan : MonoBehaviour {
 		}
 	}
 	
-	public bool home = true;
+	bool home = true;
 	public bool Home {
 		get {
 			return home;
@@ -61,7 +61,7 @@ public class CFlagMan : MonoBehaviour {
 			return;
 		}
 		
-		GetComponent<NetworkView>().RPC ("AnyoneHome", RPCMode.Server,Network.player);
+		GetComponent <NetworkView> ().RPC ("AnyoneHome", RPCMode.Server,Network.player);
 	
 	}
 	
