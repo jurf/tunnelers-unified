@@ -31,6 +31,11 @@ public class SFxMan: MonoBehaviour, IFxMan {
 
 	public void CreateExplosion (Vector3 pos, Quaternion rot) {
 
+		if (!Network.isServer || Network.isClient) {
+			enabled = false;
+			return;
+		}
+
 		Instantiate (tankExplosion, pos, rot);
 
 		GetComponent<NetworkView>().RPC ("CCreateExplosion", RPCMode.All, pos, rot);

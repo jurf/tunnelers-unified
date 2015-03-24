@@ -26,12 +26,22 @@ public class CFxMan: MonoBehaviour {
 
 	void Awake () {
 
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
+
 		sscript = GetComponent <SFxMan> ();
 
 	}
 
 	[RPC]
 	public void CCreateExplosion (Vector3 pos, Quaternion rot) {
+
+		if (!Network.isClient || Network.isServer) {
+			enabled = false;
+			return;
+		}
 
 		Instantiate (sscript.tankExplosion, pos, rot); 
 
