@@ -175,7 +175,7 @@ public class PlayerMan : MonoBehaviour, IKillable <float> {
 		IFxMan fxMan = (IFxMan) GameObject.Find ("ManMan").GetComponent (typeof (IFxMan));
 
 		// Ask it for a explosion
-		fxMan.CreateExplosion (transform.position, transform.rotation);
+		fxMan.CreateExplosion (tank.transform.position, tank.transform.rotation);
 
 		// Gracefully dissapear
 		SNetMan.NetworkDestroy (gameObject);
