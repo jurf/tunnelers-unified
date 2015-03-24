@@ -28,24 +28,20 @@ using UnityEngine;
 
 public class SNetMan : MonoBehaviour {
 
-	#region Variables
-
 //		public GameObject player; //player object to instantiate		
-		
+	
 //		public List <C_PlayerMan> playerTracker = new List <C_PlayerMan> ();
 //		public List <NetworkPlayer> scheduledSpawns = new List <NetworkPlayer> ();
-		
+	
 //		public bool processSpawnRequests = false;
 
-		public static string levelName;
-		
-		enum NetworkGroup {
-			DEFAULT = 0,
-			PLAYER = 1,
-			SERVER = 2,	
-		}
+	public static string levelName;
 	
-	#endregion
+	enum NetworkGroup {
+		DEFAULT = 0,
+		PLAYER = 1,
+		SERVER = 2,	
+	}
 	
 //	//Called on the server
 //	void OnPlayerConnected (NetworkPlayer player) {
