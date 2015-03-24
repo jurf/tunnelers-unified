@@ -21,7 +21,6 @@
 using UnityEngine;
 
 [RequireComponent (typeof (NetworkView))]
-[RequireComponent (typeof (SFlagMan))]
 
 [AddComponentMenu ("Network/Flag Man")]
 
