@@ -107,8 +107,8 @@ public class ServerC : MonoBehaviour {
 	
 	public Vector2 serverScroll;
 
-	public string[] clientServer = new string[] {"Client", "Server", "Options", "Exit"};
-	public string[] clientServerWithoutExit = new string[] {"Client", "Server", "Options"};
+	public string[] clientServer = {"Client", "Server", "Options", "Exit"};
+	public string[] clientServerWithoutExit = {"Client", "Server", "Options"};
 	
 	public GUIStyle divider;
 
@@ -204,10 +204,9 @@ public class ServerC : MonoBehaviour {
 		
 			//server = GUILayout.Toggle (server, "Server?");
 //					server = System.Convert.ToBoolean (GUILayout.Toolbar (System.Convert.ToInt32 (server), clientServer));
-			if (!isWebPlayer)
-				currentTab = (Tabs) GUILayout.Toolbar ((int)currentTab, clientServer);
-			else
-				currentTab = (Tabs) GUILayout.Toolbar ((int)currentTab, clientServerWithoutExit);
+			currentTab = !isWebPlayer
+				? (Tabs)GUILayout.Toolbar ((int)currentTab, clientServer)
+				: (Tabs)GUILayout.Toolbar ((int)currentTab, clientServerWithoutExit);
 		}
 
 		if (currentTab == Tabs.Server) {
@@ -242,8 +241,7 @@ public class ServerC : MonoBehaviour {
 				
 			}
 			
-			if (GUILayout.Button ("?"))
-				showNotice = true;
+			showNotice |= GUILayout.Button ("?");
 			
 			GUILayout.EndHorizontal ();
 			
@@ -337,8 +335,7 @@ public class ServerC : MonoBehaviour {
 			
 		GUILayout.Space (5);
 		
-		if (GUILayout.Button ("Alright, I understand."))
-			showNotice = false;
+		showNotice &= !GUILayout.Button ("Alright, I understand.");
 		
 	}
 	
@@ -385,7 +382,7 @@ public class ServerC : MonoBehaviour {
 		
 		}
 		
-		void OnServerInitialized() {
+		void OnServerInitialized () {
 		
 		    Debug.Log ("Server Initializied");
 		    
