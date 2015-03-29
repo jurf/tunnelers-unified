@@ -25,20 +25,24 @@ using UnityEngine;
 [AddComponentMenu ("Network/Flag Man")]
 
 public class CFlagMan : MonoBehaviour {
-	
+
+	// The server side
 	public SFlagMan server;
-	
+
+	// Who's carrying us?
 	GameObject carrier;
 	public GameObject Carrier {
 		get {
 			return carrier;
 		}
 		set {
+			// Once we know who it is, we need to move like them
 			carrier = value;
 			GetComponent <PosAsObjectC> ().theObject = value;
 		}
 	}
-	
+
+	// Are we home?
 	bool home = true;
 	public bool Home {
 		get {
@@ -46,6 +50,7 @@ public class CFlagMan : MonoBehaviour {
 		}
 		set {
 			home = value;
+			// If we are going home, we need to get there
 			if (value) {
 				transform.position = server.spawn.position;
 				transform.rotation = server.spawn.rotation;
@@ -54,22 +59,27 @@ public class CFlagMan : MonoBehaviour {
 	}
 	
 	void Awake () {
-	
+
 		if (!Network.isClient || Network.isServer) {
 			enabled = false;
 			return;
 		}
-		
+
+		// We need to ask what's the status on the server side, so we can act accordingly
+		// TODO no need to ask, the server recieves an event when we connect
+		// and can automatically send us the status
 		GetComponent <NetworkView> ().RPC ("AnyoneHome", RPCMode.Server,Network.player);
-	
+
 	}
 	
 	void OnConnectedToServer () {
-	
+
+		// Time to go!
 		enabled = true;
 		
 	}
-	
+
+	// Called by the server the first time we connect
 	[RPC]
 	void SetState (bool isHome, int carrierID) {
 	
@@ -77,12 +87,14 @@ public class CFlagMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-	
+
+		// We're going to fake RPC calls in order to get into sync
 		if (isHome)
 			HomeTrue ();
 		else
 			HomeFalse ();
-		
+
+		// The ID is our own identification in PlayerMan, which is always larger than -1
 		if (carrierID > -1)
 			CarrierTrue (carrierID);
 			
@@ -95,15 +107,16 @@ public class CFlagMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-	
+
+		// We don't get an instance, only an ID, so we have to make do with that
 		Debug.Log ("Got a carrier, checking player index.", gameObject);
-	
+		// Get a list of all tanks in-game
 		GameObject[] tanks = GameObject.FindGameObjectsWithTag ("Tank");
-		
+		// Report
 		Debug.Log ("Found " + tanks.Length + " tanks. Checking each and every one of them.", gameObject);
-		
+		// Go through the list
 		foreach (GameObject go in tanks) {
-		
+			// If the current tank is correct, assign it and exit
 			if (go.transform.parent.gameObject.GetComponent <PlayerMan> ().id == playerID) {
 				Debug.Log ("Found the one.");
 				Carrier = go;
@@ -111,7 +124,8 @@ public class CFlagMan : MonoBehaviour {
 			}
 			
 		}
-		
+		// If we didn't find the tank, report it
+		// This is bad
 		Debug.LogError ("Didn't find suitable tank instance.", gameObject);
 		
 	}
@@ -123,9 +137,9 @@ public class CFlagMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
-	
-		Debug.Log ("No carrier anymore.", gameObject);
 
+		Debug.Log ("No carrier anymore.", gameObject);
+		// Disassign the carrier
 		Carrier = null;
 		
 	}
@@ -139,7 +153,7 @@ public class CFlagMan : MonoBehaviour {
 		}
 	
 		Debug.Log ("Flag home.", gameObject);
-	
+		// Fly home!
 		Home = true;
 		
 	}
@@ -153,7 +167,7 @@ public class CFlagMan : MonoBehaviour {
 		}
 		
 		Debug.Log ("Flag away.", gameObject);
-		
+		// We're no longer home
 		Home = false;
 		
 	}
