@@ -2,7 +2,7 @@
 //  TankController.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
-//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//  Copyright (c) 2014-2015 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -28,11 +28,18 @@ public class TankController: ControllerBase, IMovable <int> {
 	public float maxStopVelocityChange = 2f;
 	Quaternion lastSuccRotation;
 	Quaternion lastRotation;
+	Rigidbody rb;
 	bool isMoving;
 	public bool IsMoving {
 		get {
 			return isMoving;
 		}
+	}
+
+	void Awake () {
+
+		rb = GetComponent <Rigidbody> ();
+
 	}
 
 	public void Move (int h, int v) {
@@ -56,12 +63,12 @@ public class TankController: ControllerBase, IMovable <int> {
 
 		if ((h != 0 || v != 0) && canMove) {
 			isMoving = true;
-			Vector3 newForce = AddForce (transform.forward, GetComponent<Rigidbody>().velocity, moveSpeed, maxVelocityChange);
-			GetComponent<Rigidbody>().AddForce (newForce, ForceMode.VelocityChange);
+			Vector3 newForce = AddForce (transform.forward, rb.velocity, moveSpeed, maxVelocityChange);
+			rb.AddForce (newForce, ForceMode.VelocityChange);
 		} else {
 			isMoving = false;
-			Vector3 stopForce = AddForce (transform.forward, GetComponent<Rigidbody>().velocity, 0f, maxStopVelocityChange);
-			GetComponent<Rigidbody>().AddForce (stopForce, ForceMode.VelocityChange);
+			Vector3 stopForce = AddForce (transform.forward, rb.velocity, 0f, maxStopVelocityChange);
+			rb.AddForce (stopForce, ForceMode.VelocityChange);
 		}
 
 	}
