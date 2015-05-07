@@ -185,7 +185,7 @@ public class SNetMan : MonoBehaviour {
 		foreach (C_PlayerMan man in playerTracker) {
 		
 			if (man.GetOwner () == player) {
-				Network.RemoveRPCs (man.gameObject.networkView.viewID);
+				Network.RemoveRPCs (man.gameObject.netView.viewID);
 				Network.Destroy (man.gameObject);
 			}
 			

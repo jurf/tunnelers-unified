@@ -2,7 +2,7 @@
 //  SFlagMan.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
-//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//  Copyright (c) 2014-2015 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -46,13 +46,13 @@ public class SFlagMan : MonoBehaviour {
 				transform.rotation = spawn.rotation;
 				// If it's new, we need to tell everybody
 				if (diff)
-					GetComponent <NetworkView> ().RPC ("HomeTrue", RPCMode.All);
+					netView.RPC ("HomeTrue", RPCMode.All);
 				return;
 			}
 			// If we aren't going home and the value is different, that means we were taken
 			if (diff)
 				// We need to tell everybody this too
-				GetComponent<NetworkView>().RPC ("HomeFalse", RPCMode.All);
+				netView.RPC ("HomeFalse", RPCMode.All);
 		}
 	}			
 
@@ -78,13 +78,13 @@ public class SFlagMan : MonoBehaviour {
 				// And if they're different than before
 				if (diff)
 					// We need to tell everyone
-					GetComponent <NetworkView> ().RPC ("CarrierTrue", RPCMode.All, value.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+					netView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
 				return;
 			}
 			// If we don't have a carrier anymore
 			if (diff)
 				// Everyone needs to know too
-				GetComponent <NetworkView> ().RPC ("CarrierFalse", RPCMode.All);
+				netView.RPC ("CarrierFalse", RPCMode.All);
 		}
 	}
 	
@@ -100,6 +100,9 @@ public class SFlagMan : MonoBehaviour {
 //	public C_PlayerMan.Team flagTeam;
 	public bool isBlue;
 
+	// The network view instance on our gameobject
+	NetworkView netView;
+
 	// The game manager we need to report to
 	public SGameMan gameMan;
 	
@@ -109,6 +112,8 @@ public class SFlagMan : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+
+		netView = GetComponent <NetworkView> ();
 
 	}
 	
@@ -206,9 +211,9 @@ public class SFlagMan : MonoBehaviour {
 		Debug.Log ("Sending flag state to the newly connected player.");
 		
 		if (Carrier)
-			GetComponent <NetworkView> ().RPC ("SetState", requester, Home, Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+			netView.RPC ("SetState", requester, Home, Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
 		else
-			GetComponent <NetworkView> ().RPC ("SetState", requester, Home, -1);
+			netView.RPC ("SetState", requester, Home, -1);
 		
 	}
 

@@ -49,7 +49,7 @@ public class CNetManager : MonoBehaviour {
 			Debug.Log ("Level was loaded, requesting spawn");
 			Debug.Log ("Re-enabling message queue!");
 			//Request a player instance form the server (done by spawn man)
-			//networkView.RPC ("RequestSpawn", RPCMode.Server, Network.player);
+			//netView.RPC ("RequestSpawn", RPCMode.Server, Network.player);
 			
 			GetComponent <CSpawnMan> ().ReadyToGo = true;
 		

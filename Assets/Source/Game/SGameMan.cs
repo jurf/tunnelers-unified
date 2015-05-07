@@ -71,7 +71,10 @@ public class SGameMan : MonoBehaviour {
 	
 	public int gameTime;
 	public int respawnTime;
-	
+
+	// Network view instance on our GO
+	NetworkView netView;
+
 	// TODO finish this, will be cool
 	/*
 	public enum LevelLoadType {
@@ -205,7 +208,7 @@ public class SGameMan : MonoBehaviour {
 			return;
 		}
 	
-		GetComponent<NetworkView>().RPC ("RefreshGameState", player, blueScore, redScore, blueFlagHome, redFlagHome);
+		netView.RPC ("RefreshGameState", player, blueScore, redScore, blueFlagHome, redFlagHome);
 	
 	}
 	
@@ -226,6 +229,9 @@ public class SGameMan : MonoBehaviour {
 				enabled = false;
 				return;
 			}
+
+			// Set up connections between components
+			netView = GetComponent <NetworkView> ();
 		
 		}
 			
@@ -373,7 +379,7 @@ public class SGameMan : MonoBehaviour {
 	
 		Debug.Log ("End of match.");
 		
-		GetComponent<NetworkView>().RPC ("TheEnd", RPCMode.All, (int)gameState);
+		netView.RPC ("TheEnd", RPCMode.All, (int)gameState);
 		
 		Debug.Log ("Match status: " + gameState);
 		
@@ -435,13 +441,13 @@ public class SGameMan : MonoBehaviour {
 		
 		public void BlueScored () {
 		
-			GetComponent<NetworkView>().RPC ("CBlueScored", RPCMode.All);
+			netView.RPC ("CBlueScored", RPCMode.All);
 			
 		}
 		
 		public void RedScored () {
 		
-			GetComponent<NetworkView>().RPC ("CRedScored", RPCMode.All);
+			netView.RPC ("CRedScored", RPCMode.All);
 		
 		}
 		
@@ -460,7 +466,7 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = false; else redFlagHome = false;
 
-			GetComponent<NetworkView>().RPC ("CFlagTaken", RPCMode.All, isBlue);
+			netView.RPC ("CFlagTaken", RPCMode.All, isBlue);
 		
 		}
 		
@@ -473,7 +479,7 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
 
-			GetComponent<NetworkView>().RPC ("CFlagReturned", RPCMode.All, isBlue);
+			netView.RPC ("CFlagReturned", RPCMode.All, isBlue);
 
 		}
 		
@@ -486,7 +492,7 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
 
-			GetComponent<NetworkView>().RPC ("CFlagReturnedSelf", RPCMode.All, isBlue);
+			netView.RPC ("CFlagReturnedSelf", RPCMode.All, isBlue);
 		
 		}
 		
@@ -524,7 +530,7 @@ public class SGameMan : MonoBehaviour {
 			}*/
 			
 			//playerScores[GetPlayerIndex (player)].captures++;
-			GetComponent<NetworkView>().RPC ("CFlagCaptured", RPCMode.All, isBlue);		
+			netView.RPC ("CFlagCaptured", RPCMode.All, isBlue);		
 		
 		}
 

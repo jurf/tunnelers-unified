@@ -30,6 +30,8 @@ public class CWarhead : MonoBehaviour {
 	public PlayerMan parent;
 
 	bool lastLeft;
+
+	NetworkView netView;
 	
 	void Awake () {
 	
@@ -37,6 +39,8 @@ public class CWarhead : MonoBehaviour {
 			enabled = false;
 			return;
 		}
+
+		netView = GetComponent <NetworkView> ();
 		
 	}
 	
@@ -59,7 +63,7 @@ public class CWarhead : MonoBehaviour {
 	
 		lastLeft = Input.GetMouseButton (0);
 
-		GetComponent<NetworkView>().RPC ("UpdateClientMouse", RPCMode.Server, lastLeft);
+		netView.RPC ("UpdateClientMouse", RPCMode.Server, lastLeft);
 	
 	}
 }
