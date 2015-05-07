@@ -147,11 +147,8 @@ public class SLifePoints : MonoBehaviour {
 	
 	public bool CanIShoot () {
 	
-		if (energyPoints > 0f) {
-			return true;
-		}
+		return energyPoints > 0f;
 		
-		return false;
 	}
 	
 	public void IShot (float energyUsed) {
@@ -205,11 +202,7 @@ public class SLifePoints : MonoBehaviour {
 		if (other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase")
 			return;
 		
-		if (other.tag == "BlueBase" || other.tag == "RedBase" || other.tag == "GreenBase") {
-		
-			inBase = false;
-			
-		}
+		inBase &= other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase";
 	
 	}
 	
