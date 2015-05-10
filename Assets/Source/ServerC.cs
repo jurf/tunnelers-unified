@@ -393,6 +393,7 @@ public class ServerC : MonoBehaviour {
 			Debug.Log ("Disconnected from server: " + info);
 			SNetMan.levelName = "";
 			Application.LoadLevel ("main");
+			RefreshGameList (); 
 	
 		}
 			
