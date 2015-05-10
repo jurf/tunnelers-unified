@@ -307,7 +307,7 @@ public class ServerC : MonoBehaviour {
 
 		} else if (currentTab == Tabs.Options) {
 
-			OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP?");
+			OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP");
 			overMaster = GUILayout.TextField (overMaster, 30);
 			
 			MuteSound = GUILayout.Toggle (MuteSound, "Mute sound");
