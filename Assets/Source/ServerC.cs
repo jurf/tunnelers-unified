@@ -141,12 +141,6 @@ public class ServerC : MonoBehaviour {
 			}	*/
 			
 		}
-
-	void Start () {
-
-		RefreshGameList ();
-
-	}
 	
 	#region GUI
 
@@ -365,6 +359,8 @@ public class ServerC : MonoBehaviour {
 			}
 			
 			showNameDialog = false;
+
+			RefreshGameList ();
 		}
 		
 	}
