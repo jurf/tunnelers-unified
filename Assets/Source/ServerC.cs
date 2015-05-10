@@ -310,11 +310,11 @@ public class ServerC : MonoBehaviour {
 			OverrideIP = GUILayout.Toggle (OverrideIP, "Override master server IP?");
 			overMaster = GUILayout.TextField (overMaster, 30);
 			
-			MuteSound = GUILayout.Toggle (MuteSound, "Mute sound?");
+			MuteSound = GUILayout.Toggle (MuteSound, "Mute sound");
 
 		} else {
 		
-			GUILayout.Label ("Really exit?");
+			GUILayout.Label ("Really exit");
 			
 			if (!isWebPlayer) {
 				if (GUILayout.Button ("Yes"))
