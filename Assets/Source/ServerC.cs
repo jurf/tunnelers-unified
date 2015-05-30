@@ -345,7 +345,7 @@ public class ServerC : MonoBehaviour {
 			
 		GUILayout.EndHorizontal ();
 
-		rememberNick = GUILayout.Toggle (rememberNick, "Remember name?");
+		rememberNick = GUILayout.Toggle (rememberNick, "Remember name");
 		
 		if (GUILayout.Button ("OK")) {
 			Debug.Log ("Name entered.");
