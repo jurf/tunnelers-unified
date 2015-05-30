@@ -224,8 +224,7 @@ public class SGameMan : MonoBehaviour {
 	
 		void Awake () {
 		
-			if (!Network.isServer || Network.isClient) {
-				Debug.Log ("Disabling the game man.");
+			if (Network.isClient) {
 				enabled = false;
 				return;
 			}
