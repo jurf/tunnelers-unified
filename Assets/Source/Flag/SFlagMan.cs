@@ -108,7 +108,7 @@ public class SFlagMan : MonoBehaviour {
 	
 	void Awake () {
 	
-		if (!Network.isServer || Network.isClient) {
+		if (Network.isClient) {
 			enabled = false;
 			return;
 		}
