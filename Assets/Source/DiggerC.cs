@@ -74,7 +74,7 @@ public class DiggerC : MonoBehaviour {
 			enabled = false;
 		} else if (!Network.isClient && Network.isServer) {
 			
-			PlayerTest axes = gameObject.GetComponent<PlayerTest>();
+			PlayerTest axes = GetComponent<PlayerTest>();
 			
 			horizontal = axes.horizontal;
 			vertical = axes.vertical;

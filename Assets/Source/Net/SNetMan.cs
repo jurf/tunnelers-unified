@@ -173,7 +173,7 @@ public class SNetMan : MonoBehaviour {
 	public static void NetworkDestroy (GameObject theGameObject) {
 		Debug.Log ("Network.Destroying a game object.");
 		Network.RemoveRPCs (theGameObject.GetComponent<NetworkView>().viewID);
-		//	Network.RemoveRPCs (gameObject.GetComponent <PlayerMan> ().owner);
+		//	Network.RemoveRPCs (GetComponent <PlayerMan> ().owner);
 		Network.Destroy (theGameObject);
 	}
 	

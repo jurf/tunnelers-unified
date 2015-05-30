@@ -68,7 +68,7 @@ public class CFlagMan : MonoBehaviour {
 		// We need to ask what's the status on the server side, so we can act accordingly
 		// TODO no need to ask, the server recieves an event when we connect
 		// and can automatically send us the status
-		GetComponent <NetworkView> ().RPC ("AnyoneHome", RPCMode.Server,Network.player);
+		GetComponent <NetworkView> ().RPC ("AnyoneHome", RPCMode.Server, Network.player);
 
 	}
 	
@@ -117,7 +117,7 @@ public class CFlagMan : MonoBehaviour {
 		// Go through the list
 		foreach (GameObject go in tanks) {
 			// If the current tank is correct, assign it and exit
-			if (go.transform.parent.gameObject.GetComponent <PlayerMan> ().id == playerID) {
+			if (go.transform.parent.GetComponent <PlayerMan> ().id == playerID) {
 				Debug.Log ("Found the one.");
 				Carrier = go;
 				return;

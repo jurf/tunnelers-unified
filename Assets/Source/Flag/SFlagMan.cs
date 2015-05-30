@@ -78,7 +78,7 @@ public class SFlagMan : MonoBehaviour {
 				// And if they're different than before
 				if (diff)
 					// We need to tell everyone
-					netView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+					netView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.GetComponent <PlayerMan> ().id);
 				return;
 			}
 			// If we don't have a carrier anymore
@@ -211,7 +211,7 @@ public class SFlagMan : MonoBehaviour {
 		Debug.Log ("Sending flag state to the newly connected player.");
 		
 		if (Carrier)
-			netView.RPC ("SetState", requester, Home, Carrier.transform.parent.gameObject.GetComponent <PlayerMan> ().id);
+			netView.RPC ("SetState", requester, Home, Carrier.transform.parent.GetComponent <PlayerMan> ().id);
 		else
 			netView.RPC ("SetState", requester, Home, -1);
 		
