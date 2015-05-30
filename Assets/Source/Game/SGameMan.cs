@@ -73,7 +73,7 @@ public class SGameMan : MonoBehaviour {
 	public int respawnTime;
 
 	// Network view instance on our GO
-	NetworkView netView;
+	NetworkView nView;
 
 	// TODO finish this, will be cool
 	/*
@@ -208,7 +208,7 @@ public class SGameMan : MonoBehaviour {
 			return;
 		}
 	
-		netView.RPC ("RefreshGameState", player, blueScore, redScore, blueFlagHome, redFlagHome);
+		nView.RPC ("RefreshGameState", player, blueScore, redScore, blueFlagHome, redFlagHome);
 	
 	}
 	
@@ -231,7 +231,7 @@ public class SGameMan : MonoBehaviour {
 			}
 
 			// Set up connections between components
-			netView = GetComponent <NetworkView> ();
+			nView = GetComponent <NetworkView> ();
 		
 		}
 			
@@ -379,7 +379,7 @@ public class SGameMan : MonoBehaviour {
 	
 		Debug.Log ("End of match.");
 		
-		netView.RPC ("TheEnd", RPCMode.All, (int)gameState);
+		nView.RPC ("TheEnd", RPCMode.All, (int)gameState);
 		
 		Debug.Log ("Match status: " + gameState);
 		
@@ -441,13 +441,13 @@ public class SGameMan : MonoBehaviour {
 		
 		public void BlueScored () {
 		
-			netView.RPC ("CBlueScored", RPCMode.All);
+			nView.RPC ("CBlueScored", RPCMode.All);
 			
 		}
 		
 		public void RedScored () {
 		
-			netView.RPC ("CRedScored", RPCMode.All);
+			nView.RPC ("CRedScored", RPCMode.All);
 		
 		}
 		
@@ -466,7 +466,7 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = false; else redFlagHome = false;
 
-			netView.RPC ("CFlagTaken", RPCMode.All, isBlue);
+			nView.RPC ("CFlagTaken", RPCMode.All, isBlue);
 		
 		}
 		
@@ -479,7 +479,7 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
 
-			netView.RPC ("CFlagReturned", RPCMode.All, isBlue);
+			nView.RPC ("CFlagReturned", RPCMode.All, isBlue);
 
 		}
 		
@@ -492,7 +492,7 @@ public class SGameMan : MonoBehaviour {
 			
 			if (isBlue) blueFlagHome = true; else redFlagHome = true;
 
-			netView.RPC ("CFlagReturnedSelf", RPCMode.All, isBlue);
+			nView.RPC ("CFlagReturnedSelf", RPCMode.All, isBlue);
 		
 		}
 		
@@ -530,7 +530,7 @@ public class SGameMan : MonoBehaviour {
 			}*/
 			
 			//playerScores[GetPlayerIndex (player)].captures++;
-			netView.RPC ("CFlagCaptured", RPCMode.All, isBlue);		
+			nView.RPC ("CFlagCaptured", RPCMode.All, isBlue);
 		
 		}
 

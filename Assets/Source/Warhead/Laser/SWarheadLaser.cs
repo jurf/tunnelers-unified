@@ -45,7 +45,7 @@ public class SWarheadLaser : MonoBehaviour {
 	
 	public float energyConsumption = 10f;
 
-	NetworkView netView;
+	NetworkView nView;
 	
 	void Awake () {
 	
@@ -54,7 +54,7 @@ public class SWarheadLaser : MonoBehaviour {
 			return;
 		}
 
-		netView = GetComponent <NetworkView> ();
+		nView = GetComponent <NetworkView> ();
 		
 	}
 	
@@ -68,7 +68,7 @@ public class SWarheadLaser : MonoBehaviour {
 		if (warhead.left && cooled && life.CanIShoot ()) {
 		
 			Shoot ();
-			netView.RPC ("CShoot", RPCMode.Others);
+			nView.RPC ("CShoot", RPCMode.Others);
 			time = 0f;
 			life.IShot (energyConsumption);
 		

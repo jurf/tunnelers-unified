@@ -46,7 +46,7 @@ public class CTankMan : MonoBehaviour {
 	public Vector3 serverPos;
 	public Quaternion serverRot;
 
-	NetworkView netView;
+	NetworkView nView;
     
     void Awake () {
 
@@ -58,7 +58,7 @@ public class CTankMan : MonoBehaviour {
 		if (controller == null)
 			controller = (IMovable <int>) GetComponent (typeof (IMovable <int>));
 
-		netView = GetComponent <NetworkView> ();
+		nView = GetComponent <NetworkView> ();
 
     }
     
@@ -74,7 +74,7 @@ public class CTankMan : MonoBehaviour {
 			lastMotionH = (int) Input.GetAxisRaw ("Horizontal");
 			lastMotionV = (int)Input.GetAxisRaw ("Vertical");
 	        
-	        netView.RPC ("UpdateClientMotion", RPCMode.Server, lastMotionH, lastMotionV);
+	        nView.RPC ("UpdateClientMotion", RPCMode.Server, lastMotionH, lastMotionV);
 	        //Simulate how we think the motion should come out	        
 			controller.Move (lastMotionH, lastMotionV);
 	    }

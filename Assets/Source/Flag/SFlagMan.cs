@@ -46,13 +46,13 @@ public class SFlagMan : MonoBehaviour {
 				transform.rotation = spawn.rotation;
 				// If it's new, we need to tell everybody
 				if (diff)
-					netView.RPC ("HomeTrue", RPCMode.All);
+					nView.RPC ("HomeTrue", RPCMode.All);
 				return;
 			}
 			// If we aren't going home and the value is different, that means we were taken
 			if (diff)
 				// We need to tell everybody this too
-				netView.RPC ("HomeFalse", RPCMode.All);
+				nView.RPC ("HomeFalse", RPCMode.All);
 		}
 	}			
 
@@ -78,13 +78,13 @@ public class SFlagMan : MonoBehaviour {
 				// And if they're different than before
 				if (diff)
 					// We need to tell everyone
-					netView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.GetComponent <PlayerMan> ().id);
+					nView.RPC ("CarrierTrue", RPCMode.All, value.transform.parent.GetComponent <PlayerMan> ().id);
 				return;
 			}
 			// If we don't have a carrier anymore
 			if (diff)
 				// Everyone needs to know too
-				netView.RPC ("CarrierFalse", RPCMode.All);
+				nView.RPC ("CarrierFalse", RPCMode.All);
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class SFlagMan : MonoBehaviour {
 	public bool isBlue;
 
 	// The network view instance on our gameobject
-	NetworkView netView;
+	NetworkView nView;
 
 	// The game manager we need to report to
 	public SGameMan gameMan;
@@ -113,7 +113,7 @@ public class SFlagMan : MonoBehaviour {
 			return;
 		}
 
-		netView = GetComponent <NetworkView> ();
+		nView = GetComponent <NetworkView> ();
 
 	}
 	
@@ -211,9 +211,9 @@ public class SFlagMan : MonoBehaviour {
 		Debug.Log ("Sending flag state to the newly connected player.");
 		
 		if (Carrier)
-			netView.RPC ("SetState", requester, Home, Carrier.transform.parent.GetComponent <PlayerMan> ().id);
+			nView.RPC ("SetState", requester, Home, Carrier.transform.parent.GetComponent <PlayerMan> ().id);
 		else
-			netView.RPC ("SetState", requester, Home, -1);
+			nView.RPC ("SetState", requester, Home, -1);
 		
 	}
 

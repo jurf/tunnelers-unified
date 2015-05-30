@@ -43,7 +43,7 @@ public class CSpawnMan : MonoBehaviour {
 	
 	public Rect teamSelectionRect;
 
-	NetworkView netView;
+	NetworkView nView;
 	
 	#region UnityMethods
 	
@@ -54,7 +54,7 @@ public class CSpawnMan : MonoBehaviour {
 				return;
 			}
 			
-			netView = GetComponent <NetworkView> ();
+			nView = GetComponent <NetworkView> ();
 			
 		}
 		
@@ -88,12 +88,12 @@ public class CSpawnMan : MonoBehaviour {
 //		int blueAmount;
         
 		if (GUILayout.Button ("Blue", GUILayout.MinWidth (100))) {
-			netView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, true, ServerC.playerNickname);
+			nView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, true, ServerC.playerNickname);
 			enabled = false;
 		}
         
 		if (GUILayout.Button ("Red", GUILayout.MinWidth (100))) {
-			netView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, false, ServerC.playerNickname);
+			nView.RPC ("RequestGameEntry", RPCMode.Server, Network.player, false, ServerC.playerNickname);
 			enabled = false;
 		}
 

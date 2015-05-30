@@ -90,8 +90,8 @@ public class SNetMan : MonoBehaviour {
 				playerTracker.Add (sc);
 				
 				//Get the network view of the player and add its owner
-				NetworkView netView = handle.GetComponent <NetworkView> ();
-				netView.RPC ("SetOwner", RPCMode.AllBuffered, spawn.player);
+				NetworkView nView = handle.GetComponent <NetworkView> ();
+				nView.RPC ("SetOwner", RPCMode.AllBuffered, spawn.player);
 				
 			}
 		}
@@ -156,12 +156,12 @@ public class SNetMan : MonoBehaviour {
 		}
 				
 		//Get the network view of the player and add its owner
-		NetworkView netView = handle.GetComponent <NetworkView> ();
-		netView.RPC ("SetOwner", RPCMode.AllBuffered, requester);
+		NetworkView nView = handle.GetComponent <NetworkView> ();
+		nView.RPC ("SetOwner", RPCMode.AllBuffered, requester);
 		
-		netView.RPC ("SetID", RPCMode.AllBuffered, GetComponent <SSpawnMan> ().AddTankToTracker (handle));
+		nView.RPC ("SetID", RPCMode.AllBuffered, GetComponent <SSpawnMan> ().AddTankToTracker (handle));
 		
-		netView.RPC ("SetName", RPCMode.AllBuffered, playerName);
+		nView.RPC ("SetName", RPCMode.AllBuffered, playerName);
 		
 		if (handle)
 			return handle;
@@ -185,7 +185,7 @@ public class SNetMan : MonoBehaviour {
 		foreach (C_PlayerMan man in playerTracker) {
 		
 			if (man.GetOwner () == player) {
-				Network.RemoveRPCs (man.gameObject.netView.viewID);
+				Network.RemoveRPCs (man.gameObject.nView.viewID);
 				Network.Destroy (man.gameObject);
 			}
 			

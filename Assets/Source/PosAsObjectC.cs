@@ -36,7 +36,7 @@ public class PosAsObjectC : MonoBehaviour {
 		/*if (!theObject) {
 			GameObject[] tanks = GameObject.FindGameObjectsWithTag ("Tank");
 			foreach (GameObject tank in tanks) {
-				if (tank.netView.isMine) {
+				if (tank.nView.isMine) {
 					theObject = tank;
 				}
 			}

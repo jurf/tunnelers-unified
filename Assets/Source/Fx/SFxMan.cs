@@ -30,11 +30,11 @@ public class SFxMan: MonoBehaviour, IFxMan {
 	public GameObject tankExplosion;
 
 	// The network view instance on our GO
-	NetworkView netView;
+	NetworkView nView;
 
 	void Awake () {
 
-		netView = GetComponent <NetworkView> ();
+		nView = GetComponent <NetworkView> ();
 
 	}
 
@@ -47,7 +47,7 @@ public class SFxMan: MonoBehaviour, IFxMan {
 
 		Instantiate (tankExplosion, pos, rot);
 
-		netView.RPC ("CCreateExplosion", RPCMode.All, pos, rot);
+		nView.RPC ("CCreateExplosion", RPCMode.All, pos, rot);
 	
 	}
 	

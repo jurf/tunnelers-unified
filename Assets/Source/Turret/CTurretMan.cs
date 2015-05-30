@@ -42,7 +42,7 @@ public class CTurretMan : MonoBehaviour {
 	public IRotatable controller;
 	public PlayerMan parent;
 
-	NetworkView netView;
+	NetworkView nView;
 	
 	void Awake () {
 	
@@ -54,7 +54,7 @@ public class CTurretMan : MonoBehaviour {
 		if (controller == null)
 			controller = (IRotatable) GetComponent (typeof (IRotatable));
 
-		netView = GetComponent <NetworkView> ();
+		nView = GetComponent <NetworkView> ();
 		
 	}
 	
@@ -73,7 +73,7 @@ public class CTurretMan : MonoBehaviour {
 			
 			Quaternion toRot = controller.RotateToMouse (Input.mousePosition);
 			
-			netView.RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
+			nView.RPC ("UpdateClientRotation", RPCMode.Server, toRot.eulerAngles.y);
 			controller.Rotate (toRot);
 		}
 		
