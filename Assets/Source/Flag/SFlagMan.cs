@@ -108,12 +108,10 @@ public class SFlagMan : MonoBehaviour {
 	
 	void Awake () {
 	
-		if (Network.isClient) {
+		if (!Network.isServer || Network.isClient) {
 			enabled = false;
 			return;
 		}
-
-		nView = GetComponent <NetworkView> ();
 
 	}
 	
@@ -121,9 +119,10 @@ public class SFlagMan : MonoBehaviour {
 
 		// We only need to wake up once the game has started
 		enabled = true;
-		// That also counts for finding the game manager
+		// That also counts for setting up the references between components
+		nView = GetComponent <NetworkView> ();
 		gameMan = GameObject.FindGameObjectWithTag ("GameMan").GetComponent <SGameMan> ();
-	
+
 	}
 	
 	void Update () {

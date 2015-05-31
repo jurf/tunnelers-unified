@@ -220,17 +220,17 @@ public class SGameMan : MonoBehaviour {
 			
 			timeToEnd = gameTime;
 			
+			// Set up connections between components
+			nView = GetComponent <NetworkView> ();
+			
 		}
 	
 		void Awake () {
 		
-			if (Network.isClient) {
+			if (!Network.isServer || Network.isClient) {
 				enabled = false;
 				return;
 			}
-
-			// Set up connections between components
-			nView = GetComponent <NetworkView> ();
 		
 		}
 			

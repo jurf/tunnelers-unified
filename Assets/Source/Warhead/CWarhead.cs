@@ -41,7 +41,7 @@ public class CWarhead : MonoBehaviour {
 		}
 
 		nView = GetComponent <NetworkView> ();
-		
+			
 	}
 	
 	void OnConnectedToServer () {
