@@ -308,7 +308,7 @@ public class ServerC : MonoBehaviour {
 
 		} else {
 		
-			GUILayout.Label ("Really exit");
+			GUILayout.Label ("Really exit?");
 			
 			if (!isWebPlayer) {
 				if (GUILayout.Button ("Yes"))
