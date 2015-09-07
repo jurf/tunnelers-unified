@@ -22,8 +22,10 @@ using UnityEngine;
 
 public class ControllerBase: MonoBehaviour	{
 
+	// Fuzziness of rotation comparison, in angles
 	public static float rotVar = 2f;
 
+	// Hard code rotation to prevent excessive calculations
 	public static Quaternion [,] rotations = {
 		{
 			new Quaternion (0f, 0.9238796f, 0f, 0.3826834f),
@@ -42,11 +44,11 @@ public class ControllerBase: MonoBehaviour	{
 		}
 
 	};
-	
+
+	// Get a new target rotation
 	public static Quaternion GetNewRotation (int horizontal, int vertical, Quaternion lastRot) {
 
-		// Are any keys pressed?
-		// If no, pass the last rotation
+		// Are any keys pressed? If no, pass the last rotation
 		if (horizontal == 0 && vertical == 0)
 			return lastRot;
 
@@ -55,26 +57,35 @@ public class ControllerBase: MonoBehaviour	{
 
 	}
 
-	public static Vector3 AddForce (Vector3 direction, Vector3 velocity, float speed, float maximumVelocityChange) {
+	// Return how much velocity we want to add this step
+	public static Vector3 AddForce (Vector3 direction, Vector3 velocity, float speed, float maxVelocityChange) {
 
+		// The velocity we want, in the given direction and speed
 		Vector3 targetVelocity = direction;
 		targetVelocity *= speed;
 
+		// How much more velocity we need
 		Vector3 velocityChange = (targetVelocity - velocity);
-		velocityChange.x = Mathf.Clamp (velocityChange.x, -maximumVelocityChange, maximumVelocityChange);
-		velocityChange.z = Mathf.Clamp (velocityChange.z, -maximumVelocityChange, maximumVelocityChange);
+		// Clamp the velocity change, in all direcitons
+		velocityChange.x = Mathf.Clamp (velocityChange.x, -maxVelocityChange, maxVelocityChange);
+		velocityChange.z = Mathf.Clamp (velocityChange.z, -maxVelocityChange, maxVelocityChange);
+		// We don't want to move up
 		velocityChange.y = 0;
 
 		return velocityChange;
 
 	}
 
+	// Return how much we want to rotate this step
 	public static Quaternion AddTorque (Quaternion fromRotation, Quaternion toRotation, float speed) {
 
-		//TODO Rotate with force
+		// How much steps we need to do
 		float timing = Quaternion.Angle (fromRotation, toRotation) / (speed * 120f);
+		// How fast to rotate
 		float rate = 1f / timing;
+		// Our timeline
 		float t = 0f;
+		// How far we will be on our timeline
 		t += Time.deltaTime * rate;
 
 		return Quaternion.Slerp (fromRotation, toRotation, t);

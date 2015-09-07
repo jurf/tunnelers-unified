@@ -149,7 +149,7 @@ public class SNetMan : MonoBehaviour {
 			(int)NetworkGroup.PLAYER
 		) as GameObject;
 						
-		PlayerMan sc = handle.GetComponent <PlayerMan> ();
+		Player sc = handle.GetComponent <Player> ();
 				
 		if (!sc) {
 			Debug.LogError("The prefab has no C_PlayerMan attached.");

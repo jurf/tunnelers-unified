@@ -22,26 +22,44 @@ using UnityEngine;
 
 public class TurretController: ControllerBase, IRotatable {
 
+	[Range (1, 10)]
 	public float rotationSpeed = 2.5f;
+
+	// Store the rotation we need to turn to
+	Quaternion toRotation;
+
+	void Update () {
+		// Calculate the rotation according to the mouse
+		toRotation = RotateToMouse (Input.mousePosition);
+		// Rotate to that position
+		Rotate (toRotation);
+
+	}
 
 	public Quaternion RotateToMouse (Vector2 mousePosition) {
 
+		// Create a new plane to cast a raycast on
 		var playerPlane = new Plane (Vector3.up, transform.position);
 
+		// Cast the ray from the mouse position
 		Ray ray = Camera.main.ScreenPointToRay (mousePosition);
 
-		Quaternion fromRot = transform.rotation;
 		Quaternion toRot;
 
 		float hitdist;
+		// Intersect the ray with the plane, store the intersection distance
 		if (playerPlane.Raycast (ray, out hitdist)) {
+			// If we do hit the plane, get the position of the intersection
 			Vector3 targetPoint = ray.GetPoint(hitdist);
+			// Look at that the spot, calculated relative to us
 			toRot = Quaternion.LookRotation (targetPoint - transform.position);
 		} else {
+			// If we didn't hit the plane, try not to panic
 			toRot = Quaternion.identity;
 		}
 
-		return AddTorque (fromRot, toRot, rotationSpeed);
+		// Return the calculated rotation
+		return toRot;
 
 	}
 

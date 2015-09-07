@@ -22,10 +22,18 @@ using UnityEngine;
 
 public class TankController: ControllerBase, IMovable <int> {
 
+	int horizontalMotion;
+	int verticalMotion;
+
+	[Range (1, 15)]
 	public float moveSpeed = 5f;
+	[Range (1, 10)]
 	public float rotationSpeed = 2.5f;
+	[Range (1, 15)]
 	public float maxVelocityChange = 10f;
+	[Range (1, 10)]
 	public float maxStopVelocityChange = 2f;
+
 	Quaternion lastSuccRotation;
 	Quaternion lastRotation;
 	Rigidbody rb;
@@ -39,6 +47,15 @@ public class TankController: ControllerBase, IMovable <int> {
 	void Awake () {
 
 		rb = GetComponent <Rigidbody> ();
+	
+	}
+
+	void Update () {
+
+		horizontalMotion = (int) Input.GetAxisRaw ("Horizontal");
+		verticalMotion = (int) Input.GetAxisRaw ("Vertical");
+
+		Move (horizontalMotion, verticalMotion);
 
 	}
 

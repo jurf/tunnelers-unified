@@ -67,10 +67,10 @@ public class CNetManager : MonoBehaviour {
 		
 		foreach (GameObject tank in tanks) {
 			
-			PlayerMan playerMan = tank.GetComponent <PlayerMan> ();
+			Player playerMan = tank.GetComponent <Player> ();
 			
-			if (playerMan.owner == player)
-				return tank;
+//			if (playerMan.owner == player)
+			return tank;
 		
 		}
 		
