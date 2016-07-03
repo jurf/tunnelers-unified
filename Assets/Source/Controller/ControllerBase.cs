@@ -22,7 +22,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ControllerBase: NetworkBehaviour	{
+public class ControllerBase: NetworkBehaviour {
 
 	// Fuzziness of rotation comparison, in angles
 	public static float rotVar = 2f;
