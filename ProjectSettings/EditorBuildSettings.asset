@@ -15,11 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Developer/controller_test.unity
   - enabled: 0
     path: Assets/Scenes/Developer/c_sharp_network_test.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/intro.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/main.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ctf_01_big.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ctf_02_small.unity
+  - enabled: 1
+    path: Assets/Scenes/unet-main.unity
+  - enabled: 1
+    path: Assets/Scenes/unet.unity
