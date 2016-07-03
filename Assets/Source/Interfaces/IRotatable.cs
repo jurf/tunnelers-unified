@@ -1,3 +1,4 @@
+// vim:set ts=4 sw=4 sts=4 noet:
 //
 //  IRotatable.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>
@@ -22,7 +23,6 @@ using UnityEngine;
 
 public interface IRotatable {
 
-	Quaternion RotateToMouse (Vector2 mousePosition);
-	void Rotate (Quaternion toRot);
+	void Rotate (Vector2 mousePos);
 
 }

@@ -1,8 +1,9 @@
+// vim:set ts=4 sw=4 sts=4 noet:
 //
 //  ControllerBase.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
-//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//  Copyright (c) 2014-2016 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,8 +20,9 @@
 //
 
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ControllerBase: MonoBehaviour	{
+public class ControllerBase: NetworkBehaviour	{
 
 	// Fuzziness of rotation comparison, in angles
 	public static float rotVar = 2f;

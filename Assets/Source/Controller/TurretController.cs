@@ -1,8 +1,9 @@
+// vim:set ts=4 sw=4 sts=4 noet:
 //
 //  TurretController.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
-//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//  Copyright (c) 2014-2016 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,21 +26,46 @@ public class TurretController: ControllerBase, IRotatable {
 	[Range (1, 10)]
 	public float rotationSpeed = 2.5f;
 
+	Transform tf;
+	Transform tank;
+	Vector3 initialPos;
+
 	// Store the rotation we need to turn to
 	Quaternion toRotation;
 
-	void Update () {
-		// Calculate the rotation according to the mouse
-		toRotation = RotateToMouse (Input.mousePosition);
-		// Rotate to that position
-		Rotate (toRotation);
+	void Awake () {
+
+		// Initialize references between objects
+		tf = transform.Find ("Turret");
+		tank = transform.Find ("Tank");
+
+		// Find out how high we are (no pun intended)
+		initialPos = tf.position - tank.position;
 
 	}
 
-	public Quaternion RotateToMouse (Vector2 mousePosition) {
+	void Update () {
+
+		// Keep the turret over the tank
+		tf.position = tank.position + initialPos;
+
+	}
+
+	public void Rotate (Vector2 mousePos) {
+
+		// Calculate the rotation according to the mouse
+		toRotation = RotateToMouse (mousePos);
+
+		// Rotate to that position
+		Quaternion fromRotation = tf.rotation;
+		tf.rotation = AddTorque (fromRotation, toRotation, rotationSpeed);
+
+	}
+
+	Quaternion RotateToMouse (Vector2 mousePosition) {
 
 		// Create a new plane to cast a raycast on
-		var playerPlane = new Plane (Vector3.up, transform.position);
+		var playerPlane = new Plane (Vector3.up, tf.position);
 
 		// Cast the ray from the mouse position
 		Ray ray = Camera.main.ScreenPointToRay (mousePosition);
@@ -52,7 +78,7 @@ public class TurretController: ControllerBase, IRotatable {
 			// If we do hit the plane, get the position of the intersection
 			Vector3 targetPoint = ray.GetPoint(hitdist);
 			// Look at that the spot, calculated relative to us
-			toRot = Quaternion.LookRotation (targetPoint - transform.position);
+			toRot = Quaternion.LookRotation (targetPoint - tf.position);
 		} else {
 			// If we didn't hit the plane, try not to panic
 			toRot = Quaternion.identity;
@@ -60,13 +86,6 @@ public class TurretController: ControllerBase, IRotatable {
 
 		// Return the calculated rotation
 		return toRot;
-
-	}
-
-	public void Rotate (Quaternion toRot) {
-
-		Quaternion fromRot = transform.rotation;
-		transform.rotation = AddTorque (fromRot, toRot, rotationSpeed);
 
 	}
 

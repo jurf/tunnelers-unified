@@ -1,8 +1,9 @@
+// vim:set ts=4 sw=4 sts=4 noet:
 //
 //  TankController.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
-//  Copyright (c) 2014-2015 Juraj Fiala <doctorjellyface@riseup.net>
+//  Copyright (c) 2014-2016 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,10 +21,7 @@
 
 using UnityEngine;
 
-public class TankController: ControllerBase, IMovable <int> {
-
-	int horizontalMotion;
-	int verticalMotion;
+public class TankController: ControllerBase, IMovable <sbyte> {
 
 	[Range (1, 15)]
 	public float moveSpeed = 5f;
@@ -36,7 +34,9 @@ public class TankController: ControllerBase, IMovable <int> {
 
 	Quaternion lastSuccRotation;
 	Quaternion lastRotation;
+	Transform tf;
 	Rigidbody rb;
+
 	bool isMoving;
 	public bool IsMoving {
 		get {
@@ -46,22 +46,15 @@ public class TankController: ControllerBase, IMovable <int> {
 
 	void Awake () {
 
-		rb = GetComponent <Rigidbody> ();
+		// Initialize references between objects
+		tf = transform.Find ("Tank");
+		rb = tf.GetComponent <Rigidbody> ();
 	
 	}
 
-	void Update () {
+	public void Move (sbyte h, sbyte v) {
 
-		horizontalMotion = (int) Input.GetAxisRaw ("Horizontal");
-		verticalMotion = (int) Input.GetAxisRaw ("Vertical");
-
-		Move (horizontalMotion, verticalMotion);
-
-	}
-
-	public void Move (int h, int v) {
-
-		Quaternion fromRot = transform.rotation;
+		Quaternion fromRot = tf.rotation;
 		Quaternion toRot = GetNewRotation (h, v, lastRotation);
 		lastRotation = toRot;
 
@@ -73,18 +66,18 @@ public class TankController: ControllerBase, IMovable <int> {
 			isFinal = true;
 		}
 
-		transform.rotation = newRotation;
+		tf.rotation = newRotation;
 
 		bool isVarSmallEnough = Quaternion.Angle (lastSuccRotation, lastRotation) < 45f + rotVar;
 		bool canMove = isFinal || (isMoving && isVarSmallEnough);
 
 		if ((h != 0 || v != 0) && canMove) {
 			isMoving = true;
-			Vector3 newForce = AddForce (transform.forward, rb.velocity, moveSpeed, maxVelocityChange);
+			Vector3 newForce = AddForce (tf.forward, rb.velocity, moveSpeed, maxVelocityChange);
 			rb.AddForce (newForce, ForceMode.VelocityChange);
 		} else {
 			isMoving = false;
-			Vector3 stopForce = AddForce (transform.forward, rb.velocity, 0f, maxStopVelocityChange);
+			Vector3 stopForce = AddForce (tf.forward, rb.velocity, 0f, maxStopVelocityChange);
 			rb.AddForce (stopForce, ForceMode.VelocityChange);
 		}
 
