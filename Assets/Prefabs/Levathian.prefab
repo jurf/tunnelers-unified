@@ -69,6 +69,7 @@ GameObject:
   - 114: {fileID: 11473862}
   - 114: {fileID: 11495632}
   - 114: {fileID: 11470058}
+  - 114: {fileID: 11475590}
   m_Layer: 0
   m_Name: Levathian
   m_TagString: Untagged
@@ -151,7 +152,6 @@ GameObject:
   - 4: {fileID: 410022}
   - 54: {fileID: 5464546}
   - 65: {fileID: 6558918}
-  - 114: {fileID: 11409248}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Tank
@@ -426,24 +426,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2.5
---- !u!114 &11409248
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187326}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcb16c354c14543d28007c0234ba2720, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxEnergy: 100
-  maxShield: 100
-  moveEnergyConsumption: 2
-  shootEnergyConsumption: 5
-  energyRegRate: 10
-  shieldRegRate: 5
-  otherBaseDivider: 2
 --- !u!114 &11412602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -604,6 +586,24 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &11475590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb16c354c14543d28007c0234ba2720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 100
+  maxShield: 100
+  moveEnergyConsumption: 2
+  shootEnergyConsumption: 5
+  energyRegRate: 10
+  shieldRegRate: 5
+  otherBaseDivider: 2
 --- !u!114 &11488452
 MonoBehaviour:
   m_ObjectHideFlags: 1

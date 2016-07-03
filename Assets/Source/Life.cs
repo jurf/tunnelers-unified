@@ -1,8 +1,9 @@
-﻿//
+﻿// vim:set ts=4 sw=4 sts=4 noet:
+//
 //  Life.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>
 //
-//  Copyright (c) 2015 Juraj Fiala <doctorjellyface@riseup.net>
+//  Copyright (c) 2015-2016 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,12 +21,11 @@
 
 using UnityEngine;
 
-public class Life : MonoBehaviour, ILife {
+public class Life: MonoBehaviour, ILife {
 
-	GameObject parent;
 	Player playerType;
 	// We need this to find out whether we are moving
-	IMovable <int> controller;
+	IMovable <sbyte> controller;
 
 	// Current amount of energy 
 	float energy;
@@ -50,7 +50,7 @@ public class Life : MonoBehaviour, ILife {
 			shield = newShield;
 			// Check if we're dead
 			if (shield < 0) {
-				var killer = (IKillable <float>) parent.GetComponent (typeof (IKillable <float>));
+				var killer = GetComponent <IKillable <float>> ();
 				killer.Kill ();
 			}
 			
@@ -96,14 +96,12 @@ public class Life : MonoBehaviour, ILife {
 
 	void Awake () {
 
-		// Set up references
-
-		parent = transform.parent.gameObject;
-		playerType = parent.GetComponent <Player> ();
-		controller = (IMovable <int>) GetComponent (typeof (IMovable <int>));
+		// Initialize references between objects
+		playerType = GetComponent <Player> ();
+		controller = GetComponent <IMovable <sbyte>> ();
 
 		// Set the maximum possible regeneration values to
-		// Exactly two thirds of the overall maximum
+		// exactly two thirds of the overall maximum
 		energy = maxRegEnergy = maxEnergy * (2f/3f);
 		shield = maxRegShield = maxShield * (2f/3f);
 		
