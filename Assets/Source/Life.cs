@@ -21,12 +21,15 @@
 
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Life: NetworkBehaviour, ILife {
 
 	Player playerType;
 	// To find out whether we are moving
 	IMovable <sbyte> controller;
+	public RectTransform energyBar;
+	public RectTransform shieldBar;
 
 	// Current energy 
 	[SyncVar]
@@ -36,6 +39,7 @@ public class Life: NetworkBehaviour, ILife {
 		set { 
 			// Clamp energy before assigning
 			energy = Mathf.Clamp (value, 0f, maxEnergy);
+			energyBar.sizeDelta = new Vector2(energy, energyBar.sizeDelta.y);
 		}
 	}
 
@@ -53,6 +57,7 @@ public class Life: NetworkBehaviour, ILife {
 
 			// Clamp the shield before assigning
 			shield = Mathf.Clamp (value, 0f, maxShield);
+			shieldBar.sizeDelta = new Vector2(shield, shieldBar.sizeDelta.y);
 		}
 	}
 
@@ -97,8 +102,8 @@ public class Life: NetworkBehaviour, ILife {
 
 		// Set the maximum possible regeneration values to
 		// exactly two thirds of the overall maximum
-		energy = maxRegEnergy = maxEnergy * (2f/3f);
-		shield = maxRegShield = maxShield * (2f/3f);
+		Energy = maxRegEnergy = maxEnergy * (2f/3f);
+		Shield = maxRegShield = maxShield * (2f/3f);
 	}
 
 	void Update () {
@@ -179,33 +184,4 @@ public class Life: NetworkBehaviour, ILife {
 		inBase = false;
 		
 	}
-
-	// For now
-	void OnGUI () {
-
-		if (!isLocalPlayer)
-			return;
-		
-		GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
-		GUILayout.BeginVertical ();
-		
-		GUILayout.FlexibleSpace ();		
-		GUILayout.BeginHorizontal ();
-		
-		GUILayout.Label ("Energy: " + (int) energy, "box");
-		GUILayout.FlexibleSpace ();
-		
-		GUILayout.EndHorizontal ();
-		GUILayout.BeginHorizontal ();
-		
-		GUILayout.Label ("Shield: " + (int) shield, "box");
-		GUILayout.FlexibleSpace ();
-		
-		GUILayout.EndHorizontal ();
-		
-		GUILayout.EndVertical ();
-		GUILayout.EndArea ();
-		
-	}
-	
 }
