@@ -36,8 +36,8 @@ public class Controls: NetworkBehaviour {
 	void Awake () {
 
 		// Initialize references between objects
-		tankCtrl = GetComponent <TankController> ();
-		turretCtrl = GetComponent <TurretController> ();
+		tankCtrl = GetComponent <IMovable <sbyte>> ();
+		turretCtrl = GetComponent <IRotatable> ();
 
 		//NetworkServer.Spawn (tankCtrl.gameObject);
 
