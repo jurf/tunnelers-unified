@@ -62,29 +62,25 @@ public class Life: MonoBehaviour, ILife {
 		get { return energy > 0;}
 	}
 
-	// Maximum energy we can get by regenerating
+	// Maximum energy/shield we can get by regenerating
 	float maxRegEnergy;
-	// Maximum shield we can get by regenerating
 	float maxRegShield;
 	
-	// The most energy we can get with power-ups
+	// The most energy/shield we can get with power-ups
 	[Range (50, 200)]
 	public float maxEnergy = 100f;
-	// Maximum shield shield we can get with power-ups
 	[Range (50, 200)]
 	public float maxShield = 100f;
 
-	// What does moving cost us
+	// What does moving/shooting cost us
 	[Range (0, 10)]
 	public float moveEnergyConsumption = 2f;
-	// What does shooting cost us
 	[Range (0, 30)]
 	public float shootEnergyConsumption = 5f;
 
-	// How quickly we regenerate energy
+	// How quickly we regenerate energy/shield
 	[Range (0, 20)]
 	public float energyRegRate = 10f;
-	// How quickly we regenerate shield
 	[Range (0, 20)]
 	public float shieldRegRate = 5f;
 
