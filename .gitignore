@@ -14,8 +14,10 @@
 /*.booproj
 /.project
 
-# Gedit backups
+# Backups
 *~
+*.swp
+
 # MonoDevelop on Linux
 /C:
 /Z:
