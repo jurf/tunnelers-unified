@@ -20,14 +20,16 @@
 //
 
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Life: MonoBehaviour, ILife {
+public class Life: NetworkBehaviour, ILife {
 
 	Player playerType;
 	// To find out whether we are moving
 	IMovable <sbyte> controller;
 
 	// Current energy 
+	[SyncVar]
 	float energy;
 	public float Energy {
 		get { return energy; }
@@ -38,6 +40,7 @@ public class Life: MonoBehaviour, ILife {
 	}
 
 	// Current shield
+	[SyncVar]
 	float shield ;
 	public float Shield {
 		get { return shield; }
@@ -100,6 +103,9 @@ public class Life: MonoBehaviour, ILife {
 
 	void Update () {
 
+		if (!isServer)
+			return;
+
 		// If we're moving and not in any kind of base, use up energy
 		if (controller.IsMoving && !inBase)
 			Energy -= moveEnergyConsumption * Time.deltaTime;
@@ -109,6 +115,11 @@ public class Life: MonoBehaviour, ILife {
 	// in order to sign up for exp
 	public void Damage (float amount, out bool killed) {
 		
+		if (!isServer) {
+			killed = false;
+			return;
+		}
+
 		Debug.Log ("A tank recieved " + amount + " damage.", gameObject);
 
 		// Check if it would kill us
@@ -127,6 +138,9 @@ public class Life: MonoBehaviour, ILife {
 	}
 
 	void OnTriggerStay (Collider other) {
+
+		if (!isServer)
+			return;
 
 		// We're not interested in triggers which are not bases
 		if (other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase")
@@ -154,6 +168,9 @@ public class Life: MonoBehaviour, ILife {
 
 	void OnTriggerExit (Collider other) {
 
+		if (!isServer)
+			return;
+
 		// Only do something when we exit a base
 		if (other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase")
 			return;
@@ -165,6 +182,9 @@ public class Life: MonoBehaviour, ILife {
 
 	// For now
 	void OnGUI () {
+
+		if (!isLocalPlayer)
+			return;
 		
 		GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
 		GUILayout.BeginVertical ();
