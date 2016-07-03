@@ -24,18 +24,16 @@ using UnityEngine;
 public class Life: MonoBehaviour, ILife {
 
 	Player playerType;
-	// We need this to find out whether we are moving
+	// To find out whether we are moving
 	IMovable <sbyte> controller;
 
-	// Current amount of energy 
+	// Current energy 
 	float energy;
 	public float Energy {
 		get { return energy; }
 		set { 
-			float newEnergy = value;
 			// Clamp energy before assigning
-			newEnergy = Mathf.Clamp (newEnergy, -1f, maxEnergy);
-			energy = newEnergy;
+			energy = Mathf.Clamp (value, 0f, maxEnergy);
 		}
 	}
 
@@ -44,16 +42,14 @@ public class Life: MonoBehaviour, ILife {
 	public float Shield {
 		get { return shield; }
 		set {
-			float newShield = value;
-			// Clamp the shield before assigning
-			newShield = Mathf.Clamp (newShield, -1f, maxShield);
-			shield = newShield;
 			// Check if we're dead
-			if (shield < 0) {
+			if (value < 0) {
 				var killer = GetComponent <IKillable <float>> ();
 				killer.Kill ();
 			}
-			
+
+			// Clamp the shield before assigning
+			shield = Mathf.Clamp (value, 0f, maxShield);
 		}
 	}
 
@@ -100,28 +96,25 @@ public class Life: MonoBehaviour, ILife {
 		// exactly two thirds of the overall maximum
 		energy = maxRegEnergy = maxEnergy * (2f/3f);
 		shield = maxRegShield = maxShield * (2f/3f);
-		
 	}
 
 	void Update () {
 
-		// If we're moving, not in any kind of base and have energy, use up energy
-		if (controller.IsMoving && !inBase && energy > 0)
+		// If we're moving and not in any kind of base, use up energy
+		if (controller.IsMoving && !inBase)
 			Energy -= moveEnergyConsumption * Time.deltaTime;
-		
 	}
-
 
 	// The shooter needs to know if they've killed us,
 	// in order to sign up for exp
-	// We don't need to know the killer, for simplicity
 	public void Damage (float amount, out bool killed) {
 		
 		Debug.Log ("A tank recieved " + amount + " damage.", gameObject);
 
 		// Check if it would kill us
 		if (amount > shield) {
-			// if yes, notfiy the killer
+
+			// If yes, notfiy the killer
 			killed = true;
 			Debug.Log ("A tank was killed.", gameObject);
 			// The shield property will kill us before we get to return
@@ -130,9 +123,7 @@ public class Life: MonoBehaviour, ILife {
 		}
 
 		killed = false;
-		// If we wouldn't be killed, still apply the damage
 		Shield -= amount;
-
 	}
 
 	void OnTriggerStay (Collider other) {
@@ -141,22 +132,24 @@ public class Life: MonoBehaviour, ILife {
 		if (other.tag != "BlueBase" && other.tag != "RedBase" && other.tag != "GreenBase")
 			return;
 
+		inBase = true;
+
 		if (playerType.IsMyBase (other.tag)) {
+
 			// If we're in our base, regenerate normally
-			inBase = true;
 			if (energy < maxRegEnergy)
-				energy += energyRegRate * Time.deltaTime;
+				energy = Mathf.Clamp (energy + energyRegRate * Time.deltaTime, 0f, maxRegEnergy);
 			if (shield < maxRegShield)
-				shield += shieldRegRate * Time.deltaTime;
+				shield = Mathf.Clamp (shield + shieldRegRate * Time.deltaTime, 0f, maxRegShield);
+
 		} else if (!playerType.IsMyBase (other.tag)) {
+
 			// If we're in an enemy base, divide the regeneration rate
-			inBase = true;
 			if (energy < maxRegEnergy)
-				energy += energyRegRate / otherBaseDivider * Time.deltaTime;
+				energy = Mathf.Clamp (energy + energyRegRate / otherBaseDivider * Time.deltaTime, 0f, maxRegEnergy);
 			if (shield < maxRegShield)
-				shield += shieldRegRate / otherBaseDivider * Time.deltaTime;
+				shield = Mathf.Clamp (shield + shieldRegRate / otherBaseDivider * Time.deltaTime, 0f, maxRegShield);
 		}
-		
 	}
 
 	void OnTriggerExit (Collider other) {
@@ -179,13 +172,13 @@ public class Life: MonoBehaviour, ILife {
 		GUILayout.FlexibleSpace ();		
 		GUILayout.BeginHorizontal ();
 		
-		GUILayout.Label ("Energy: " + energy, "box");
+		GUILayout.Label ("Energy: " + (int) energy, "box");
 		GUILayout.FlexibleSpace ();
 		
 		GUILayout.EndHorizontal ();
 		GUILayout.BeginHorizontal ();
 		
-		GUILayout.Label ("Shield: " + shield, "box");
+		GUILayout.Label ("Shield: " + (int) shield, "box");
 		GUILayout.FlexibleSpace ();
 		
 		GUILayout.EndHorizontal ();
