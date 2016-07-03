@@ -29,22 +29,9 @@ public class ControllerBase: NetworkBehaviour	{
 
 	// Hard code rotation to prevent excessive calculations
 	public static Quaternion [,] rotations = {
-		{
-			new Quaternion (0f, 0.9238796f, 0f, 0.3826834f),
-			new Quaternion (0f, 1f, 0f, -4.371139e-08f),
-			new Quaternion (0f, 0.9238796f, 0f, -0.3826835f)
-		},
-		{
-			new Quaternion (0f, 0.7071068f, 0f, 0.7071068f),
-			Quaternion.identity,
-			new Quaternion (0f, 0.7071068f, 0f, -0.7071068f)
-		},
-		{
-			new Quaternion (0f, 0.3826835f, 0f, 0.9238796f),
-			new Quaternion (0f, 0f, 0f, 1f),
-			new Quaternion (0f, -0.3826835f, 0f, 0.9238796f)
-		}
-
+		{new Quaternion (0f, 0.9238796f, 0f, -0.3826835f), new Quaternion (0f, 0.7071068f, 0f, -0.7071068f), new Quaternion (0f, -0.3826835f, 0f, 0.9238796f)},
+		{new Quaternion (0f, 1f, 0f, -4.371139e-08f),      Quaternion.identity,                              new Quaternion (0f, 0f, 0f, 1f)},
+		{new Quaternion (0f, 0.9238796f, 0f, 0.3826834f),  new Quaternion (0f, 0.7071068f, 0f, 0.7071068f),  new Quaternion (0f, 0.3826835f, 0f, 0.9238796f)}
 	};
 
 	// Get a new target rotation
