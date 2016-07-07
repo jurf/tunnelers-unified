@@ -67,7 +67,7 @@ public class Flag : MonoBehaviour, IFlag {
 				lastTouch = Time.time;
 
 			// We now need to move with our carrier
-			moveWith.TheObject = value.transform;
+			//moveWith.TheObject = value.transform;
 		}
 	}
 	
@@ -76,7 +76,7 @@ public class Flag : MonoBehaviour, IFlag {
 	// The game manager we need to report to
 	IGame game;
 	// A componenet that will make us follow our carrier
-	IMoveWith moveWith;
+	//IMoveWith moveWith;
 
 	void Awake () {
 
@@ -84,7 +84,7 @@ public class Flag : MonoBehaviour, IFlag {
 		otherFlag = (IFlag) GameObject.FindGameObjectWithTag ("Flag").GetComponent (typeof (IFlag));
 
 		// Set the component that's supposed to move us
-		moveWith = (IMoveWith) GetComponent (typeof (IMoveWith)); 
+		//moveWith = (IMoveWith) GetComponent (typeof (IMoveWith)); 
 
 		// Find the game component
 
