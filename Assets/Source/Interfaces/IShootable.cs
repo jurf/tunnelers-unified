@@ -1,8 +1,9 @@
-﻿//
-//  IWeapon.cs is part of Tunnelers: Unified
+﻿// vim:set ts=4 sw=4 sts=4 noet:
+//
+//  IShootable.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>
 //
-//  Copyright (c) 2015 Juraj Fiala <doctorjellyface@riseup.net>
+//  Copyright (c) 2016 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +19,7 @@
 //  along with Tunnelers: Unified.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-public interface IWeapon {
+public interface IShootable {
 
 	void Shoot ();
-
 }

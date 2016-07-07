@@ -1,8 +1,9 @@
-﻿//
-//  Warhead.cs is part of Tunnelers: Unified
+﻿// vim:set ts=4 sw=4 sts=4 noet:
+//
+//  IBullet.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>
 //
-//  Copyright (c) 2015 Juraj Fiala <doctorjellyface@riseup.net>
+//  Copyright (c) 2016 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,24 +21,9 @@
 
 using UnityEngine;
 
-public class Warhead: MonoBehaviour {
+public interface IBullet {
 
-	IWeapon weapon;
-
-	void Awake () {
-
-		weapon = (IWeapon) GetComponent (typeof (IWeapon)); 
-
+	Transform Start {
+		set;
 	}
-
-	void Update () {
-
-		if (Input.GetButton ("Fire1")) {
-
-			weapon.Shoot ();
-
-		}
-
-	}
-
 }
