@@ -1,8 +1,8 @@
 //
-//  MoveCamera.cs is part of Tunnelers: Unified
+//  CameraMovement.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>.
 //
-//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//  Copyright (c) 2014-2016 Juraj Fiala<doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,30 +20,35 @@
 
 using UnityEngine;
 
-public class MoveCamera : MonoBehaviour {
+public class CameraMovement: MonoBehaviour {
 
-	Vector2 resolution;
-	Vector2 mousePos;
-	Vector3 newCameraPos;
+	public Transform target;
 	public float moveBy = 5f;
 	public float smoothTime = 0.2f;
+
 	Vector3 velocity;
+	Vector3 oldPos;
 
 	void Update () {
 
-		resolution.x = Screen.width / 2;
-		resolution.y = Screen.height / 2;
-		mousePos = (Vector2) Input.mousePosition - resolution;
+		Vector3 zero = new Vector3 (target.position.x, transform.position.y, target.position.z);
 
-		float percentX = (100 / resolution.x) * mousePos.x;
-		float percentY = (100 / resolution.y) * mousePos.y;
+		Vector2 center;
+		center.x = Screen.width;
+		center.y = Screen.height;
+		center /= 2;
 
-		newCameraPos = new Vector3 ((percentX / 100) * moveBy, (percentY / 100) * moveBy, transform.localPosition.z);
+		Vector2 mousePos = (Vector2) Input.mousePosition - center;
 
-		//transform.localPosition = newCameraPos;
+		float percentX = mousePos.x / center.x;
+		float percentY = mousePos.y / center.y;
 
-		transform.localPosition = Vector3.SmoothDamp (transform.localPosition, newCameraPos, ref velocity, smoothTime);
+		Vector3 newRelPos = new Vector3 (percentX * moveBy, 0, percentY * moveBy);
 
+		Vector3 newPos = Vector3.SmoothDamp (oldPos, newRelPos, ref velocity, smoothTime);
+		transform.position = zero + newPos;
+
+		oldPos = newPos;
 	}
 
 }
