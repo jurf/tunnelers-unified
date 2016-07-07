@@ -3,7 +3,7 @@
 //  IRotatable.cs is part of Tunnelers: Unified
 //  <https://github.com/VacuumGames/tunnelers-unified/>
 //
-//  Copyright (c) 2014 Juraj Fiala<doctorjellyface@riseup.net>
+//  Copyright (c) 2014 Juraj Fiala <doctorjellyface@riseup.net>
 //
 //  Tunnelers: Unified is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by

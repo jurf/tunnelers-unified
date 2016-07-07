@@ -28,6 +28,7 @@ public class Life: NetworkBehaviour, ILife {
 	Player playerType;
 	// To find out whether we are moving
 	IMovable <sbyte> controller;
+
 	public RectTransform energyBar;
 	public RectTransform shieldBar;
 
