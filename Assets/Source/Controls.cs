@@ -27,6 +27,7 @@ public class Controls: NetworkBehaviour {
 	// Our controllers
 	IMovable <sbyte> tankCtrl;
 	IRotatable turretCtrl;
+	IShootable weaponCtrl;
 
 	// Store the input
 	sbyte hMotion;
@@ -38,6 +39,7 @@ public class Controls: NetworkBehaviour {
 		// Initialize references between objects
 		tankCtrl = GetComponent <IMovable <sbyte>> ();
 		turretCtrl = GetComponent <IRotatable> ();
+		weaponCtrl = GetComponent <IShootable> ();
 
 		//NetworkServer.Spawn (tankCtrl.gameObject);
 
@@ -58,6 +60,9 @@ public class Controls: NetworkBehaviour {
 		// Pass it to the controllers
 		tankCtrl.Move (hMotion, vMotion);
 		turretCtrl.Rotate (mousePos);
+		if (Input.GetAxis ("Fire1") > 0) {
+			weaponCtrl.Shoot ();
+		}
 
 	}
 
