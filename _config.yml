@@ -1,3 +1,5 @@
 github: [Repository metadata]
 timezone: Europe/Bratislava
 
+gems:
+  - github-pages

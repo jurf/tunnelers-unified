@@ -3,8 +3,7 @@ title: "Tunnelers: Unified"
 layout: default
 ---
 
-
-![image](/assets/tunnelers-logo-itchio.png)
+![image]({{ site.github.repository_name }}/assets/tunnelers-logo-itchio.png)
 
 <span class="linkbar">
   [News](#)
@@ -14,6 +13,6 @@ layout: default
   <span class="play">
     [Play](#)
   </span>
-  [Get Involved](https://github.com/VacuumGames/tunnelers-unified)
+  [Get Involved]({{ site.github.repository_url }})
   [About](https://doctorjellyface.itch.io/tunnelers-unified)
 </span>
