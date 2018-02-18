@@ -6,13 +6,13 @@ layout: default
 ![image]({{ site.github.repository_name }}/assets/tunnelers-logo-itchio.png)
 
 <span class="linkbar">
-  [News](#)
+  [News](http://vacuumgames.tk/)
   <a target="_blank" href="https://doctorjellyface.itch.io/tunnelers-unified/purchase?popup=1">
     Download
   </a>
   <span class="play">
-    [Play](#)
+    [Play](https://doctorjellyface.itch.io/tunnelers-unified)
   </span>
-  [Get Involved]({{ site.github.repository_url }})
+  [Get Involved](https://github.com/jurf/tunnelers-unified)
   [About](https://doctorjellyface.itch.io/tunnelers-unified)
 </span>
