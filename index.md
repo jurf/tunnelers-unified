@@ -7,12 +7,12 @@ layout: default
 
 <span class="linkbar">
   [News](http://vacuumgames.tk/)
-  <a target="_blank" href="https://doctorjellyface.itch.io/tunnelers-unified/purchase?popup=1">
+  <a target="_blank" href="https://jurf.itch.io/tunnelers-unified/purchase?popup=1">
     Download
   </a>
   <span class="play">
     [Play](https://doctorjellyface.itch.io/tunnelers-unified)
   </span>
   [Get Involved](https://github.com/jurf/tunnelers-unified)
-  [About](https://doctorjellyface.itch.io/tunnelers-unified)
+  [About](https://jurf.itch.io/tunnelers-unified)
 </span>
