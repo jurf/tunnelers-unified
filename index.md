@@ -6,7 +6,7 @@ layout: default
 ![image]({{ site.github.repository_name }}/assets/tunnelers-logo-itchio.png)
 
 <span class="linkbar">
-  [News](http://vacuumgames.tk/)
+  [News](https://vacuumgames.tk/)
   <a target="_blank" href="https://jurf.itch.io/tunnelers-unified/purchase?popup=1">
     Download
   </a>
